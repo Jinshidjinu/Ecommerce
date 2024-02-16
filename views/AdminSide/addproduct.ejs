@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product</title>
+    <link rel="stylesheet" href="/css/addproduct.css">
+</head>
+<body>
+    <div class="container">
+        <form class="product-form">
+            <h2>Add Product</h2>
+            <label for="productName"> Name:</label>
+            <input type="text" id="productName" name="productName" required>
+            <label for="productName"> Category:</label>
+            <input type="text" id="category" name="category" required>
+
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" rows="2" required></textarea>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" step="0.01" required>
+
+            <label for="image">Image:</label>
+            <input type="file" id="image" name="image" accept="image/*" required>
+
+            <button type="submit">Add Product</button>
+        </form>
+    </div>
+</body>
+</html>
