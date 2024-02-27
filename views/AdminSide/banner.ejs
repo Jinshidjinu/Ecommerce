@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/banner.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"></script>
+</head>
+
+<body>
+
+    <section id="menu">
+        <div class="logo">
+            <img src="/images/logo.png" alt="">
+            <h2>Dynamic</h2>
+        </div>
+        <div class="items">
+            <li><i class="fa-solid fa-chart-pie"></i> <a href="/admin/dashboard">Dashboard</a></li>
+            <li><i class="fa-solid fa-table-cells-large"></i> <a href="/admin/products">Products</a></li>
+            <li> <i class="fa-solid fa-list" style="color: #adb1b8;"></i> <a href="/admin/Category">Categories</a></li>
+            <li><i class="fa-solid fa-credit-card"></i> <a href="#">Orders</a></li>
+            <li><i class="fa-solid fa-credit-card"></i> <a href="/admin/banner">Banners</a></li>
+            <li><i class="fa-solid fa-credit-card"></i> <a href="/admin/coupon">Coupons</a></li>
+            <li><i class="fa-solid fa-user" style="color: #c4c8cf;"></i><a href="/admin/Userslist">Users</a></li>
+          
+            <!-- <li><i class="fa-solid fa-chart-line"></i> <a href="#">Blank</a></li> -->
+            <div class="logout">
+                <li><i class="fa-solid fa-right-from-bracket" style="color: #d40c48;"></i> <a href="#">Logout</a></li>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="interface">
+        <div class="navigation">
+            <div class="n1">
+                <div>
+            
+                    <i id="menu-btn" class="fa-solid fa-bars"></i>
+                </div>
+                <div class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+           
+            <div class="profile">
+                <button class="addbtn"><a href="/admin/addbanner"> Add Banner </a></button>
+                <i class="fa-solid fa-bell"></i>
+                <img src="/images/ramees.jpeg" alt="">
+            </div>
+        </div>
+
+        <h3 class="i-name">Banners List</h3>
+      
+
+<div class="board">
+            <table width="100%"> 
+                <thead>
+                    <tr>
+                    
+                        <td>Bannername</td>
+                        <td>image</td>
+                        <td>Description</td>
+                        <td>offer</td>
+                        <td>startDate</td>
+                        <td>endDate</td>
+                        <td>edit</td>
+                        <td>Delete</td>
+                      
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <% BannerDatas.forEach((data)=>{ %>
+                        </td>
+
+                        <td class="people-des">
+                          <h5><%=data.title%></h5>
+                        </td>
+                        <td class="people"> 
+                            <img src="/images/banner/<%=data.Image %>" alt="" style="object-fit: contain;">
+                        </td>
+                     
+                        <td class="people-des">
+                          <h5><%=data.description%></h5>
+                        </td>
+                        <td class="people-des">
+                          <h5><%=data.offer%></h5>
+                        </td>
+                        <td class="people-des">
+                          <h5><%=data.startdate%></h5>
+                        </td>
+                        <td class="people-des">
+                          <h5><%=data.expirydate%></h5>
+                        </td>
+<!-- 
+                        <td class="active"><p></p></td> -->
+                        <td class="edit"> <a href="/admin/editbanner/<%=data._id%>"><i class="fa-solid fa-pen-to-square" style="color: #a81523;"></i></a></td>
+                        <td class="delete"><button class="deletebanner" type="submit" onclick="window.location.href='/admin/delete/<%=data._id%>'">Delete</button></td>
+                        <!-- <td class="delete" ><a href="/admin/delete/<%=data._id%>"><p><i class="fa-solid fa-trash" style="color: #bd0a0a;" ></i></p></td></a> -->
+
+                    </tr>
+                                     
+                </tr>
+             <%})%>
+                </tbody>
+            </table>
+            
+        </div>
+
+
+
+
+           
+        
+
+
+    </section>
+
+    <script>
+        $('#menu-btn').click(function() {
+           $('#menu').toggleClass('active')
+        })
+    </script>
+</body>
+
+</html>

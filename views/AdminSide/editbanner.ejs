@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/editbanner.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"></script>
+</head>
+
+<body>
+
+    <section id="menu">
+        <div class="logo">
+            <img src="/images/logo.png" alt="">
+            <h2>Dynamic</h2>
+        </div>
+        <div class="items">
+            <li><i class="fa-solid fa-chart-pie"></i> <a href="#">Dashboard</a></li>
+            <li><i class="fa-solid fa-table-cells-large"></i> <a href="/admin/products">Products</a></li>
+            <li> <i class="fa-solid fa-list" style="color: #adb1b8;"></i> <a href="/admin/Category">Categories</a></li>
+            <li><i class="fa-solid fa-credit-card"></i> <a href="#">Orders</a></li>
+            <li><i class="fa-solid fa-credit-card"></i> <a href="/admin/banner">Banner</a></li>
+            <li><i class="fa-solid fa-user" style="color: #c4c8cf;"></i><a href="/admin/Userslist">Users</a></li>
+          
+            
+            <!-- <li><i class="fa-solid fa-chart-line"></i> <a href="#">Blank</a></li> -->
+            <div class="logout">
+                <li><i class="fa-solid fa-right-from-bracket" style="color: #d40c48;"></i> <a href="#">Logout</a></li>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="interface">
+        <div class="navigation">
+            <div class="n1">
+                <div>
+            
+                    <i id="menu-btn" class="fa-solid fa-bars"></i>
+                </div>
+                <div class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+        </div>
+
+        <h3 class="i-name">Edit Banners</h3>
+      
+       <div class="main">
+      
+        <form action="/admin/editbanner/<%=getbannerid._id%>"  method="post" class="banner" id="add_banner" enctype="multipart/form-data" >
+            <div class="data3" >
+                <div class="content-data3" >
+                   
+                        <!-- Display success messages -->
+                        <div class="imagefull1">
+                            <div class="profileimgbox1">
+                                <img  src="/uploads" alt="submit" name="image" id="imagePreview" class="bannerimage" width="100%" height="100%"  >
+                            </div>
+                            <div class="choose1">
+                                <div class="choose1inner1">
+                                    <input type="file"  name="image" onchange="previewImage(this)" id="banner_image" class="bannerImageADD">
+                                </div>
+                            </div>
+                        </div><br>
+                        <div class="bannerName" style="font-weight: bold;margin-left: 15%;">Banner Name</div>
+                        <input type="text" id="bannerName" value="<%=getbannerid.title%>" name="bannerName" style="margin-left: 15%;width: 70%; height: 5%; border: 2px solid black; border-radius: 5px; padding-left: 5px;" placeholder="Enter Banner Name" required ><br><br>
+                        <div class="bannerHeading" style="font-weight: bold;margin-left: 15%;" ><label for="description" >Banner Heading</label><br>
+                        <textarea name="bannerHeading" id="bannerHeading"  style="width: 82%; height: 3%; border: 2px solid black; border-radius: 5px; padding-left: 5px;"  required></textarea></div>
+                        <div class="offerPrice" style="font-weight: bold;margin-left: 15%;">Offer Price</div>
+                        <input type="number" id="offerPrice" value="<%=getbannerid.offer%>" name="offerPrice" style="margin-left: 15%;width: 70%; height: 5%; border: 2px solid black; border-radius: 5px; padding-left: 5px;" placeholder="Enter Price" min="0" max="1000" required><br><br>
+                        <div class="startDate" style="font-weight: bold;margin-left: 15%;">Start Date</div>
+                        <input type="date" id="startDates" value="<%=getbannerid.startdate%>" name="startDates" oninput="formatDateInput(this)" style="margin-left: 15%;width: 70%; height: 5%; border: 2px solid black; border-radius: 5px; padding-left: 5px;" required><br><br>
+                        <div class="endDate" style="font-weight: bold;margin-left: 15%;">Expiry Date</div>
+                        <input type="date" id="endDate"  value="<%=getbannerid.expirydate%>"  name="endDate" oninput="formatDateInput(this)" style="margin-left: 15%;width: 70%; height: 5%; border: 2px solid black; border-radius: 5px; padding-left: 5px;" required><br><br>
+                        <div class="message" style="color: rgb(183, 21, 21);margin-bottom: 10px;margin-left: 15%; font-weight: bold;"></div>
+                        <button type="submit" class="submit" style="height: 5%; width: 50%; display: flex; align-items: center; justify-content: center;margin-left: 25%; background-color: #d40c48;" >Add</button>
+                    </div>
+                    <div style="width: 50%;"></div>
+        </form>
+  
+    </div>
+
+
+
+
+
+           
+        
+
+
+    </section>
+    <script>
+        function previewImage(input) {
+            var file = input.files[0];
+            if(file){
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                document.getElementById('imagePreview').src= e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }else{
+            document.getElementById("imagePreview").setAttribute('src', 'https://via.placeholder.com/150');
+            }
+        }
+    </script>
+
+    <script>
+        $('#menu-btn').click(function() {
+           $('#menu').toggleClass('active')
+        })
+    </script>
+</body>
+
+</html>

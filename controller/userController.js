@@ -15,6 +15,10 @@ const AccountSID = "AC419ed74a879f53ae188cad46d571b854";
 const AuthToken = "b54b5e31baa07cac709d8712e174106c";
 const client = require("twilio")(AccountSID, AuthToken);
 
+const products = require('../models/products')
+const bannerSchema = require('../models/Banner')
+const categorySchema = require('../models/category')
+
 let Number;
 
 
@@ -38,7 +42,8 @@ module.exports = {
           check.password
         );
         if (passwordmatch) {
-          res.redirect("/");
+           req.session.email = check
+          res.redirect("/userhome");
         } else {
           res.send("wrong password");
         }
@@ -228,16 +233,31 @@ module.exports = {
       console.log("error not change in password");
     }
   },
+
+
+  //UserHome
+
+  loadUserHomeGET :async(req,res)=>{
+    if(req.session.email){
+      const categoryData = await categorySchema.find() 
+      const bannerData = await bannerSchema.find()
+      const productData = await products.find({is_blocked:false}).limit(10)  
+      res.render('UserSide/userHome',{bannerData,productData,categoryData})
+    }
+    },
+
+
+    productViewGET:async(req,res)=>{
+
+      const viewID = req.query.id
+      console.log(viewID);       
+      const productShow = await products.findOne({_id:viewID})
+      console.log(productShow);
+      res.render('UserSide/productDetails',{productShow})
+    }
+
+
 };
-
-
-
-
-
-
-
-
-
 
 
 

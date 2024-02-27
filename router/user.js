@@ -22,9 +22,11 @@ router.post('/forgot',userController.forgotPOST)
 router.get('/forgot/otp/:mail',userController.forgotOTPverifyGET)
 router.post('/forgot/otp/:mail',userController.forgotOTPverifyPOST)
 
-
 router.get('/Reset/Passwords/:mail',userController.ResetPasswordGET)
 router.post('/Reset/Password/:mail',userController.ResetPasswordPOST)
+
+router.get('/userhome',userController.loadUserHomeGET)
+router.get('/productView',userController.productViewGET)
 
 
 

@@ -1,0 +1,93 @@
+<div class="board">
+                    
+    <div class="right_content">
+        <div class="form_frame">
+            <form spellcheck="false" class="product_form" enctype="multipart/form-data" id="formID" method="post">
+            <div class="top">
+                <div class="top_left">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" name="productname" id="productname">
+                     
+                    <div style="display: flex; gap: 1rem; width: 100%; padding: .5rem 0;">
+                        <span style="display: flex; flex-direction: column; gap: .2rem;">
+                            <label for="product_name">Price</label>
+                            <input type="number" name="oldprice" style="width: 100%;" id="price">
+                        </span>
+                    </div>
+                    
+                    <label for="product_name">Category</label>
+                    
+                    <select style="font-family: 'Poppins',sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 100%; padding: .4rem;" name="category" id="category">
+                        <option onchange="select(e)" value="Category" style="font-size: .8rem;">Category</option>
+                     
+                    </select>
+                </div>
+                <div class="top_right">
+                    <img src="" id="imagePreview" class="product_img" alt="">
+                    <div class="file_div"><span class="choose_file">Choose File</span><input onchange="previewImage(this)" type="file" name="product_img" class="input_file"  multiple></div>
+                </div>
+            </div>
+            <div class="bottom" style="padding: 0 1rem;">
+
+                <div style="display: flex; gap: 1rem; width: 100%;">
+                    <span style="display: flex; flex-direction: column; gap: .2rem;">
+                    <label for="size">Size</label>
+                    <div class="color_drop">
+                        <p>SIZE</p>
+                        <ul class="drop_bar">
+                        <li><input type="checkbox" name="size" id="S" value="S"><label for="S">S</label></li>
+                        <li><input type="checkbox" name="size" id="M" value="M"><label for="M" >M</label></li>
+                        <li><input type="checkbox" name="size" id="L" value="L"><label  for="L">L</label></li>
+                        <li><input type="checkbox" name="size" id="XL" value="XL"><label  for="XL">XL</label></li>
+                        <li><input type="checkbox" name="size" id="2XL" value="2XL"><label for="2XL">2XL</label></li>
+                       </ul>
+                </div>
+                </span>
+                
+                <span style="display: flex; flex-direction: column; gap: .2rem;">
+                <label for="size">Color</label>
+                <div class="color_drop">
+                        <p>COLOR</p>
+                        <ul class="drop_bar">
+                        <li><input type="checkbox" name="color" id="green" value="green"><label style="color: rgb(0, 195, 0);" for="green">green</label></li>
+                        <li><input type="checkbox" name="color" id="black" value="black"><label for="black" style="color: black;">black</label></li>
+                        <li><input type="checkbox" name="color" id="red" value="red"><label style="color: red;" for="red">red</label></li>
+                        <li><input type="checkbox" name="color" id="orange" value="orange"><label style="color: orange;" for="orange">orange</label></li>
+                        <li><input type="checkbox" name="color" id="pink" value="pink"><label style="color: rgb(216, 118, 135);" for="pink">pink</label></li>
+                       </ul>
+                </div>
+                </span>
+
+
+                <span style="display: flex; flex-direction: column; gap: .2rem; font-size: 14px;" >
+                <label for="size">Sub Category</label>
+                <select style="font-family: 'Poppins', sans-serif; height: 2.5rem; outline: none; font-size: .9rem; width: 9rem; padding: .4rem;" name="subcategory" id="subcategory" >
+                    <option value="">Sub Category</option>
+                 
+                        
+                </select>
+                </span>
+
+
+                <span style="display: flex; flex-direction: column; width: 9%; padding-left: 0; gap: .2rem;">
+                    <label for="size">Stock</label>
+                    <input type="number"  name="stock" id="stock">
+                </span>
+
+                </div>
+
+                <span style="display: flex; flex-direction: column; gap: .2rem; margin-top: .5rem;">
+                    <label for="size">Product Description</label>
+                    <textarea name="description" id="text_area"></textarea>
+                </span>
+                <p class="error_msg" id="error_area" style="color: red;"></p>
+                <div style="width: 100%; display: flex; justify-content: center; padding: .1rem; padding-bottom: 10px;">
+
+                    <button type="button" id="submitBtn" class="add_btn">Add Product</button>
+                </div>
+            </div>
+        </form>
+       
+        </div>
+    </div>   
+    </div>

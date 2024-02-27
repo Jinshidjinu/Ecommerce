@@ -4,7 +4,12 @@
     const adminController=require('../controller/adminController')
     const productController=require('../controller/productController')
     const categoryController=require('../controller/CategoryController')
-
+    const bannerController =require('../controller/BannerController')
+    const couponController = require('../controller/CouponController')
+    const utility = require('../utility/multer')
+    
+    const uploadProducts = utility.productimg()
+    const uploadBanner  = utility.bannerimg()
 
     router.get('/adminlogin',adminController.adminloginGET)
     router.post('/adminlogin',adminController.adminloginPOST)
@@ -13,18 +18,45 @@
     router.post('/signup',adminController.adminsignupPOST)
     
     router.get('/dashboard',adminController.dashboardGET)
-    router.post('/dashboard',adminController.dashboardPOST)
+    // router.post('/dashboard',adminController.dashboardPOST)
 
     router.get('/Userslist',adminController.adminuserlistGET)
     router.post('/Userslist',adminController.adminuserlistPOST)
 
+    //category
+
     router.get('/Category',categoryController.categoryGET)
     router.post('/Category',categoryController.AddcategoryPOST)
-
     router.delete('/deleteCategory',categoryController.deleteCategoryDELETE)
+    router.delete('/deleteSubCategory',categoryController.deletesubCategoryDELETE)
 
 
+    // product
 
+    router.get('/products',productController.productsGET)
+    router.get('/AddProducts',productController.AddproductsGET)
+    router.post('/AddProducts',uploadProducts.array('productImage',20),productController.AddproductsPOST)
+    router.get('/editproduct/:productID',productController.editproductGET)
+    router.post('/editProduct/:id',uploadProducts.array('productImage',20),productController.editproductPOST)
+    router.patch('/blockproducts',productController.blockproductsPATCH)
+
+    //banners
+
+   router.get('/banner',bannerController.bannersideGET)
+   router.get('/addbanner',bannerController.AddbannerGET)
+   router.post('/addbanner',uploadBanner.single('image'),bannerController.AddbannerPOST)
+   router.get('/editbanner/:bannerID',bannerController.editbannerGET)
+   router.post('/editbanner/:bannerID',uploadBanner.single('image'),bannerController.editbannerPOST)
+   router.get('/delete/:deleteID',bannerController.bannerDeleteGET)
+
+   //Coupons
+
+   router.get('/coupon',couponController.couponSideGET)
+   router.get('/addcoupon',couponController.AddcouponGET)
+   router.post('/addcoupon',couponController.AddcouponPOST)
+   router.get('/editcoupon/:CouponID',couponController.editCouponGET)
+   router.post('/editcoupon/:CouponID',couponController.editCouponPOST)
+   router.delete('/deleteCoupon',couponController.couponDELETE)
 
 
 

@@ -1,7 +1,5 @@
 
- 
-  require('axios')
-const categoryModel = require('../models/category')
+
  const CategorySchema = require('../models/category')
 module.exports = {
 
@@ -17,24 +15,6 @@ module.exports = {
         
     },
 
-    
-    // AddcategoryPOST:async(req,res)=>{
-    //    const {categoryName,subcategoryName} = req.body
-    //    const addcategory = await CategorySchema({
-    //     category:categoryName,
-    //     subcategory:subcategoryName
-    //    })   
-
-    //    try {
-    //     // Save the new category instance
-    //     await addcategory.save();
-      
-    // } catch (error) {
-    //     console.error('Error while saving category:', error);
-    //     res.status(500).send('Internal server error');
-    // }
-  
-    // }
 
     AddcategoryPOST: async (req, res) => {
         const { categoryName, subcategoryName } = req.body;
@@ -60,10 +40,10 @@ module.exports = {
         }
     },
 
-     deleteCategoryDELETE:async(req,res)=>{
+     deletesubCategoryDELETE:async(req,res)=>{
         try{
          const {subcategoryid,categoryid}=req.query
-         await categoryModel.findOneAndUpdate(
+         await CategorySchema.findOneAndUpdate(
             {category:categoryid},
             {$pull:{subcategory:subcategoryid}},
             {new:true}
@@ -73,5 +53,17 @@ module.exports = {
             console.log('error in removing sub category',error);
             res.status(400).json({success:false,message:"something  wrong!"})
         }
+     },
+
+     
+     deleteCategoryDELETE:async(req,res)=>{
+          try{
+            const categoryid = req.query.id;
+            await CategorySchema.deleteOne({_id:categoryid})  
+            res.status(200).json({success:true,message:"Category removed list"})          
+          }catch(error){
+            console.log('error in removing category',error);
+            res.status(500).json({success:false,message:"something  wrong!"})
+          }
      }
-}
+}  
