@@ -34,11 +34,8 @@ module.exports={
             console.log(req.files);
             
             const productImage = req.files.map(file=>file.filename)
-              console.log(productImage);
             
                     const { productName, prices, discount, stock, category, subCategory, deliveryDate, description, color, size } = req.body;
-                      console.log(prices);
-            
                     const newschema = new productModel({
                         productName,    
                         prices,
@@ -51,9 +48,7 @@ module.exports={
                         size,
                         color,
                         image:productImage,
-                   
-          
-                    
+                  
                     });
                    
                     await newschema.save()

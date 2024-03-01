@@ -1,0 +1,23 @@
+addtocartGET: async (req, res) => {
+    if (req.session.email ) {
+        const usersiD = req.session.email._id;
+    
+        const product_ID = req.query.id;
+     
+        const cartCreation =await cartSchema.findByIdAndUpdate(
+         
+          {userID:usersiD},
+          {$push:{productID:{id:product_ID}}},
+          {upsert:true,new:true}
+
+               
+        )
+       //  console.log(cartCreation);   
+    } else {
+        // Handle the case when user or user's _id is not present in the session
+        console.error("User not authenticated or session data is incomplete.");
+        res.status(401).send("Unauthorized");
+    }
+
+
+}

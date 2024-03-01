@@ -39,50 +39,6 @@ module.exports={
         res.render('AdminSide/editbanner',{getbannerid})
     },
     editbannerPOST:async(req,res)=>{
-
-        // try{
-
-        //     const id = req.params.bannerID
-        //     const Datas = req.body
-        //     const bannerImage = req?.file?.filename
-        //     const editbanner = await bannerSchema.find(id)
-        //     const image = editbanner.Image
-        //     if(!bannerImage){
-        //         await bannerSchema.updateOne({_id:editbanner},
-
-        //             {$set:{
-                       
-        //                 title:Datas.bannerName,
-        //                 description:Datas.bannerHeading,
-        //                 offer:Datas.offerPrice,
-        //                 startdate:Datas.startDate,
-        //                 expirydate:Datas.endDate,
-        //                 Image:image
-            
-            
-        //             }
-        //         })
-        //     }else{
-        //         await bannerSchema.updateOne({_id:editbanner},
-        //             {$set:{
-                       
-        //                 title:Datas.bannerName,
-        //                 description:Datas.bannerHeading,
-        //                 offer:Datas.offerPrice,
-        //                 startdate:Datas.startDate,
-        //                 expirydate:Datas.endDate,
-        //                 Image:bannerImage
-            
-            
-        //             }
-        //         })
-        //     }
-       
-
-        //  res.redirect('/admin/banner')
-        // }catch(error){
-        //     console.log(error);
-        // }
         try{
 
             const id = req.params.bannerID

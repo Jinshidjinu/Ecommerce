@@ -241,7 +241,7 @@ module.exports = {
     if(req.session.email){
       const categoryData = await categorySchema.find() 
       const bannerData = await bannerSchema.find()
-      const productData = await products.find({is_blocked:false}).limit(10)  
+      const productData = await products.find({is_blocked:false}).limit(4)  
       res.render('UserSide/userHome',{bannerData,productData,categoryData})
     }
     },
@@ -249,10 +249,9 @@ module.exports = {
 
     productViewGET:async(req,res)=>{
 
-      const viewID = req.query.id
-      console.log(viewID);       
+      const viewID = req.query.id     
       const productShow = await products.findOne({_id:viewID})
-      console.log(productShow);
+      // console.log(productShow);
       res.render('UserSide/productDetails',{productShow})
     }
 

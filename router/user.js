@@ -2,6 +2,7 @@
 const express=require('express')
 const router=express.Router()
 const userController=require('../controller/userController')
+const cartController = require('../controller/CartController')
 
 
 
@@ -27,6 +28,12 @@ router.post('/Reset/Password/:mail',userController.ResetPasswordPOST)
 
 router.get('/userhome',userController.loadUserHomeGET)
 router.get('/productView',userController.productViewGET)
+
+router.get('/cart',cartController.cartGET)
+router.get('/addtocart',cartController.addtocartGET)
+router.post('/deleteCart',cartController.deletecartPOST)
+router.get('/quantity',cartController.updateQuantity)
+
 
 
 

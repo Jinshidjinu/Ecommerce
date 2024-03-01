@@ -347,9 +347,9 @@
                 <a href="/userBuyNow/id">
                   <button class="buyBtn">Buy Now</button>
                 </a>
-                <a href="/userCartNow/id">
-                  <button class="cartBtn">add to cart</button>
-                </a>
+              
+                  <button class="cartBtn" onclick="addToCart(event,'<%=productShow._id%>')" id="addToCartButton" >add to cart</button>
+              
               </div>
             </div>
          
@@ -954,22 +954,40 @@
     </footer>
     <!-- end of footer -->
 <script src="/js/ProductView.js"></script>
-    <!-- custom js -->
-    <script src="https://cdn.jsdelivr.net/npm/drift-zoom@1.5.0/dist/Drift.min.js"></script>
-   
-    <!-- end of custom js -->
-    <!-- fontawesome -->
-    <script
-      src="https://kit.fontawesome.com/23d1247997.js"
-      crossorigin="anonymous"
-    ></script>
-    <!-- end of fontawesome -->
-    <!-- Bootstrap script file -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-    <!--end of Bootstrap script file -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+      async function addToCart(event,id) {
+          event.preventDefault();
+          event.stopPropagation();
+      
+         console.log(id);
+        const response = await fetch(`/addtocart?id=${id}`,{
+ 
+          method:'GET',
+          headers:{
+            'Content-Type':'application/json'
+          }
+
+        })
+
+      const result = await response.json()
+      // alert("Product added to cart!"); // Example: You can replace this with your actual logic
+        if (result.success == true) {
+      
+              Swal.fire({
+                title: "Product Add Successfully!..",
+                text: "",
+                icon: "success",
+              });
+            } else {
+              message.innerHTML = result.error || "unknown error";
+            }
+          
+  }
+    </script>
+
+    
+
   </body>
 </html>

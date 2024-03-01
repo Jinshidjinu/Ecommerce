@@ -60,12 +60,5 @@ submit.addEventListener("click",async(data)=> {
 })
 
 
-// function for view subcategory if exists
 
-// async function categoryView(event){
-//     try{
-//         const categoryName = event.target.value
-//         const response = await fetch(`/admin/`)
-//     }
-// }
 
