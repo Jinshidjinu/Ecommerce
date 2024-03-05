@@ -1,25 +1,38 @@
 const { default: mongoose, Types } = require('mongoose')
 const cartSchema = require('../models/Cart')
 const productSchema =require('../models/products')
+const { Axios } = require('axios')
+
 
 module.exports={
 
 
 
-
-   cartGET : async(req,res)=>{
+   cartGET: async (req, res) => {
       if (req.session.email) {
-         
-         try{
-            const userID = req.session.email
-   
-            const productview = await cartSchema.findOne({userID:userID}).populate('productID.id')                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
-             res.render('UserSide/cart',{productview})
-         }catch(error){
-            console.log(error)
-         }
+        try {
+          const userID = req.session.email._id;
+    
+          const productview = await cartSchema.findOne({ userID: userID }).populate('productID.id');
+    
+          const subtotal = productview.productID.reduce((acc, index) => {
+            return (acc += index.id.prices * index.quantity);
+          }, 0);
+    
+          let discountTotal = 0; // Initialize discountTotal here
+    
+          discountTotal = productview.productID.reduce((acc, index) => {
+            console.log(discountTotal);
+            return (acc += index.id.discount * index.quantity);
+          }, 0);
+    
+          res.render('UserSide/cart', { productview, subtotal, discountTotal });
+        } catch (error) {
+          console.log(error);
+        }
       }
-   },
+    },
+    
       
    
    addtocartGET: async (req, res) => {
@@ -34,7 +47,6 @@ module.exports={
             const cart = await cartSchema.findOne({userID})
             if(!cart){
                const cartNew = new cartSchema({userID,productID:[{id,quantity:1}]})
-               console.log(cartNew);
                await cartNew.save()
                res.json({success:true,count:1})
            
@@ -84,21 +96,25 @@ deletecartPOST:async(req,res)=>{
 
 
 updateQuantity:async(req,res)=>{
+
    try {
-      console.log('hh');
-      const userID = req.session.email._id
-      const productID = req.query.id
-      const quantity = req.query.qty
-      // console.log(userID);
-      // console.log(productID);       
-      console.log(`qty----`,quantity); 
-      // res.redirect('/cart')
-      
-    const Quantitynew = await cartSchema.findOne({userID:userID})
-   } catch (error) {
-      
-   }
-   
+      const userID = req.session.email?._id
+      console.log(userID,'jdghgd');
+      const userid=new mongoose.Types.ObjectId(userID)
+      const productid = req.body.productid;
+      const id = new mongoose.Types.ObjectId(productid)
+      console.log(productid);
+      const qty = req.body.qty;
+    const abc=  await cartSchema.updateOne(
+      { userID: userid, "productID.id": id },
+      { $set: { "productID.$.quantity": qty } },
+        );
+        console.log(abc,'dhgfygt');
+      res.status(200).json({success:true,message:'quantity updated'})
+    } catch (err) {
+      console.log("cart quantity Update", err);
+    }
+
 
 
     

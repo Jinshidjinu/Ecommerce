@@ -65,5 +65,7 @@ module.exports = {
             console.log('error in removing category',error);
             res.status(500).json({success:false,message:"something  wrong!"})
           }
-     }
+     },
+
+     
 }  

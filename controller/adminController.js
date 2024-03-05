@@ -60,12 +60,12 @@ module.exports={
 
             }else{
                                  
-                   // hash the password using bcrypt
+           // hash the password using bcrypt
                       
            const saltRounds=10; // number of salt round for bcrypt
-          const hashedPassword = await bcrypt.hash(datas.password, saltRounds)
+           const hashedPassword = await bcrypt.hash(datas.password, saltRounds)
            datas.password = hashedPassword 
-             signupData= await adminschema.insertMany(datas)
+           signupData= await adminschema.insertMany(datas)
                console.log(signupData);
             }
             res.redirect('/admin/adminlogin')

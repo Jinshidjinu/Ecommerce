@@ -1,0 +1,79 @@
+<script>
+
+
+    function productPlus(event,productId, proPrice){
+
+     console.log(proPrice,'pri');
+
+   
+
+       let quantity = document.querySelector(`.qtyOne${productId}`)
+       const qty = ++quantity.innerHTML
+       console.log(qty, productId);
+       window.location.href =`/quantity?id=${productId}&qty=${qty}`
+
+
+
+       let sum = proPrice * qty
+
+       let price = document.querySelector(`#proPrices${productId}`)
+
+       price.innerHTML = `₹${sum}`;
+     
+
+     }
+     function productMin(event,productId){
+       console.log("Product Min - Quantity:");
+       let quantity = document.querySelector(`.qtyOne${productId}`)
+       let qty = parseInt(quantity.innerHTML);
+        
+
+   if (qty > 1) {
+       qty = --qty;
+       quantity.innerHTML = qty;
+       window.location.href = `/quantity?id=${productId}&qty=${qty}`;
+    
+   } else {
+       console.log("Quantity cannot be less than 1");
+   }
+   
+ }
+
+
+
+
+</script>
+
+<script>
+
+
+
+
+    function productPlus(event,productId){
+       let quantity = document.querySelector(`.qtyOne${productId}`)
+       const qty = ++quantity.innerHTML
+       console.log(qty, productId);
+       window.location.href =`/quantity?id=${productId}&qty=${qty}`
+     }
+     function productMin(event,productId){
+       console.log("Product Min - Quantity:");
+       let quantity = document.querySelector(`.qtyOne${productId}`)
+       let qty = parseInt(quantity.innerHTML);
+       
+
+
+
+   if (qty > 1) {
+       qty = --qty;
+       quantity.innerHTML = qty;
+       window.location.href = `/quantity?id=${productId}&qty=${qty}`;
+   } else {
+       console.log("Quantity cannot be less than 1");
+   }
+   
+ }
+
+
+
+
+</script>

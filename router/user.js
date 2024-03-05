@@ -32,7 +32,7 @@ router.get('/productView',userController.productViewGET)
 router.get('/cart',cartController.cartGET)
 router.get('/addtocart',cartController.addtocartGET)
 router.post('/deleteCart',cartController.deletecartPOST)
-router.get('/quantity',cartController.updateQuantity)
+router.post('/quantity',cartController.updateQuantity)
 
 
 
