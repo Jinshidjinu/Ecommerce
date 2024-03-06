@@ -67,14 +67,11 @@ module.exports={
             let proid = req.params.productID
             let getproducts = await  productModel.findByIdAndUpdate({_id:proid})
             let categorydata = await categoryModel.find()
-            console.log(categorydata);
-            console.log(getproducts);
             res.render('AdminSide/editProduct',{getproducts,categorydata})
         },
-
+                   
         editproductPOST: async (req,res)=>{
             try{
-
               const prodid = req.params.id
               const editProductData = req.body;
               const productImage = req.files.map(file=>file.filename)

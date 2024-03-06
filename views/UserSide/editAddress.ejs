@@ -233,36 +233,43 @@
                 <h2 class="m-0 p-0 text-capitalize">Edit Address</h2>
               </div>
             </div>
-            <form action="/editAddress" method="post">
+            <%addressView.address.forEach((data)=>{ %>
+            <form action="/editAddress/<%=data._id%>" method="post">
                 <div class="editBody">
+
+                    
                     <div class="d-flex uAcc">
                         <div class="sides">
                             <div>
                                 <label for="locality">Locality</label>
-                                <input name="locality" class="d-block text-capitalize" type="text">
+                                <input name="locality" class="d-block text-capitalize" type="text" value="<%=data.Locality%>" >
                                 <label for="country">Country</label>
-                                <input name="country" class="d-block" type="text">
+                                <input name="country" class="d-block" type="text" value="<%=data.country%> ">
                                 <label for="district">District</label>
-                                <input name="district" class="d-block" type="text">
+                                <input name="district" class="d-block" type="text" value="<%=data.District%> ">
                                 <label for="state">State</label>
-                                <input name="state" class="d-block" type="text">
+                                <input name="state" class="d-block" type="text" value="<%=data.state%>">
                             </div>
                             <button type="submit" class="saveBtn oneBtn">Add Address</button>
                         </div>
                         <div class="sides">
                             <div class="left">
                                 <label for="city">City</label>
-                                <input name="city" class="d-block text-capitalize" type="text">
-                                <label for="hNo">House Name</label>
-                                <input name="hNo" class="d-block" type="number">
+                                <input name="city" class="d-block text-capitalize" type="text" value="<%=data.City%>">
+                                <label for="housename">House Name</label>
+                                <input name="housename" class="d-block" type="text" value="<%=data.HouseName%>">
+                                <label for="hNo">House No</label>
+                                <input name="hNo" class="d-block" type="number" value="<%=data.HouseNo%>">
                                 <label for="pin">PIN Code</label>
-                                <input name="pin" class="d-block" type="number">
+                                <input name="pin" class="d-block" type="number" value="<%=data.pincode%>">
                             </div>
                             <button type="submit" class="saveBtn twoBtn">Save Changes</button>
                         </div>
                     </div>
+                    
                 </div>
             </form>
+            <% }) %>
           </div>
         </div>
       </div>
