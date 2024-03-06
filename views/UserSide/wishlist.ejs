@@ -171,7 +171,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/userWhislist">
+                    <a href="/wishlist">
                       <svg
                         width="20"
                         height="20"
@@ -263,23 +263,6 @@
                       </div>
                       <div class="productDetails">
                         <h2>Fort S48</h2>
-                        <div class="quandity d-flex align-items-center">
-                          <div
-                            class="dec d-flex justify-content-center align-items-center"
-                          >
-                            <i class="fa-solid fa-minus"></i>
-                          </div>
-                          <div
-                            class="qty d-flex justify-content-center align-items-center"
-                          >
-                            <p class="m-0 p-0 qtyOne">1</p>
-                          </div>
-                          <div
-                            class="inc d-flex justify-content-center align-items-center"
-                          >
-                            <i class="fa-solid fa-plus"></i>
-                          </div>
-                        </div>
                         <p class="color">COLOR</p>
                         <p class="cName">Black</p>
                         <div class="price d-flex align-items-baseline gap-2">
@@ -290,144 +273,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="items position-relative">
-                    <a
-                      class="position-absolute deleteBtn"
-                      href="/userCartDelete/id"
-                    >
-                      <svg
-                        width="13"
-                        height="17"
-                        viewBox="0 0 15 19"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1.07143 16.8889C1.07143 18.05 2.03571 19 3.21429 19H11.7857C12.9643 19 13.9286 18.05 13.9286 16.8889V4.22222H1.07143V16.8889ZM15 1.05556H11.25L10.1786 0H4.82143L3.75 1.05556H0V3.16667H15V1.05556Z"
-                          fill="black"
-                        />
-                      </svg>
-                    </a>
-                    <div class="contentDiv d-flex gap-4">
-                      <div class="itemImg">
-                        <img src="./images/cartImg/1a.png" alt="" />
-                      </div>
-                      <div class="productDetails">
-                        <h2>Collar Flash Pro</h2>
-                        <div class="quandity d-flex align-items-center">
-                          <div
-                            class="dec d-flex justify-content-center align-items-center"
-                          >
-                            <i class="fa-solid fa-minus"></i>
-                          </div>
-                          <div
-                            class="qty d-flex justify-content-center align-items-center"
-                          >
-                            <p class="m-0 p-0 qtyOne">1</p>
-                          </div>
-                          <div
-                            class="inc d-flex justify-content-center align-items-center"
-                          >
-                            <i class="fa-solid fa-plus"></i>
-                          </div>
-                        </div>
-                        <p class="color">COLOR</p>
-                        <p class="cName">Blue</p>
-                        <div class="price d-flex align-items-baseline gap-2">
-                          <p class="lPrice">₹1499</p>
-                          <p class="fPrice">₹2999</p>
-                          <p>49% OFF</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="coupons">
-                    <form
-                      action="/userApplyCoupon"
-                      class="d-flex align-items-center"
-                      method="post"
-                    >
-                      <div class="input">
-                        <input type="text" placeholder="Enter Coupon Code" />
-                      </div>
-                      <div>
-                        <button type="submit">APPLY</button>
-                      </div>
-                    </form>
-                  </div>
                 </div>
               </div>
-              <div class="col-6 oneSection">
-                <div class="orderSummary">
-                  <div class="orderHeading">
-                    <h2>order summary</h2>
-                  </div>
-                  <div class="orderContent">
-                    <div
-                      class="sTotal d-flex justify-content-between align-items-center"
-                    >
-                      <p class="commonText m-0 p-0">Subtotal</p>
-                      <p class="commonSub m-0 p-0" id="sTotal">₹30,597</p>
-                    </div>
-
-                    <div
-                      class="ship d-flex justify-content-between align-items-center"
-                    >
-                      <p class="commonText m-0 p-0">Shipping</p>
-                      <p class="commonSub m-0 p-0" id="free">FREE</p>
-                    </div>
-
-                    <div
-                      class="ship d-flex justify-content-between align-items-center"
-                    >
-                      <p class="commonText m-0 p-0">Discount</p>
-                      <p class="commonSub m-0 p-0" id="dPrice">-21,100</p>
-                    </div>
-
-                    <div
-                      class="ship d-flex justify-content-between align-items-center"
-                    >
-                      <p class="commonText m-0 p-0">Coupon Discount</p>
-                      <p class="commonSub m-0 p-0" id="cDPrice">0</p>
-                    </div>
-                  </div>
-                  <div
-                    class="commonText tPrice d-flex justify-content-between align-items-center"
-                  >
-                    <p class="m-0 p-0">Total</p>
-                    <p class="m-0 p-0" id="tPrice">₹9,497</p>
-                  </div>
-                </div>
-                <!-- <div class="ms-auto orderSummary mb-0">
-                                <div class="orderHeading">
-                                    <h2>Delivery Address</h2>
-                                </div>
-                                <div class="deleviryContent">
-                                    <div class="chooseAdd position-relative">
-                                        <div class="existingAddress">
-                                            <p class="name">John D</p>
-                                            <p>Abc house, abc street,PIN: 673478</p>
-                                            <p class="phone">Phone: 98675555568</p>
-                                        </div>
-                                        <a href="/userChangeAddress">
-                                            <button class="position-absolute button">Change</button>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div> -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="checkOut">
-              <form action="/userCartCheckOut">
-                <button>CHECKOUT</button>
-              </form>
             </div>
           </div>
         </div>

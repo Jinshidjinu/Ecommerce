@@ -286,7 +286,7 @@
                 />
            
                 <div class="detail"></div>
-                <a href="/userWishlist/:id/1">
+                <a href="/userWishlist/:id/1" onclick="Addwishlist(event,'<%=productShow._id%>')">
                   <div
                     class="favIcon position-absolute d-flex justify-content-center align-items-center"
                   >
@@ -955,6 +955,37 @@
     <!-- end of footer -->
 <script src="/js/ProductView.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  async function Addwishlist(event,id) {
+      event.preventDefault();
+      event.stopPropagation();
+  
+     console.log(id);
+    const response = await fetch(`/addwishlist?id=${id}`,{
+
+      method:'GET',
+      headers:{
+        'Content-Type':'application/json'
+      }
+
+    })
+
+  const result = await response.json()
+  // alert("Product added to cart!"); // Example: You can replace this with your actual logic
+    if (result.success == true) {
+  
+          Swal.fire({
+            title: "Product Add wishlist!..",
+            text: "",
+            icon: "success",
+          });
+        } else {
+          message.innerHTML = result.error || "unknown error";
+        }
+      
+}
+</script>
 
     <script>
       async function addToCart(event,id) {

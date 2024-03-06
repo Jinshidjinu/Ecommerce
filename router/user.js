@@ -4,6 +4,7 @@ const router=express.Router()
 const userController=require('../controller/userController')
 const cartController = require('../controller/CartController')
 const addressController = require('../controller/addressController')
+const wishlistController = require('../controller/wishlistController')
 
 
 
@@ -45,6 +46,11 @@ router.get('/cart',cartController.cartGET)
 router.get('/addtocart',cartController.addtocartGET)
 router.post('/deleteCart',cartController.deletecartPOST)
 router.post('/quantity',cartController.updateQuantity)
+
+
+router.get('/wishlist',wishlistController.wishlistGET)
+router.get('/addwishlist',wishlistController.addwishlistGET)
+
 
 
 
