@@ -38,7 +38,7 @@ router.get('/Addaddress',addressController.AddaddresuserGET)
 router.post('/Addaddress',addressController.AddaddresuserPOST)
 router.get('/editAddress/:id',addressController.EditAddressGET)
 router.post('/editAddress/:id',addressController.EditAddressPOST)
-// router.delete('/addressdelete',addressController.addressDelete)
+router.delete('/addressdelete',addressController.addressDelete)
 
 
 router.get('/cart',cartController.cartGET)

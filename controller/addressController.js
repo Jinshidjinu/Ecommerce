@@ -104,6 +104,27 @@ EditAddressPOST : async (req, res) => {
 
 addressDelete:async(req,res)=>{
 
+  try{
+    
+    const addrID = req.query.id
+    console.log(addrID);
+
+    const userID = req.session.email._id
+    console.log(userID);
+
+    const result = await addressSchema.updateOne(
+      {user:userID},
+      {$pull:{address:{_id:addrID}}}
+    )
+
+    res.json({success:true})
+
+
+  }catch(error){
+    console.log(error)
+    res.status(500).json({ success: false, error: "Server Error" });
+
+  }
 
 
 }
