@@ -40,15 +40,12 @@ module.exports={
           HouseNo: req.body.hNo,
           pincode: req.body.pin,
         };
-  
-    
         // Update the address
         const updatedAddresss = await addressSchema.findOneAndUpdate(
           { user: userID },
           { $push: { address: datas } },
           { upsert: true, new: true }
         );
-    
         console.log(updatedAddresss);
         res.json({ add: true, address: updatedAddresss });
       } catch (err) {
@@ -57,7 +54,5 @@ module.exports={
       }
   }
 },
-
-
 }
 }
