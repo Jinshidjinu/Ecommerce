@@ -251,8 +251,17 @@ module.exports = {
 
       const viewID = req.query.id     
       const productShow = await products.findOne({_id:viewID})
-      // console.log(productShow);
       res.render('UserSide/productDetails',{productShow})
+    },
+
+
+    userProfileGET : async(req,res)=>{
+
+      res.render('UserSide/Userprofile')
+
+    },
+    userProfilePOST : async(req,res)=>{
+
     }
 
 

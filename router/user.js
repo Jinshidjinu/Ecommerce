@@ -3,6 +3,7 @@ const express=require('express')
 const router=express.Router()
 const userController=require('../controller/userController')
 const cartController = require('../controller/CartController')
+const addressController = require('../controller/addressController')
 
 
 
@@ -29,10 +30,22 @@ router.post('/Reset/Password/:mail',userController.ResetPasswordPOST)
 router.get('/userhome',userController.loadUserHomeGET)
 router.get('/productView',userController.productViewGET)
 
+router.get("/userAccount",userController.userProfileGET)
+router.post("/userAccount",userController.userProfilePOST)
+
+router.get('/address',addressController.AddressGET)
+router.get('/Addaddress',addressController.AddaddresuserGET)
+router.post('/Addaddress',addressController.AddaddresuserPOST)
+router.get('/editAddress/:id',addressController.EditAddressGET)
+router.post('/editAddress/:id',addressController.EditAddressPOST)
+
+
 router.get('/cart',cartController.cartGET)
 router.get('/addtocart',cartController.addtocartGET)
 router.post('/deleteCart',cartController.deletecartPOST)
 router.post('/quantity',cartController.updateQuantity)
+
+
 
 
 
