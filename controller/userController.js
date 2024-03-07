@@ -18,6 +18,7 @@ const client = require("twilio")(AccountSID, AuthToken);
 const products = require('../models/products')
 const bannerSchema = require('../models/Banner')
 const categorySchema = require('../models/category')
+const wishlistSchema = require('../models/wishlist')
 
 let Number;
 
@@ -248,10 +249,19 @@ module.exports = {
 
 
     productViewGET:async(req,res)=>{
-
+      const userID = req.session.email._id
+      console.log(userID);
       const viewID = req.query.id     
+      console.log(viewID);
+      let existingProduct = false;
       const productShow = await products.findOne({_id:viewID})
-      res.render('UserSide/productDetails',{productShow})
+      const wishlist  = await wishlistSchema.findOne({userID:userID})
+      const existProduct = wishlist.product.find(product => product.id.equals(viewID));
+      if(existProduct!== undefined){
+        existingProduct = true
+      }
+      console.log(existingProduct);
+      res.render('UserSide/productDetails',{productShow,existingProduct})
     },
 
 

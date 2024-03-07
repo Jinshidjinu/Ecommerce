@@ -238,42 +238,39 @@
                 </svg>
               </div>
             </div>
+            
             <div class="cartBody d-flex">
               <div class="col-6 oneSection">
-                <div class="cartItems">
+             
+                <%productshow.product.forEach((data)=>{ %>
+                <div class="cartItems" id="removedwishlist">
                   <div class="items position-relative">
                     <a
                       class="position-absolute deleteBtn"
-                      href="/userCartDelete/id"
+                      href=""
                     >
-                      <svg
-                        viewBox="0 0 15 19"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M1.07143 16.8889C1.07143 18.05 2.03571 19 3.21429 19H11.7857C12.9643 19 13.9286 18.05 13.9286 16.8889V4.22222H1.07143V16.8889ZM15 1.05556H11.25L10.1786 0H4.82143L3.75 1.05556H0V3.16667H15V1.05556Z"
-                          fill="black"
-                        />
-                      </svg>
+                      <i class="fa-solid fa-trash" style="color: #cb1531;" onclick="Removewishlist('<%=data.id._id%>')"></i>
                     </a>
+
                     <div class="contentDiv d-flex gap-4">
+                  
                       <div class="itemImg">
-                        <img src="./images/cartImg/2c.png" alt="" />
+                        <img src="/images/products/<%=data.id.image[0]%>" alt="" />
                       </div>
                       <div class="productDetails">
-                        <h2>Fort S48</h2>
+                        <h2><%=data.id.productName%></h2>
                         <p class="color">COLOR</p>
                         <p class="cName">Black</p>
                         <div class="price d-flex align-items-baseline gap-2">
-                          <p class="lPrice">₹7,998</p>
-                          <p class="fPrice">₹27,598</p>
+                          <p class="lPrice">₹<%=data.id.prices%></p>
+                          <p class="fPrice">₹<%=data.id.discount%></p>
                           <p>71% OFF</p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
+                <% }) %>
               </div>
             </div>
           </div>
@@ -781,7 +778,55 @@
         </div>
     </footer>
     <!-- end of footer -->
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  
+    <script>
+      function Removewishlist(wishlist) {
+        addEventListener('click',(event)=>{
+          event.preventDefault()
+        })
+       
+       Swal.fire({
+       title: "Are you sure?",
+       text: "You won't be able to revert this!",
+       icon: "warning",
+       showCancelButton: true,
+       confirmButtonColor: "#3085d6",
+       cancelButtonColor: "#d33",
+       confirmButtonText: "Yes, delete it!",
+     }).then(async (result) => {
+       if (result.isConfirmed){
+           const wishlistId =wishlist
+         console.log(wishlistId);
+         const response = await fetch(
+           `/deletewishlist?id=${wishlistId}`,
+           { method: "post" }
+         )
+         if (!response.ok) {
+           throw new Error(
+             "error deleting wishlist products" + response.statusText
+           );
+         }
+         const result = await response.json();
+         console.log(result);
+       
+         if (result.success == true) {
+   
+           Swal.fire({
+             title: "Deleted!",
+             text: "Your file has been deleted.",
+             icon: "success",
+           });
+           
+           document.getElementById('removedwishlist').remove()
+         
+         } else {
+           message.innerHTML = result.error || "unknown error";
+         }
+       }
+     });
+   }
+ </script>
     <!-- custom js -->
     <script src="./js/userCart.js"></script>
     <!-- end of custom js -->

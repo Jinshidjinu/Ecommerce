@@ -50,6 +50,7 @@ router.post('/quantity',cartController.updateQuantity)
 
 router.get('/wishlist',wishlistController.wishlistGET)
 router.get('/addwishlist',wishlistController.addwishlistGET)
+router.post('/deletewishlist',wishlistController.wishlistPOST)
 
 
 

@@ -1,12 +1,15 @@
 
-const categoryModel = require('../models/category')
+const categoryModel= require('../models/category')
 const productModel = require('../models/products')
+const wishlistModel= require('../models/wishlist')
+
 
 module.exports={
     
     productsGET:async(req,res)=>{
       try{
         const productdatas = await productModel.find()
+          
           res.render('AdminSide/products',{productdatas})
 
       }catch(error){
