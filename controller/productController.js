@@ -126,6 +126,12 @@ module.exports={
                 console.log(error.message);
            }  
           
+         },
+
+
+         showAllproductsGET:async(req,res)=>{
+
+          res.render('userSide/showAllproducts')
          }
 
 

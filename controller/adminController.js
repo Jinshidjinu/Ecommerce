@@ -99,9 +99,32 @@ module.exports={
             console.log("error in homeget", err.message);
         }
     },
-    
-    adminuserlistPOST:  (req,res)=>{
-          
-    } 
+   
+    blockUsersPATCH: async (req,res)=>{
+        console.log('hai');
+  
+        let block = false;
+
+         try{
+               const dataID = req.query.id
+               console.log(dataID);
+
+               const userdetail = await customer.findOne({_id:dataID})
+
+               if(userdetail.verified){
+                await customer.updateOne({_id:dataID},{$set:{verified:false}})
+                block = false
+               }else{
+                await customer.updateOne({_id:dataID},{$set:{verified:true}})
+                block = true
+               }
+               res.json({ block});   
+              
+         }catch(error){
+              console.log(error.message);
+         }  
+        
+       }
+
     
 } 

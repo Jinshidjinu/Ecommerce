@@ -7,6 +7,7 @@
     const bannerController =require('../controller/BannerController')
     const couponController = require('../controller/CouponController')
     const utility = require('../utility/multer')
+const userController = require('../controller/userController')
     
     const uploadProducts = utility.productimg()
     const uploadBanner  = utility.bannerimg()
@@ -20,8 +21,10 @@
     router.get('/dashboard',adminController.dashboardGET)
     // router.post('/dashboard',adminController.dashboardPOST)
 
+    //users List
     router.get('/Userslist',adminController.adminuserlistGET)
-    router.post('/Userslist',adminController.adminuserlistPOST)
+    router.patch('/blockusers',adminController.blockUsersPATCH)
+   
 
     //category
 

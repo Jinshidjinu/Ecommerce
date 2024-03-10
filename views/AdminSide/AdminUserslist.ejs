@@ -63,7 +63,7 @@
                         <td>Email</td>
                         <td>Phone</td>
                         <td>verified</td>
-                        <td></td>
+                       
                     </tr>
                 </thead>
                 <tbody>
@@ -82,9 +82,19 @@
 
                         <td class="active"><p><%=data.phone%></p></td>
 
-                        <td class="role"> <p><%=data.verified%></p></td>
+                        <td class="role">
+                            <% if(data.verified) { %>
+                                <button style="padding: .6rem;  border-radius: 5px; border: none; width: 100px; color: rgb(234, 218, 218); background-color: red;"  class="blockBtn blockbtn<%=data._id %>" onclick="blockUser(event,'<%=data._id %>')">
+                                    BLOCK
+                                </button>
+                                <% }else { %> 
+                                <button style="padding: .6rem; ; border-radius: 5px; border: none; width: 100px; color: rgb(199, 215, 199); background-color: green;"  class="blockBtn blockbtn<%=data._id %>" onclick="blockUser(event,'<%=data._id %>')">
+                                   Active 
+                                </button>
+                                <% } %>
+                        </td>
 
-                        <td class="edit"> <a href="#">Edit</a></td>
+                        
                     </tr>
                                      
                 </tr>
@@ -95,6 +105,40 @@
         </div>
     </section>
 
+    <script>
+        async function blockUser(event,userid){
+            event.preventDefault()
+            try {
+        
+                const blockBtn = document.querySelector('.blockbtn' + userid)
+        
+                   const response = await fetch(`/admin/blockusers?id=${userid}`,{
+                    method:'PATCH',
+                    headers:{
+                    'Content-Type':'application/json'
+                    }
+                   })
+        
+                   const result = await response.json()
+        
+                   if(result.block){
+                       blockBtn.innerText = 'BLOCK'
+                       blockBtn.style.backgroundColor = 'red'
+                       blockBtn.style.color = 'white'
+                    }
+                    else{
+                        
+                       blockBtn.innerText = 'Active'
+                       blockBtn.style.backgroundColor = 'green'
+                       blockBtn.style.color = 'white'
+        
+                   }
+            } catch (error) {
+                console.log('Error in block product',error);
+            }
+        }
+        
+        </script>
  
 </body>
 

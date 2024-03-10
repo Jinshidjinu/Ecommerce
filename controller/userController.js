@@ -302,7 +302,7 @@ module.exports = {
        }
     
 
-    }
+    },
 
 
 };
