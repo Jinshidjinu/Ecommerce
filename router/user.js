@@ -32,7 +32,8 @@ router.get('/userhome',userController.loadUserHomeGET)
 router.get('/productView',userController.productViewGET)
 
 router.get("/userAccount",userController.userProfileGET)
-router.post("/userAccount",userController.userProfilePOST)
+router.get("/editAccount",userController.editProfileGET)
+
 
 router.get('/address',addressController.AddressGET)
 router.get('/Addaddress',addressController.AddaddresuserGET)

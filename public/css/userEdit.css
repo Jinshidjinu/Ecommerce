@@ -1,5 +1,5 @@
 /*---------- font family ----------*/
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Lemon&family=Russo+One&family=Ubuntu:wght@300;400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Lemon&family=Ubuntu:wght@300;400;500;700&display=swap");
 /*---------- end of font family ----------*/
 
 *::after,
@@ -12,6 +12,7 @@
 body {
   padding: 0;
   margin: 0;
+  overflow-x: hidden;
 }
 body::-webkit-scrollbar {
   display: none;
@@ -32,7 +33,6 @@ a {
   --bs-body-bg: transparent;
   --bs-border-color: rgba(255, 255, 255, 0.4);
   --bs-accordion-btn-focus-border-color: transparent;
-  --carousel-control-color: blue;
 }
 .accordion-button:not(.collapsed) {
   color: white;
@@ -130,7 +130,7 @@ a {
   width: 75vw;
   height: 100vh;
   background-color: blue;
-  z-index: 2;
+  z-index: 1;
   top: 0;
   left: -100%;
   padding: 94px 50px;
@@ -143,7 +143,7 @@ a {
 }
 .mobilenavigation.active {
   position: fixed;
-  z-index: 4;
+  z-index: 2;
 }
 .mobilenavigation {
   display: none;
@@ -183,16 +183,7 @@ a {
   height: 2rem;
 }
 .navigationnavbar ul li {
-  position: relative;
   margin-left: 2rem;
-}
-.navigationnavbar ul li:focus-within::before {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 2px;
-  bottom: -3px;
-  background-color: #0f0;
 }
 .navigationnavbar ul li:last-child {
   margin-right: 2rem;
@@ -259,187 +250,234 @@ a {
 }
 /*---------- end of header ----------*/
 
-/*---------- main ----------*/
-.leftBtn {
-  transform: rotate(180deg);
+/*---------- main COntent ----------*/
+.main {
+  padding: 3% 4%;
 }
-.slideBtn {
-  max-width: 2.5rem;
-  max-height: 2.5rem;
-  border-radius: 2.5rem;
-  border: transparent;
-  background-color: rgba(255, 255, 255, 1);
-  background-image: url("../images/slideImg/arrow-right.svg");
-  background-position: center;
-  background-size: 70% 70%;
+.mainContainer {
+  border: 1px solid #e0e0e0;
+  background: #fff;
 }
-.carousel-control-next,
-.carousel-control-prev {
-  width: 8%;
+.cartHead {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
 }
-.carousel-item img {
-  object-fit: cover;
-}
-.carousel-inner img {
-  min-height: 44vw;
-  overflow: hidden;
-}
-.img-large-screen {
-  display: block;
-}
-.img-small-screen {
-  display: none;
-}
-.main-body {
-  padding-top: 5rem;
-  line-height: normal;
-  font-style: normal;
-}
-.main-body h2 {
-  color: #484955;
-  font-family: Inter;
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 3rem;
-}
-.newlyLaunched {
-  max-width: 1200px;
-  margin: 0 auto;
-  margin-bottom: 3rem;
-  overflow: visible;
-}
-.newlyLaunched li {
-  display: inline-block;
-  margin: 0 0.5rem;
-}
-.newlyLaunched li:nth-child(1) {
-  margin-left: 0;
-}
-.newlyLaunched li:last-child {
-  margin-right: 0;
-}
-.newItems {
-  width: 23.75rem;
-  min-height: 36.125rem;
-  background: #f6f6f7;
-  box-shadow: 0px 23px 40px -31px rgba(0, 0, 0, 0.33);
-  padding: 1.25rem 1.25rem;
-}
-.newItems img {
-  width: 300px;
-  height: 323px;
-  margin: 0 1.25rem;
-}
-.text-area {
-  text-align: start;
-}
-.productTittle p {
-  text-transform: uppercase;
-  color: #484955;
+.cartHead h2 {
+  color: #000;
   font-family: Ubuntu;
-  font-size: 1.25rem;
+  font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-  margin-bottom: 1rem;
 }
-.discountPrice p {
-  font-family: Ubuntu;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 1.5rem;
-  margin-left: 0.5rem;
-  margin-bottom: 1rem;
+.cartBody {
+  padding: 1.25rem;
 }
-.discountPrice p:first-child {
-  color: #484955;
-  font-size: 1.25rem;
+.cartHead svg {
+  width: 35px;
+  height: 35px;
 }
-.discountPrice p:nth-child(2) {
-  color: rgba(72, 73, 85, 0.4);
-  font-size: 1rem;
-  text-decoration-line: line-through;
+.orderSummary {
+  margin-left: auto;
+  width: 80%;
+  background: #fff;
+  margin-bottom: 2rem;
 }
-.discountPrice {
-  border-bottom: 1px solid rgba(75, 73, 85, 0.1);
+.orderHeading {
+  padding: 1.2rem;
+  border-bottom: 1px solid #e0e0e0;
 }
-.property div {
-  display: flex;
-  align-items: center;
-  gap: 0.44rem;
-}
-.property div:nth-child(1) {
-  margin-top: 1rem;
-}
-.property div img {
-  width: 10px;
-  height: 10px;
+.orderHeading h2 {
   margin: 0;
-}
-.property div p {
-  color: rgba(72, 73, 85, 0.65);
+  color: rgba(0, 0, 0, 0.5);
   font-family: Ubuntu;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 1.5rem;
-}
-.property {
-  margin-bottom: 1rem;
-}
-.colorOptions div {
-  gap: 1rem;
-}
-.colorOptions div p {
-  color: rgba(72, 73, 85, 0.7);
-  font-family: Ubuntu;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.5rem;
+  line-height: normal;
+  text-transform: capitalize;
 }
-.colorOptions div div {
-  gap: 0.25rem;
+.orderContent {
+  padding: 1.2rem;
+  border-bottom: 1px solid #e0e0e0;
+  font-family: Ubuntu;
+  font-style: normal;
+  line-height: normal;
 }
-.colorOptions div div div {
-  width: 1.25rem;
-  height: 1.25rem;
-  border-radius: 1.25rem;
-  border: 0.8px solid #bdbdbd;
+.orderContent div {
+  margin-bottom: 1.75rem;
 }
-.colorOptions {
-  margin-bottom: 0.5rem;
+.orderContent div:last-child {
+  margin-bottom: 0;
 }
-.shopOption div p {
-  text-transform: uppercase;
-  color: #484955;
-  font-family: Russo One;
+.commonText {
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+.commonSub {
+  color: #000;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.ship p:nth-child(2) {
+  color: #3cb77c;
+}
+.tPrice {
+  padding: 1.2rem;
+}
+.tPrice p {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.deleviryContent {
+  padding: 2rem;
+}
+.chooseAdd {
+  border: 1px solid #e0e0e0;
+  padding: 2rem 1.5rem;
+}
+.existingAddress {
+  width: 65%;
+}
+.existingAddress p {
+  color: rgba(0, 0, 0, 0.75);
+  font-family: Ubuntu;
   font-size: 0.75rem;
   font-style: normal;
-  font-weight: 400;
-  line-height: 1.5rem;
-  margin-right: 0.75rem;
+  font-weight: 600;
+  line-height: normal;
 }
-.newlyLaunched {
-  transition: all 1000ms;
-}
-.newlyLaunched::-webkit-scrollbar {
-  display: none;
-}
-.slideButton {
-  gap: 5px;
-  margin-bottom: 0.5rem;
-}
-.slideButton li button {
-  width: 32px;
-  height: 3.2px;
+.button {
+  color: #000;
+  font-family: Ubuntu;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
   border: transparent;
-  background-color: rgba(220, 211, 201, 1);
+  outline: none;
+  background-color: #0f0;
+  padding: 0.4rem 1.25rem;
+  top: 20px;
+  right: 20px;
 }
-.slideButton li button:focus {
-  background-color: rgba(0, 255, 0, 1);
+.phone {
+  width: max-content;
 }
-/*---------- end of main ----------*/
+.checkOut {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  width: 100%;
+  height: 12vh;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 2rem;
+  padding: 0 3%;
+}
+.pInfo{
+    padding: 1rem;
+    border-radius: 9px;
+    border: 1px solid #e0e0e0;
+}
+.editBody h2{
+    color: #000;
+    font-family: Ubuntu;
+    font-size: 0.9rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 0.75rem;
+}
+.pInfo p{
+    color: #000;
+    font-family: Ubuntu;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 0.5rem;
+}
+.pInfo span{
+    font-weight: 400;
+}
+.pInfo{
+    margin-bottom: 1.25rem;
+}
+.saveBtn{
+    margin-top: 0.65rem;
+    border: transparent;
+    outline: transparent;
+    background-color: #0f0;
+    color: #000;
+    font-family: Ubuntu;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    width: 6.5rem;
+    height: 2rem;
+    border-radius: 4px;
+}
+.cardOptions{
+    border-radius: 9px;
+    width: 8rem;
+    border: 1px solid #e0e0e0;
+    padding: 1rem 0;
+    margin-bottom: 1rem;
+}
+.cardOptions svg{
+    width: 42px;
+    height: 42px;
+    margin-bottom: 0.2rem;
+}
+.cardOptions p{
+    color: #000;
+    font-family: Ubuntu;
+    font-size: 0.8rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+.editBody{
+    padding: 2.25rem;
+}
+.editBody label{
+    color: #000;
+    font-family: Ubuntu;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 0.65rem;
+}
+.editBody input{
+    outline: transparent;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid #E0E0E0;
+    background: #FFF;
+    margin-bottom: 0.65rem;
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.left{
+    min-width: fit-content;
+    margin-left: auto;
+}
+.twoBtn{
+    display: none;
+}
+.sides{
+    width: 50%;
+}
+/*---------- end of main COntent ----------*/
 
 /*---------- footer ----------*/
 footer {
@@ -554,11 +592,12 @@ footer {
 }
 /*---------- end of footer ----------*/
 
-
-
-
-
 /*---------- media query ----------*/
+@media (max-width: 1536px) {
+    .mainContainer{
+        width: 699px;
+    }
+}
 @media (max-width: 1472px) {
   .navigation {
     padding: 0 9.5%;
@@ -629,6 +668,177 @@ footer {
   .navigationnavbar ul li:last-child {
     margin-right: 1rem;
   }
+  .tPrice p {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .productDetails h2 {
+    color: #000;
+    font-family: Ubuntu;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    margin-bottom: 0.75rem;
+  }
+  .quandity div {
+    width: 18px;
+    height: 18px;
+    border: 1px solid #e0e0e0;
+    background-color: white;
+    margin-bottom: 0.75rem;
+  }
+  .quandity div i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8px;
+    height: 8px;
+    object-fit: contain;
+  }
+  .quandity div:first-child,
+  .quandity div:last-child {
+    width: 24px;
+    cursor: pointer;
+    background-color: #eee;
+  }
+  #qty {
+    color: #000;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    user-select: none;
+  }
+  .color {
+    color: rgba(0, 0, 0, 0.4);
+    font-family: Inter;
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+  .cName {
+    text-transform: capitalize;
+    color: #000;
+    font-family: Inter;
+    font-size: 0.65rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 1.2rem;
+  }
+  .price {
+    font-style: normal;
+    line-height: normal;
+    text-transform: uppercase;
+    font-family: Ubuntu;
+  }
+  .price p:nth-child(1) {
+    color: #212121;
+    font-size: 1rem;
+    font-weight: 700;
+  }
+  .price p:nth-child(2) {
+    color: #bdbdbd;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-decoration-line: line-through;
+  }
+  .price p:nth-child(3) {
+    color: #3cb77c;
+    font-size: 0.8rem;
+    width: max-content;
+    font-weight: 500;
+  }
+  .deleteBtn {
+    top: 14px;
+    right: 14px;
+  }
+  .deleteBtn svg {
+    width: 11px;
+    height: 15px;
+  }
+  .checkOut button {
+    width: 8rem;
+    border: transparent;
+    outline: transparent;
+    color: #000;
+    font-family: Inter;
+    font-size: 0.7rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.175rem;
+    text-transform: uppercase;
+    background-color: #0f0;
+    padding: 0.8rem;
+  }
+  .checkOut {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 2rem;
+    padding: 0 3%;
+  }
+}
+@media (max-width: 871px) {
+  .itemImg {
+    width: 120px;
+  }
+}
+@media (max-width: 771px) {
+  .cartBody {
+    flex-direction: column;
+    align-items: center;
+  }
+  .orderSummary {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-left: 0;
+    width: 100%;
+    background: #fff;
+    margin-bottom: 2rem;
+  }
+  .oneSection {
+    width: 100%;
+  }
+  .cartHead {
+    padding: 0.9rem 1.25rem;
+  }
+  .cartHead h2 {
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .cartHead svg {
+    width: 30px;
+    height: 30px;
+  }
+  .cartBody {
+    padding: 0.9rem 1.25rem;
+  }
+  .quandity div i {
+    font-size: x-small;
+  }
+  .productDetails h2 {
+    font-size: 15px;
+  }
+  .price p:nth-child(1) {
+    font-size: 15px;
+  }
+  .price p:nth-child(2) {
+    font-size: 0.6rem;
+  }
+  .price p:nth-child(3) {
+    font-size: 0.7rem;
+  }
 }
 @media (max-width: 861px) {
   .navigationnavbar {
@@ -643,41 +853,28 @@ footer {
   .logo.active a {
     margin-left: 50px;
   }
-  .carousel-inner {
-    min-height: 90vw;
-  }
-  .img-large-screen {
-    display: none;
-  }
-  .img-small-screen {
-    display: block;
-  }
-  .newlyLaunched {
-    overflow-x: scroll;
-  }
-  .newItems {
-    width: 340px;
-  }
-  .newItems img {
-    width: 245px;
-    height: 270px;
-    object-fit: cover;
-  }
-  .productImg {
-    background-image: url(../images/slideImg/mobile.svg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  .slideProduct {
-    display: none;
-  }
-  .showAllProducts{
-    background-color: #0f0;
-  }
-  .main-body h2 {
-    font-size: 2.5rem;
-  }
+}
+@media (max-width: 654px) {
+    .cardOptions{
+        border-radius: 9px;
+        width: 7rem;
+        border: 1px solid #e0e0e0;
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+    }
+    .cardOptions svg{
+        width: 32px;
+        height: 32px;
+        margin-bottom: 0.2rem;
+    }
+    .cardOptions p{
+        color: #000;
+        font-family: Ubuntu;
+        font-size: 0.7rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
 }
 @media (max-width: 600px) {
   .loginbox {
@@ -711,22 +908,89 @@ footer {
     font-weight: 500;
     text-decoration: underline;
   }
-  .main-body h2 {
-    font-size: 2rem;
+  .uAcc{
+    flex-direction: column;
   }
-  .slideBtn {
-    max-width: 1.5rem;
-    max-height: 1.5rem;
+  .left{
+    margin-left: 0;
+  }
+  .oneBtn{
+    display: none;
+  }
+  .twoBtn{
+    margin-top: 1.3rem;
+    display: block;
+  }
+  .sides{
+    width: 100%;
+  }
+  .editBody label{
+    font-size: small;
+  }
+  .editBody input{
+    width: 100%;
+ }
+}
+@media (max-width: 585px) {
+    .cardOptions{
+        border-radius: 9px;
+        width: 6rem;
+        border: 1px solid #e0e0e0;
+        padding: 1rem 0;
+        margin-bottom: 1rem;
+    }
+    .cardOptions svg{
+        width: 32px;
+        height: 32px;
+        margin-bottom: 0.2rem;
+    }
+    .cardOptions p{
+        color: #000;
+        font-family: Ubuntu;
+        font-size: 0.65rem;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+}
+@media (max-width: 481px) {
+  .orderHeading {
+    padding: 0.65rem;
+  }
+  .orderHeading h2 {
+    font-size: 15px;
+  }
+  .orderContent {
+    padding: 0.65rem;
+  }
+  .orderContent div {
+    margin-bottom: 17px;
+  }
+  .tPrice {
+    padding: 0.65rem;
+  }
+  .ship p:nth-child(2) {
+    font-size: 0.8rem;
+  }
+  .checkOut button {
+    width: 7rem;
+    border: transparent;
+    outline: transparent;
+    color: #000;
+    font-family: Inter;
+    font-size: 0.6rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    letter-spacing: 0.175rem;
+    text-transform: uppercase;
+    background-color: #0f0;
+    padding: 0.6rem;
   }
 }
 @media (min-width: 1537px) {
   .catgoryDiv {
     height: 4em;
-  }
-}
-@media (min-width: 1156px) {
-  .slideButton li:last-child {
-    display: none;
   }
 }
 /*---------- end of media query ----------*/

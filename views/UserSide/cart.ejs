@@ -946,7 +946,6 @@ async function inc(id, price, stock,discount) {
   const initialPrice = parseFloat(lPrice.innerHTML.replace("₹", ""));
   qty.innerHTML = +qty.innerHTML + 1;
   const newprice = qty.innerHTML * price;
-  // console.log(newprice);
   const newdiscount = qty.innerHTML * discount;
   console.log(newdiscount);
   const qtyval = parseInt(qty.innerHTML);

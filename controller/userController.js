@@ -1,4 +1,4 @@
-const customer = require("../models/customer");
+
 const bcrypt = require("bcrypt");
 const utility = require("../utility/mailer");
 const Mail = require("nodemailer/lib/mailer");
@@ -15,10 +15,12 @@ const AccountSID = "AC419ed74a879f53ae188cad46d571b854";
 const AuthToken = "b54b5e31baa07cac709d8712e174106c";
 const client = require("twilio")(AccountSID, AuthToken);
 
+const customer = require("../models/customer");
 const products = require('../models/products')
 const bannerSchema = require('../models/Banner')
 const categorySchema = require('../models/category')
 const wishlistSchema = require('../models/wishlist')
+const AddressSchema  = require('../models/Address')
 
 let Number;
 
@@ -260,17 +262,45 @@ module.exports = {
       if(existProduct!== undefined){
         existingProduct = true
       }
-      console.log(existingProduct);
+     
       res.render('UserSide/productDetails',{productShow,existingProduct})
     },
 
 
     userProfileGET : async(req,res)=>{
+       try{
 
-      res.render('UserSide/Userprofile')
+        const userID = req.session.email._id
+        console.log(userID);
+
+        const findAccount = await customer.findOne({_id:userID})
+        
+        const addressdetails =  await AddressSchema.findOne({user:userID})
+        
+        
+        res.render('UserSide/Userprofile',{findAccount,addressdetails})
+
+       }catch(error){
+         
+       console.log(error);
+
+       }
+
 
     },
-    userProfilePOST : async(req,res)=>{
+    editProfileGET : async(req,res)=>{
+       try {
+        const userID = req.session.email._id
+        console.log(userID);
+
+        const findAccount = await customer.findOne({_id:userID})
+        console.log(findAccount);
+
+        res.render('userSide/userEdit',{findAccount})
+       } catch (error) {
+        console.log(error);
+       }
+    
 
     }
 

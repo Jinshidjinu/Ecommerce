@@ -115,12 +115,7 @@ updateQuantity:async(req,res)=>{
       console.log("cart quantity Update", err);
     }
 
-
-
-    
-    
-
 }
 
 
-}
+} 
