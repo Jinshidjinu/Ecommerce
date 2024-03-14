@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ecart Home</title>
+    <title>Login Account</title>
+    <!-- <link rel="shortcut icon" href="#" type="image/x-icon" /> -->
     <!-- Bootstrap css cdn link -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -13,7 +14,7 @@
     />
     <!-- end of Bootstrap css cdn link -->
     <!-- Style css -->
-    <link rel="stylesheet" href="/css/userHome.css" />
+    <link rel="stylesheet" href="/css/checkout.css" />
     <!-- end of Style css -->
   </head>
   <body>
@@ -123,7 +124,7 @@
               <div class="useroptions d-flex">
                 <ul class="m-0 p-0 d-flex align-items-center list-unstyled">
                   <li>
-                    <a href="/userAccount">
+                    <a href="/userAccont">
                       <svg
                         width="20"
                         height="20"
@@ -170,7 +171,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/wishlist">
+                    <a href="/userWhislist">
                       <svg
                         width="20"
                         height="20"
@@ -186,7 +187,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/cart">
+                    <a href="/usersAddToCart">
                       <svg
                         width="20"
                         height="20"
@@ -212,208 +213,207 @@
 
     <!-- main -->
     <main>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div
-              id="carouselExampleControls"
-              class="carousel slide"
-              data-bs-ride="carousel"
-            >
-
-        
-           
-              <div class="carousel-inner">
-                <% bannerData.forEach((data)=>{ %>
-                <div
-                  class="carousel-item active"
-                  data-bs-interval="6000"
-                  data-bs-pause="false"
-                  data-bs-ride="false"
-                >
-                  <a href=""
-                    ><img
-                      src="/images/banner/<%=data.Image %>"
-                      class="w-100 img-large-screen"
-                      alt=""
-                  /></a>
-                
-                </div>
-                <%})%>
-               
-              </div>
-          
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev"
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="changeAddressModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-white eachAdd border-0">
+            <div class="modal-header">
+              <h5
+                class="modal-title"
+                id="exampleModalLabel"
               >
-                <span
-                  class="carousel-control-prev-icon slideBtn leftBtn"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
+                Address
+              </h5>
               <button
-                class="carousel-control-next"
                 type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="next"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <% addressView.address.forEach((data)=>{ %>
+                <div class="chooseAdd existingAddress p-3 w-100 mb-3 position-relative">
+                  <p class="name"><%=usersData.name%></p>
+                  <p><%=data.HouseNo%>,<%=data.HouseName%>,<%=data.Locality%>,<%=data.City%>,<%=data.District%>,<%=data.state%>,<%=data.country%>,<%=data.pincode%></p>
+                  <p class="phone">Phone: <%=usersData.phone%></p>
+                  <input name="adId" class="position-absolute radio" type="radio" value="<%=data.HouseNo%>,<%=data.HouseName%>,<%=data.Locality%>,<%=data.City%>,<%=data.District%>,<%=data.state%>,<%=data.country%>,<%=data.pincode%>">
+                </div>   
+              <% }) %>
+              <p class="m-0"><a href="/Addaddress" class="button">Add Address</a></p>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary bg-danger text-white"
+                data-bs-dismiss="modal"
               >
-                <span
-                  class="carousel-control-next-icon slideBtn"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Next</span>
+                Close
               </button>
+              <!-- Add additional buttons or actions as needed -->
             </div>
           </div>
         </div>
       </div>
-      <div class="container-fluid">
-        <div class="row">
+      <!-- end of Modal -->
+      <div class="container-fluid main">
+        <div class="row mainContainer">
           <div class="col-12">
-            <div class="main-body">
-              <div class="col-12">
-                <div class="text-center">
-                  <h2>Newly Arrayvals</h2>
+            <div class="cartBody d-flex">
+              <div class="col-6 oneSection">
+                <div class="cartItems">
+                  <div class="items position-relative mb-3">
+                    <div class="d-flex payOptions align-items-center gap-3">
+                      <input
+                        class="pay"
+                        name="payMethode"
+                        value="OP"
+                        type="radio"
+                        id="creditCard"
+                      />
+                      <h2 class="m-0">Credit Card</h2>
+                    </div>
+                    <div class="credit">
+                      <label for="cCNo" class="d-block"
+                        >Credit card number</label
+                      >
+                      <input type="number" name="cCNo" />
+                      <div class="d-flex gap-3 w-100">
+                        <div class="w-50">
+                          <label for="expiry" class="d-block"
+                            >Expiry (MM/YY)</label
+                          >
+                          <input type="text" class="w-100" name="expiry" />
+                        </div>
+                        <div class="w-50">
+                          <label for="CVV" class="d-block">CVV</label>
+                          <input type="number" class="w-100" name="CVV" />
+                        </div>
+                      </div>
+                      <label for="nOC" class="d-block">Name on the card</label>
+                      <input type="number" name="nOC" />
+                    </div>
+                  </div>
+
+                  <div class="items position-relative mb-3">
+                    <div class="d-flex payOptions align-items-center gap-3">
+                      <input
+                        class="pay"
+                        name="payMethode"
+                        value="COD"
+                        type="radio"
+                        id="COD"
+                      />
+                      <h2 class="m-0">Cash On Delivery (COD)</h2>
+                    </div>
+                  </div>
+
+                  <div class="orderSummary m-0 w-100">
+                    <div class="orderHeading">
+                      <h2>Delivery Address</h2>
+                    </div>
+                    <div class="deleviryContent">
+                      <div class="chooseAdd position-relative">
+                        <div class="existingAddress">
+                          <p class="name"><%=usersData.name%></p>
+                          <p id="Addresses"><%=addressView.address[0].HouseNo%>,<%=addressView.address[0].HouseName%>,<%=addressView.address[0].Locality%>,<%=addressView.address[0].City%>,<%=addressView.address[0].District%>,<%=addressView.address[0].state%>,<%=addressView.address[0].country%>,<%=addressView.address[0].pincode%></p>
+                          <p class="phone">Phone:  <%=usersData.phone%></p>
+                        </div>
+                        <a
+                          href="/userChangeAddress"
+                          data-bs-toggle="modal"
+                          data-bs-target="#changeAddressModal"
+                        >
+                          <button class="position-absolute button">
+                            Change
+                          </button>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="coupons" style="margin-top: 8px;">
+                    <form
+                      action="/userApplyCoupon"
+                      class="d-flex align-items-center"
+                      method="post"
+                    >
+                      <div class="input">
+                        <input type="text" placeholder="Enter Coupon Code" />
+                      </div>
+                      <div>
+                        <button type="submit">APPLY</button>
+                      </div>
+                    </form>
+                  </div>
+                  <button class="returntocart">
+
+                    <a href="/cart" style="color: black;">Return to Cart</a>
+                  </button>
                 </div>
               </div>
-              <div class="col-12 overflow-hidden">
-                <div>
-                  <ul
-                    id="newlyLaunched"
-                    class="newlyLaunched position-relative p-0 d-flex align-items-center list-unstyled"
-                  >
-                  <% productData.forEach((product)=>{ %>
-                    <li>
-                      <a href="/productView?id=<%=product._id%>">
-                        <div class="newItems">
-                          <div class="productImg">
-                            <img src="/images/products/<%=product.image[0]%>" alt="" />
-                          </div>
-                          <div class="text-area">
-                            <div class="productTittle">
-                              <p><%=product.productName%></p>
-                            </div>
-                            <div
-                              class="discountPrice d-flex align-items-baseline"
-                            >
-                              <p>₹<%=product.price%></p>
-                              <p>₹<%=product.MRP%></p>
-                            </div>
-                            <div class="property">
-                              <div>
-                                <img
-                                  src=""
-                                  alt=""
-                                />
-                                <p>Swift Charge Technology</p>
-                              </div>
-                              <div>
-                                <img
-                                  src="./images/newlyLaunched/hexagon-list-icon.svg"
-                                  alt=""
-                                />
-                                <p>Dual Connectivity</p>
-                              </div>
-                              <div>
-                                <img
-                                  src="./images/newlyLaunched/hexagon-list-icon.svg"
-                                  alt=""
-                                />
-                                <p>Powered By 13mm Powerful Drivers</p>
-                              </div>
-                            </div>
-                            <!-- <div class="colorOptions">
-                              <div class="d-flex align-items-center">
-                                <p><%=product.color%></p>
-                                <div class="d-flex align-items-center">
-                                  <div class="bg-black"></div>
-                                  <div class="bg-white"></div>
-                                  <div class="bg-primary"></div>
-                                </div>
-                              </div>
-                            </div> -->
-                            <div class="shopOption">
-                              <div class="d-flex align-items-center">
-                                <!-- <p>shop Now</p> -->
-                                <svg
-                                  width="18"
-                                  height="12"
-                                  viewBox="0 0 18 12"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg" 
-                                >
-                                  <g clip-path="url(#clip0_28_66)">
-                                    <path
-                                      d="M1 1L6 6L1 11"
-                                      stroke="#4B4955"
-                                      stroke-width="1.5"
-                                    />
-                                    <path
-                                      opacity="0.65"
-                                      d="M6 1L11 6L6 11"
-                                      stroke="#4B4955"
-                                      stroke-width="1.5"
-                                    />
-                                    <path
-                                      opacity="0.4"
-                                      d="M11 1L16 6L11 11"
-                                      stroke="#4B4955"
-                                      stroke-width="1.5"
-                                    />
-                                  </g>
-                                  <defs>
-                                    <clipPath id="clip0_28_66">
-                                      <rect
-                                        width="18"
-                                        height="12"
-                                        fill="white"
-                                      />
-                                    </clipPath>
-                                  </defs>
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </a>
+              <div class="col-6 oneSection">
+                <div class="orderSummary">
+                  <div class="orderHeading">
+                    <h2>order summary</h2>
+                  </div>
+                  <div class="orderContent">
+                    <div
+                      class="sTotal d-flex justify-content-between align-items-center"
+                    >
+                      <p class="commonText m-0 p-0">Subtotal</p>
+                      <p class="commonSub m-0 p-0" id="sTotal">₹<%=mrp%></p>
+                    </div>
 
-                    </li>
-                    <%})%>
-                  </ul>
+                    <div
+                      class="ship d-flex justify-content-between align-items-center"
+                    >
+                      <p class="commonText m-0 p-0">Shipping</p>
+                      <p class="commonSub m-0 p-0" id="free">FREE</p>
+                    </div>
+
+                    <div
+                      class="ship d-flex justify-content-between align-items-center"
+                    >
+                      <p class="commonText m-0 p-0">Discount</p>
+                      <p class="commonSub m-0 p-0" id="dPrice">-<%=discount%></p>
+                    </div>
+
+                    <div
+                      class="ship d-flex justify-content-between align-items-center"
+                    >
+                      <p class="commonText m-0 p-0">Coupon Discount</p>
+                      <p class="commonSub m-0 p-0" id="cDPrice">0</p>
+                    </div>
+                  </div>
+                  <div
+                    class="commonText tPrice d-flex justify-content-between align-items-center"
+                  >
+                    <p class="m-0 p-0">Total</p>
+                    <p class="m-0 p-0" id="tPrice">₹<%=totalPrice%></p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row slideProduct">
-          <div class="col-12 text-center">
-            <ul
-              class="slideButton d-flex align-items-center list-unstyled justify-content-center"
-            >
-              <li data-index="0">
-                <button onfocus="moveSlide(0)"></button>
-              </li>
-              <li data-index="1">
-                <button onfocus="moveSlide(1)"></button>
-              </li>
-              <li data-index="2">
-                <button onfocus="moveSlide(2)"></button>
-              </li>
-              <li data-index="2">
-                <button onfocus="moveSlide(3)"></button>
-              </li>
-            </ul>
-            <a class="showProducts" href="/showAllproducts">
-              <button class="showAllProducts" style="background-color: rgb(233, 239, 239); width: 150px; height: 38px; margin-left: 0; border: none; border-radius: 5px;margin-bottom: 5px; ">show All <i class="fa-solid fa-arrow-down"></i></button>
-            </a>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="checkOut">
+              <form action="/userCartCheckOut">
+                <button>Proceed to payment</button>
+              </form>
+            </div>
           </div>
-          
         </div>
-      
       </div>
     </main>
     <!-- end of main -->
@@ -919,7 +919,7 @@
     <!-- end of footer -->
 
     <!-- custom js -->
-  <script src="/js/userHome.js"></script>
+    <script src="/js/checkout.js"></script>
     <!-- end of custom js -->
     <!-- fontawesome -->
     <script

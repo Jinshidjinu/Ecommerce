@@ -251,19 +251,27 @@ module.exports = {
 
 
     productViewGET:async(req,res)=>{
-      const userID = req.session.email._id
-      console.log(userID);
-      const viewID = req.query.id     
-      console.log(viewID);
-      let existingProduct = false;
-      const productShow = await products.findOne({_id:viewID})
-      const wishlist  = await wishlistSchema.findOne({userID:userID})
-      const existProduct = wishlist.product.find(product => product.id.equals(viewID));
-      if(existProduct!== undefined){
-        existingProduct = true
+      try{
+        const userID = req.session.email?._id
+        console.log(userID);
+        const viewID = req.query.id     
+        console.log(viewID);
+        let existingProduct = false;
+        const productShow = await products.findOne({_id:viewID})
+        const wishlist  = await wishlistSchema.findOne({userID:userID})
+      
+     if (wishlist && wishlist.product) {
+     const existProduct = wishlist.product.find(product => product.id.equals(viewID));
+     if (existProduct !== undefined) {
+      existingProduct = true;
+    }
+}
+       
+        res.render('UserSide/productDetails',{productShow,existingProduct})
+
+      }catch(error){
+        console.log(error);
       }
-     
-      res.render('UserSide/productDetails',{productShow,existingProduct})
     },
 
 

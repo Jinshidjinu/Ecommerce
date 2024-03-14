@@ -17,13 +17,13 @@
             required : true
 
         },
-        discount:{
+        price:{
             type:Number
         },
         return:{
             type:[String]
         },
-        prices:{
+        MRP:{
             type : Number,
             // required:true
         },

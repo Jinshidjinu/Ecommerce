@@ -9,13 +9,11 @@ module.exports={
     productsGET:async(req,res)=>{
       try{
         const productdatas = await productModel.find()
-          
           res.render('AdminSide/products',{productdatas})
-
       }catch(error){
         console.error('Error:', error);
       }
-
+      
     },
 
     AddproductsGET:async(req,res)=>{
@@ -30,14 +28,10 @@ module.exports={
 
     AddproductsPOST:async(req,res)=>{
         try{
-            
             if(!req.files ||req.files.length>5){
                 return res.status(230).json({message:"please provide a image",success:false})
             }
-            console.log(req.files);
-            
             const productImage = req.files.map(file=>file.filename)
-            
                     const { productName, prices, discount, stock, category, subCategory, deliveryDate, description, color, size } = req.body;
                     const newschema = new productModel({
                         productName,    
@@ -51,13 +45,9 @@ module.exports={
                         size,
                         color,
                         image:productImage,
-                  
                     });
-                   
                     await newschema.save()
-
                    res.redirect('/admin/products')
-
                 } catch (error) {
                     console.error("Error saving data to the database:", error);
                     res.status(500).json({ message: "Internal Server Error", success: false });
@@ -77,9 +67,7 @@ module.exports={
             try{
               const prodid = req.params.id
               const editProductData = req.body;
-              const productImage = req.files.map(file=>file.filename)
-              console.log(productImage);
-            
+              const productImage = req.files.map(file=>file.filename) 
               const updateproducts = await productModel.findByIdAndUpdate({_id:prodid},
                 {$set:{
                       
@@ -91,28 +79,19 @@ module.exports={
                   image:productImage
 
                 }
-                
               })
               res.redirect('/admin/products')
-            
-
             }catch(error){
               console.log(error);
             }
-             
         },
+             
 
          blockproductsPATCH: async (req,res)=>{
-          console.log('hai');
-    
           let block = false;
-
            try{
                  const dataID = req.query.id
-                 console.log(dataID);
-
                  const userdetail = await productModel.findOne({_id:dataID})
-
                  if(userdetail.is_blocked){
                   await productModel.updateOne({_id:dataID},{$set:{is_blocked:false}})
                   block = false
@@ -120,18 +99,17 @@ module.exports={
                   await productModel.updateOne({_id:dataID},{$set:{is_blocked:true}})
                   block = true
                  }
-                 res.json({ block});   
-                
+                 res.json({ block});    
            }catch(error){
                 console.log(error.message);
            }  
-          
          },
 
 
          showAllproductsGET:async(req,res)=>{
-
-          res.render('userSide/showAllproducts')
+          const userID = req.session.email?._id
+          const productDetails = await productModel.find()
+          res.render('userSide/showAllproducts',{productDetails})
          }
 
 

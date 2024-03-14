@@ -14,19 +14,22 @@ module.exports={
           const userID = req.session.email._id;
     
           const productview = await cartSchema.findOne({ userID: userID }).populate('productID.id');
-    
-          const subtotal = productview.productID.reduce((acc, index) => {
-            return (acc += index.id.prices * index.quantity);
-          }, 0);
-    
-          let discountTotal = 0; // Initialize discountTotal here
-    
-          discountTotal = productview.productID.reduce((acc, index) => {
-            console.log(discountTotal);
-            return (acc += index.id.discount * index.quantity);
-          }, 0);
-    
-          res.render('UserSide/cart', { productview, subtotal, discountTotal });
+          if (productview && productview.productID) {
+            const subtotal = productview.productID.reduce((acc, index) => {
+                return (acc += index.id.MRP * index.quantity);
+            }, 0);
+
+            let discountTotal = 0; // Initialize discountTotal here
+
+            discountTotal = productview.productID.reduce((acc, index) => {
+                return (acc += index.id.price * index.quantity);
+            }, 0);
+
+            res.render('UserSide/cart', { productview, subtotal, discountTotal });
+        } else {
+            // Handle the case where productview or productview.productID is null or undefined
+            res.render('UserSide/cart', { productview: null, subtotal: 0, discountTotal: 0 });
+        }
         } catch (error) {
           console.log(error);
         }
@@ -74,7 +77,6 @@ module.exports={
 
 
 deletecartPOST:async(req,res)=>{
-   
          const Productid = new mongoose.Types.ObjectId(req.query.id)
          console.log(Productid);
          const userid = req.session.email._id
@@ -99,17 +101,14 @@ updateQuantity:async(req,res)=>{
 
    try {
       const userID = req.session.email?._id
-      console.log(userID,'jdghgd');
       const userid=new mongoose.Types.ObjectId(userID)
       const productid = req.body.productid;
       const id = new mongoose.Types.ObjectId(productid)
-      console.log(productid);
       const qty = req.body.qty;
-    const abc=  await cartSchema.updateOne(
+      const abc=  await cartSchema.updateOne(
       { userID: userid, "productID.id": id },
       { $set: { "productID.$.quantity": qty } },
         );
-        console.log(abc,'dhgfygt');
       res.status(200).json({success:true,message:'quantity updated'})
     } catch (err) {
       console.log("cart quantity Update", err);

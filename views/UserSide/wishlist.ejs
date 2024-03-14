@@ -241,8 +241,9 @@
             
             <div class="cartBody d-flex">
               <div class="col-6 oneSection">
-             
+               
                 <%productshow.product.forEach((data)=>{ %>
+                
                 <div class="cartItems" id="removedwishlist">
                   <div class="items position-relative">
                     <a
@@ -255,7 +256,6 @@
                     <div class="contentDiv d-flex gap-4">
                      
                       <div class="itemImg">
-                        
                         <img src="/images/products/<%=data.id.image[0]%>" alt="" />
                       </div>
                       <div class="productDetails">
@@ -263,8 +263,8 @@
                         <p class="color">COLOR</p>
                         <p class="cName">Black</p>
                         <div class="price d-flex align-items-baseline gap-2">
-                          <p class="lPrice">₹<%=data.id.prices%></p>
-                          <p class="fPrice">₹<%=data.id.discount%></p>
+                          <p class="lPrice">₹<%=data.id.price%></p>
+                          <p class="fPrice">₹<%=data.id.MRP%></p>
                           <p>71% OFF</p>
                         </div>
                       </div>

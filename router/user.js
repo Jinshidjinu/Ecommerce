@@ -6,6 +6,7 @@ const cartController = require('../controller/CartController')
 const addressController = require('../controller/addressController')
 const wishlistController = require('../controller/wishlistController')
 const productController=require('../controller/productController')
+const paymentController = require('../controller/paymentController')
 
 
 
@@ -63,6 +64,10 @@ router.post('/quantity',cartController.updateQuantity)
 router.get('/wishlist',wishlistController.wishlistGET)
 router.get('/addwishlist',wishlistController.addwishlistGET)
 router.post('/deletewishlist',wishlistController.wishlistPOST)
+
+//..........Payment details .............//
+router.get('/usersCheckout',paymentController.checkOutGET)
+router.post('/userCheckout',paymentController.checkOutPOST)
 
 
 

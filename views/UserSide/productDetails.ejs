@@ -171,7 +171,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/userWhislist">
+                    <a href="/wishlist">
                       <svg
                         width="20"
                         height="20"
@@ -187,7 +187,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/usersAddToCart">
+                    <a href="/cart">
                       <svg
                         width="20"
                         height="20"
@@ -335,8 +335,8 @@
                 <p class="unRatedStar">★</p>
               </div>
               <div class="price">
-                <p class="lPrice">₹<%=productShow.prices%></p>
-                <p class="fPrice">₹<%=productShow.discount%></p>
+                <p class="lPrice">₹<%=productShow.price%></p>
+                <p class="fPrice">₹<%=productShow.MRP%></p>
               </div>
               <p class="stock text-success">In stock
                 <div class="stckshow">
@@ -344,8 +344,8 @@
                 </div>
               </p>
               <div class="btnBuy">
-                <a href="/userBuyNow/id">
-                  <button class="buyBtn">Buy Now</button>
+                <a href="/usersCheckout?id=<%=productShow._id%>">
+                  <button class="buyBtn" >Buy Now</button>
                 </a>
               
                   <button class="cartBtn" onclick="addToCart(event,'<%=productShow._id%>')" id="addToCartButton" >add to cart</button>
@@ -1014,6 +1014,40 @@
           
   }
     </script>
+
+
+    <script>
+  //     async function BuyNow(event,id) {
+  //         event.preventDefault();
+  //         event.stopPropagation();
+      
+  //        console.log(id);
+  //       const response = await fetch(`/usersCheckout?id=${id}`,{
+ 
+  //         method:'GET',
+  //         headers:{
+  //           'Content-Type':'application/json'
+  //         }
+
+  //       })
+
+  //     const result = await response.json()
+  //     // alert("Product added to cart!"); // Example: You can replace this with your actual logic
+  //       if (result.success == true) {
+      
+  //             Swal.fire({
+  //               title: "Product Add Successfully!..",
+  //               text: "",
+  //               icon: "success",
+  //             });
+  //           } else {
+  //             message.innerHTML = result.error || "unknown error";
+  //           }
+          
+  // }
+    </script>
+
+
 
     
 

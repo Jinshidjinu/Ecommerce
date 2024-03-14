@@ -3,9 +3,9 @@ const mongoose = require('mongoose')
 
 const couponSchema = new mongoose.Schema({
 
-    name:{
+    CouponCode:{
         type:String,
-        required:true
+     
     },
   
     discount:{
@@ -14,19 +14,19 @@ const couponSchema = new mongoose.Schema({
     },
     minOrderAmount:{
         type:Number,
-        required:true
+       
     },
     maxOrderAmount:{
         type:Number,
-        required:true
+      
     },
     startdate:{
         type:Date,
-        required:true
+       
     },
     expiryDate:{
         type:Date,
-        required:true
+       
     },
 
 })

@@ -19,7 +19,7 @@ module.exports={
               const couponData = req.body
               const data = new couponSchema({
       
-                  name:couponData.couponName,
+                CouponCode:couponData.couponName,
                   discount:couponData.couponDiscount,
                   minOrderAmount:couponData.minOrderAmount,
                   maxOrderAmount:couponData.maxOrderAmount,
@@ -55,7 +55,7 @@ module.exports={
          const NewEditData = await couponSchema.findByIdAndUpdate({_id:id},
             
             {$set:{
-                name:editedData.couponName,
+              CouponCode :editedData.couponName,
                 discount:editedData.couponDiscount,
                 minOrderAmount:editedData.minOrderAmount,
                 maxOrderAmount:editedData.maxOrderAmount,
