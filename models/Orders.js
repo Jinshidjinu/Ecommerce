@@ -10,7 +10,7 @@ const orderSchema = mongoose.Schema({
     totalprice:Number,
     address:String,
     paymentMethod:String,
-    Status:String
+    Status:{type:String,default:'Pending'}
 
 },{timestamps:true})
 

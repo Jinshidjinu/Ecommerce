@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Login Account</title>
+    <title>Order Successfull</title>
     <!-- <link rel="shortcut icon" href="#" type="image/x-icon" /> -->
     <!-- Bootstrap css cdn link -->
     <link
@@ -14,7 +14,7 @@
     />
     <!-- end of Bootstrap css cdn link -->
     <!-- Style css -->
-    <link rel="stylesheet" href="/css/checkout.css" />
+    <link rel="stylesheet" href="/css/OrderSuccess.css" />
     <!-- end of Style css -->
   </head>
   <body>
@@ -213,220 +213,36 @@
 
     <!-- main -->
     <main>
-      <!-- Modal -->
       <div
-        class="modal fade"
-        id="changeAddressModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
+        class="page d-flex flex-column justify-content-center align-items-center"
       >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content bg-white eachAdd border-0">
-            <div class="modal-header">
-              <h5
-                class="modal-title"
-                id="exampleModalLabel"
-              >
-                Address
-              </h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">
-              <% addressView.address.forEach((data)=>{ %>
-                <div class="chooseAdd existingAddress p-3 w-100 mb-3 position-relative">
-                  <p class="name"><%=usersData.name%></p>
-                  <p><%=data.HouseNo%>,<%=data.HouseName%>,<%=data.Locality%>,<%=data.City%>,<%=data.District%>,<%=data.state%>,<%=data.country%>,<%=data.pincode%></p>
-                  <p class="phone">Phone: <%=usersData.phone%></p>
-                  <input name="adId" class="position-absolute radio" type="radio" value="<%=data.HouseNo%>,<%=data.HouseName%>,<%=data.Locality%>,<%=data.City%>,<%=data.District%>,<%=data.state%>,<%=data.country%>,<%=data.pincode%>">
-                </div>   
-              <% }) %>
-              <p class="m-0"><a href="/Addaddress" class="button">Add Address</a></p>
-            </div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-secondary bg-danger text-white"
-                data-bs-dismiss="modal"
-              >
-                Close
-              </button>
-              <!-- Add additional buttons or actions as needed -->
-            </div>
+        <div>
+          <div>
+            <svg
+              class="checkmark"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 52 52"
+            >
+              <circle
+                class="checkmark__circle"
+                cx="26"
+                cy="26"
+                r="25"
+                fill="none"
+              />
+              <path
+                class="checkmark__check"
+                fill="none"
+                d="M14.1 27.2l7.1 7.2 16.7-16.8"
+              />
+            </svg>
           </div>
         </div>
-      </div>
-      <!-- end of Modal -->
-      <div class="container-fluid main">
-        <div class="row mainContainer">
-          <div class="col-12">
-            <div class="cartBody d-flex">
-              <div class="col-6 oneSection">
-                <div class="cartItems">
-                  <div class="items position-relative mb-3">
-                    <div class="d-flex payOptions align-items-center gap-3">
-                      <input
-                        class="pay"
-                        name="payMethode"
-                        value="OP"
-                        type="radio"
-                        id="creditCard" onchange="paymentSelect('OP')"
-                      />
-                      <h2 class="m-0">Credit Card</h2>
-                    </div>
-                    <div class="credit">
-                      <label for="cCNo" class="d-block"
-                        >Credit card number</label
-                      >
-                      <input type="number" name="cCNo" />
-                      <div class="d-flex gap-3 w-100">
-                        <div class="w-50">
-                          <label for="expiry" class="d-block"
-                            >Expiry (MM/YY)</label
-                          >
-                          <input type="text" class="w-100" name="expiry" />
-                        </div>
-                        <div class="w-50">
-                          <label for="CVV" class="d-block">CVV</label>
-                          <input type="number" class="w-100" name="CVV" />
-                        </div>
-                      </div>
-                      <label for="nOC" class="d-block">Name on the card</label>
-                      <input type="number" name="nOC"/>
-                    </div>
-                  </div>
-
-                  <div class="items position-relative mb-3">
-                    <div class="d-flex payOptions align-items-center gap-3">
-                      <input
-                        class="pay"
-                        name="payMethode"
-                        value="COD"
-                        type="radio"
-                        id="COD"
-                       onchange="paymentSelect('COD')"/>
-                      <h2 class="m-0">Cash On Delivery (COD)</h2>
-                    </div>
-                  </div>
-
-                  <div class="orderSummary m-0 w-100">
-                    <div class="orderHeading">
-                      <h2>Delivery Address</h2>
-                    </div>
-                    <div class="deleviryContent">
-                      <div class="chooseAdd position-relative">
-                        <div class="existingAddress">
-                          <p class="name"><%=usersData.name%></p>
-                          <p id="Addresses" class="paymentAddress">
-                            <%=addressView.address[0].HouseNo%>,
-                            <%=addressView.address[0].HouseName%>,
-                            <%=addressView.address[0].Locality%>,
-                            <%=addressView.address[0].City%>,<%=addressView.address[0].District%>,
-                            <%=addressView.address[0].state%>,<%=addressView.address[0].country%>,
-                            <%=addressView.address[0].pincode%></p>
-                          <p class="phone">Phone: <%=usersData.phone%></p>
-                        </div>
-                        <a
-                          href="/userChangeAddress"
-                          data-bs-toggle="modal"
-                          data-bs-target="#changeAddressModal"
-                        >
-                          <button class="position-absolute button">
-                            Change
-                          </button>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="coupons" style="margin-top: 8px;">
-                    <form
-                      action="/userApplyCoupon"
-                      class="d-flex align-items-center"
-                      method="post"
-                    >
-                      <div class="input">
-                        <input type="text" placeholder="Enter Coupon Code" name="Couponcode" class="couponName"/>
-                      </div>
-                      <div>
-                        <button type="submit" onclick="applyCoupon(event,'<%=totalPrice%>')" >APPLY</button>
-                      </div>
-                    </form>
-                  </div>
-                  <% if (CouponDetails && CouponDetails.length > 0) { %>
-                    <% CouponDetails.forEach((data) => { %>
-                    <div class="CouponGIFT"><i class="fa-solid fa-tag" style="color: #121417;"></i><%=data?.CouponCode%></div>
-                    <% }) %>
-                    <% } %>
-                    
-                  <button class="returntocart">
-
-                    <a href="/cart" style="color: black;">Return to Cart</a>
-                  </button>
-                </div>
-              </div>
-              <div class="col-6 oneSection">
-                <div class="orderSummary">
-                  <div class="orderHeading">
-                    <h2>order summary</h2>
-                  </div>
-                  <div class="orderContent">
-                    <div
-                      class="sTotal d-flex justify-content-between align-items-center"
-                    >
-                      <p class="commonText m-0 p-0">Subtotal</p>
-                      <p class="commonSub m-0 p-0" id="sTotal">₹<%=totalPrice%></p>
-                    </div>
-
-                    <div
-                      class="ship d-flex justify-content-between align-items-center"
-                    >
-                      <p class="commonText m-0 p-0">Shipping</p>
-                      <p class="commonSub m-0 p-0" id="free">FREE</p>
-                    </div>
-
-                    <!-- <div
-                      class="ship d-flex justify-content-between align-items-center"
-                    >
-                      <p class="commonText m-0 p-0">Discount</p>
-                      <p class="commonSub m-0 p-0" id="dPrice">-<%=discount%></p>
-                    </div> -->
-
-                    <div
-                      class="ship d-flex justify-content-between align-items-center"
-                    >
-                      <p class="commonText m-0 p-0">Coupon Discount</p>
-                      <p class="commonSub m-0 p-0" id="cDPrice"></p>
-                    </div>
-                  </div>
-                  <div
-                    class="commonText tPrice d-flex justify-content-between align-items-center"
-                  >
-                    <p class="m-0 p-0">Total</p>
-                    <p class="m-0 p-0" id="tPrice">₹<%=totalPrice%></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="checkOut">
-              <form action="/usersCheckout">
-                <p class="error" style="color: red; text-align: center;"></p>
-                <button type="button" class="proceedBtn">Proceed to payment</button>
-              </form>
-            </div>
-          </div>
-        </div>
+        <h2>Order Placed Successfully</h2>
+        <p>Thank you</p>
+        <a href="/userOrder">
+          <button class="okBtn">Ok</button>
+        </a>
       </div>
     </main>
     <!-- end of main -->
@@ -930,78 +746,9 @@
       </div>
     </footer>
     <!-- end of footer -->
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script>
-  
-async function applyCoupon(event,totalAmt){
-   event.preventDefault()
-   
-   try {
 
-    const CouponName = document.querySelector('.couponName').value;
-    
-    const discount = document.getElementById('cDPrice')
-
-    const response = await axios.post('/applyCoupon',{
-      couponCode:CouponName,
-      Amount :totalAmt
-      
-    })
-    const result = response.data.Total
-    const discountPercentage = response.data.discount
-    if(result){
-      document.getElementById('tPrice').innerHTML = result
-      document.getElementById('cDPrice').innerHTML = discountPercentage +'%'
-    }
-    console.log(result);
-    
-   } catch (error) {
-    console.log(error);
-   }
-  
-
-
-
-
-}
-</script>
-
-<script>
-      let payment;
-      function paymentSelect(val){
-        payment = val
-      }
-      const proceedBtn = document.querySelector('.proceedBtn')
-      proceedBtn.addEventListener('click',async(event)=>{
-        
-        event.preventDefault()
-        if(!payment){
-          document.querySelector('.error').innerHTML = 'Please select payment Method'
-          setTimeout(() => {
-            document.querySelector('.error').innerHTML =''
-          }, 3000);
-        }
-        const phoneNo = document.querySelector('.phone').innerHTML
-        const paymentAddress = document.querySelector('.paymentAddress').innerHTML  
-        const response = await axios.post('/usersCheckout',{
-          phone:phoneNo,
-          paymentAddress:paymentAddress,
-          paymentMethod:payment
-        })
-      
-       const result = response.data
-       if(result.COD == true){
-        console.log('gggg');
-        window.location.href ='/orderConfirm'
-       }
-      })
-    
- 
-     
-     
-</script>
     <!-- custom js -->
-    <script src="/js/checkout.js"></script>
+    <script src="./js/orderPlacedSuccessfull.js"></script>
     <!-- end of custom js -->
     <!-- fontawesome -->
     <script
