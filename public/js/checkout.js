@@ -1,3 +1,4 @@
+
 const hamburgerBtn = document.querySelector(".hamburger");
 const mobilenavigationList = document.querySelector(".mobilenavigationList");
 const mobilenavigation = document.querySelector(".mobilenavigation");
@@ -38,6 +39,8 @@ const addresses = document.getElementById('Addresses')
 radio.forEach((element) => {
   element.addEventListener('change', () => {
     const data = element.value;
+    console.log(data);
     addresses.innerHTML=data
   })
 }); 
+

@@ -47,7 +47,7 @@ module.exports={
           { $push: { address: datas } },
           { upsert: true, new: true }
         );
-        console.log(updatedAddresss);
+      
         res.json({ add: true, address: updatedAddresss });
       } catch (err) {
         console.error(err);

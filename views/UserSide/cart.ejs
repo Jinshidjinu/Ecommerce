@@ -273,7 +273,7 @@
                             <div
                               class="dec d-flex justify-content-center align-items-center"
                             >
-                            <i class="fa-solid fa-minus" onclick="dec('<%=data.id._id%>', '<%=data.id.MRP%>', '<%=data.id.stock%>','<%=data.id.price%>')"></i>
+                            <i class="fa-solid fa-minus" onclick="dec('<%=data.id._id%>', '<%=data.id.price%>', '<%=data.id.stock%>','<%=data.id.MRP%>')"></i>
   
                             </div>
                             <div
@@ -284,14 +284,14 @@
                             <div
                               class="inc d-flex justify-content-center align-items-center"
                             >
-                              <i class="fa-solid fa-plus" onclick="inc('<%=data.id._id%>' ,' <%=data.id.MRP%>','<%=data.id.stock%>','<%=data.id.price%>')" ></i>
+                              <i class="fa-solid fa-plus" onclick="inc('<%=data.id._id%>' ,' <%=data.id.price%>','<%=data.id.stock%>','<%=data.id.MRP%>')" ></i>
                             </div>
                           </div>
                           <p class="color">COLOR</p>
                           <p class="cName">Black</p>
                           <div class="price d-flex align-items-baseline gap-2">
                             
-                            <% let productPrice = data.id.price* data.quantity %>
+                            <% let productPrice = data.id.price * data.quantity %>
                             <p class="lPrice<%=data.id._id%>">₹<%=productPrice %></p>
                             <% let productdiscount = data.id.MRP * data.quantity  %>
                             <p class="fPrice<%=data.id._id%>">₹<%=productdiscount %></p>
@@ -326,12 +326,12 @@
                       <p class="commonSub m-0 p-0" id="free">FREE</p>
                     </div>
 
-                    <div
+                    <!-- <div
                       class="ship d-flex justify-content-between align-items-center">
                       <% let discount = subtotal - discountTotal %>
                       <p class="commonText m-0 p-0">Discount</p>
-                      <p class="commonSub m-0 p-0" id="dPrice">-<%=discount%></p>
-                    </div>
+                      <p class="commonSub m-0 p-0" id="dPrice">-<%=discountTotal%></p>
+                    </div> -->
 
                     <div
                       class="ship d-flex justify-content-between align-items-center"
@@ -344,7 +344,7 @@
                     class="commonText tPrice d-flex justify-content-between align-items-center"
                   >
                     <p class="m-0 p-0">Total</p>
-                    <p class="m-0 p-0" id="tPrice">₹<%=discountTotal%></p>
+                    <p class="m-0 p-0" id="tPrice">₹<%=subtotal%></p>
                   </div>
                 </div>
               </div>
@@ -942,8 +942,9 @@ async function inc(id, price, stock,discount) {
     productid: id,
     qty: qtyval,
   });
-  lPrice.innerHTML = `₹${newdiscount}`;
-  fPrice.innerHTML = `₹${newprice}`;
+  
+  lPrice.innerHTML = `₹${newprice}`;
+  fPrice.innerHTML = `₹${newdiscount}`;
   const total1 = total(price);
   const totaldis = total(discount)
   fPrice.innerHTML = `₹${totaldis}`;
@@ -959,8 +960,8 @@ async function inc(id, price, stock,discount) {
   }
 }
 function total(price) {
-  const subtoal = sTotal.innerHTML.replace("₹", "");
-  const grantTotal = parseInt(subtoal) + parseInt(price);
+  const subtotal = sTotal.innerHTML.replace("₹", "");
+  const grantTotal = parseInt(subtotal) + parseInt(price);
   return grantTotal;
 }
 function total(discount) {
@@ -968,7 +969,6 @@ function total(discount) {
   const Total = parseInt(discounttotal) + parseInt(discount);
   return Total;
 }
-
 
 
 // decrement the quantity
@@ -994,7 +994,6 @@ async function dec(id, price, stock,discount) {
       lPrice.innerHTML = `₹${newprice}`;
   
      
-      
     } else {
       lPrice.classList.add("red");
       lPrice.innerHTML = "out of stock";

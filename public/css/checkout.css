@@ -431,6 +431,12 @@ a {
   line-height: normal;
   text-transform: uppercase;
 }
+.CouponGIFT{
+  width: 120px;
+  height: 30px;
+  background-color: rgb(218, 178, 178);
+  
+}
 .input {
   width: 100%;
 }

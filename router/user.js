@@ -68,6 +68,7 @@ router.post('/deletewishlist',wishlistController.wishlistPOST)
 //..........Payment details .............//
 router.get('/usersCheckout',paymentController.checkOutGET)
 router.post('/userCheckout',paymentController.checkOutPOST)
+router.post('/applyCoupon',paymentController.ApplyCouponPOST)
 
 
 

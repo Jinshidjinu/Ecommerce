@@ -344,13 +344,19 @@
                       method="post"
                     >
                       <div class="input">
-                        <input type="text" placeholder="Enter Coupon Code" />
+                        <input type="text" placeholder="Enter Coupon Code" name="Couponcode" class="couponName"/>
                       </div>
                       <div>
-                        <button type="submit">APPLY</button>
+                        <button type="submit" onclick="applyCoupon(event,'<%=totalPrice%>')" >APPLY</button>
                       </div>
                     </form>
                   </div>
+                
+                    <% CouponDetails.forEach((data) => { %>
+                    <div class="CouponGIFT"><i class="fa-solid fa-tag" style="color: #121417;"></i><%=data.CouponCode%></div>
+                    <% }) %>
+                 
+                    
                   <button class="returntocart">
 
                     <a href="/cart" style="color: black;">Return to Cart</a>
@@ -367,7 +373,7 @@
                       class="sTotal d-flex justify-content-between align-items-center"
                     >
                       <p class="commonText m-0 p-0">Subtotal</p>
-                      <p class="commonSub m-0 p-0" id="sTotal">₹<%=mrp%></p>
+                      <p class="commonSub m-0 p-0" id="sTotal">₹<%=totalPrice%></p>
                     </div>
 
                     <div
@@ -377,18 +383,18 @@
                       <p class="commonSub m-0 p-0" id="free">FREE</p>
                     </div>
 
-                    <div
+                    <!-- <div
                       class="ship d-flex justify-content-between align-items-center"
                     >
                       <p class="commonText m-0 p-0">Discount</p>
                       <p class="commonSub m-0 p-0" id="dPrice">-<%=discount%></p>
-                    </div>
+                    </div> -->
 
                     <div
                       class="ship d-flex justify-content-between align-items-center"
                     >
                       <p class="commonText m-0 p-0">Coupon Discount</p>
-                      <p class="commonSub m-0 p-0" id="cDPrice">0</p>
+                      <p class="commonSub m-0 p-0" id="cDPrice"></p>
                     </div>
                   </div>
                   <div
@@ -917,7 +923,41 @@
       </div>
     </footer>
     <!-- end of footer -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  
+async function applyCoupon(event,totalAmt){
+   event.preventDefault()
+   
+   try {
 
+    const CouponName = document.querySelector('.couponName').value;
+    
+    const discount = document.getElementById('cDPrice')
+
+    const response = await axios.post('/applyCoupon',{
+      couponCode:CouponName,
+      Amount :totalAmt
+      
+    })
+    const result = response.data.Total
+    const discountPercentage = response.data.discount
+    if(result){
+      document.getElementById('tPrice').innerHTML = result
+      document.getElementById('cDPrice').innerHTML = discountPercentage +'%'
+    }
+    console.log(result);
+    
+   } catch (error) {
+    console.log(error);
+   }
+  
+
+
+
+
+}
+</script>
     <!-- custom js -->
     <script src="/js/checkout.js"></script>
     <!-- end of custom js -->

@@ -59,6 +59,7 @@ module.exports={
                if (existingProduct) {
                    // If the product is already in the cart, update its quantity
                    existingProduct.quantity += 1;
+
                } else {
                    // If the product is not in the cart, add it as a new entry
                    cart.productID.push({ id, quantity: 1 });
@@ -105,7 +106,7 @@ updateQuantity:async(req,res)=>{
       const productid = req.body.productid;
       const id = new mongoose.Types.ObjectId(productid)
       const qty = req.body.qty;
-      const abc=  await cartSchema.updateOne(
+      const CartData=  await cartSchema.updateOne(
       { userID: userid, "productID.id": id },
       { $set: { "productID.$.quantity": qty } },
         );
