@@ -11,6 +11,7 @@
     "nodemailer": "^6.9.9",
     "nodemailer-smtp-transport": "^2.7.4",
     "nodemon": "^3.0.3",
+    "razorpay": "^2.9.2",
     "twilio": "^4.21.0"
   },
   "name": "front-end",

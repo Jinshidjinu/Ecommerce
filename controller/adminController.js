@@ -5,36 +5,42 @@ const bcrypt = require('bcrypt')
 require('dotenv').config()
 Adminkey=process.env.ADMINKEY
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const Admin = {
+    email :process.env.AdminMail,
+    password : process.env.Password
+}
+console.log(Admin.email);
 module.exports={
 
 
-
     adminloginGET:(req,res)=>{
-        res.render('adminlogin')
+        res.render('AdminSide/adminlogin')
     },
     adminloginPOST:async(req,res)=>{
-        try{
-            const checking= await adminschema.findOne(({email:req.body.email}))
+          console.log(req.body);
+       if(Admin.email == req.body.email && Admin.password == req.body.password){
+          console.log('bai');
+           res.render('AdminSide/dashboard')
+
+       }
+
+        // try{
+        //     const checking= await adminschema.findOne(({email:req.body.email}))
   
-            if(!checking){
-              res.send("email  not found")
-            }else{
-               const passwordmatch= await bcrypt.compare(req.body.password,checking.password)
-               if(passwordmatch){
-                  res.render("dashboard")
-               }else{
-                  res.send("wrong password")
-               }
-            }
-         }catch{
-             res.send("wrong details")
-         }
+        //     if(!checking){
+        //       res.send("email  not found")
+        //     }else{
+        //        const passwordmatch= await bcrypt.compare(req.body.password,checking.password)
+        //        if(passwordmatch){
+        //           res.render("dashboard")
+        //        }else{
+        //           res.send("wrong password")
+        //        }
+        //     }
+        //  }catch{
+        //      res.send("wrong details")
+        //  }
     },
-
-
-
-
-
 
     adminsignupGET:(req,res)=>{
         res.render('AdminSide/adminsignup')
@@ -60,23 +66,23 @@ module.exports={
 
             }else{
                                  
-           // hash the password using bcrypt
-                      
+           // hash the password using bcrypt          
            const saltRounds=10; // number of salt round for bcrypt
            const hashedPassword = await bcrypt.hash(datas.password, saltRounds)
            datas.password = hashedPassword 
            signupData= await adminschema.insertMany(datas)
                console.log(signupData);
             }
+            
             res.redirect('/admin/adminlogin')
+               
         }catch{
+
             console.log("error signupPOST",err.message);
+
         }
     },
     
-
-
-
 // admin dashboard 
 
     dashboardGET:(req,res)=>{
@@ -86,7 +92,6 @@ module.exports={
     dashboardPOST:(req,res)=>{
     
     },
-
 
     // admin usersList showpage
 
@@ -125,6 +130,4 @@ module.exports={
          }  
         
        }
-
-    
 } 

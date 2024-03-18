@@ -72,7 +72,9 @@ router.post('/applyCoupon',paymentController.ApplyCouponPOST)
 router.get('/orderConfirm',paymentController.OrderOTPGET)
 router.post('/orderConfirm',paymentController.OrderOTPpost)
 router.get('/confirmed',paymentController.SuccessGET)
-
+router.get('/userOrders',paymentController.userOrdersListGET)
+router.post('/razorpayment',paymentController.razorpaymentPOST)
+router.get('/ordersummary',paymentController.orderSummaryGET)
 
 
 

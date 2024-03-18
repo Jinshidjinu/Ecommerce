@@ -22,12 +22,12 @@ const tPrice = document.querySelector("#tPrice");
 
 
 const creditCard = document.querySelector('#creditCard');
-const credit = document.querySelector('.credit');
+const credit = document.querySelector('.pay');
 const COD = document.querySelector('#COD');
 
-creditCard.addEventListener('click', () => {
-  credit.classList.add('togggle');
-});
+  creditCard.addEventListener('click', () => {
+    credit.classList.add('togggle');
+  });
 
 COD.addEventListener('click', () => {
   credit.classList.remove('togggle');

@@ -11,10 +11,12 @@
       rel="stylesheet"
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
+      
     />
     <!-- end of Bootstrap css cdn link -->
     <!-- Style css -->
     <link rel="stylesheet" href="/css/checkout.css" />
+
     <!-- end of Style css -->
   </head>
   <body>
@@ -273,13 +275,13 @@
                       <input
                         class="pay"
                         name="payMethode"
-                        value="OP"
+                        value="razorpay"
                         type="radio"
-                        id="creditCard" onchange="paymentSelect('OP')"
+                        id="creditCard" onchange="paymentSelect('razorpay')"
                       />
-                      <h2 class="m-0">Credit Card</h2>
+                      <h2 class="m-0">RazorPay</h2>
                     </div>
-                    <div class="credit">
+                    <!-- <div class="credit">
                       <label for="cCNo" class="d-block"
                         >Credit card number</label
                       >
@@ -298,7 +300,7 @@
                       </div>
                       <label for="nOC" class="d-block">Name on the card</label>
                       <input type="number" name="nOC"/>
-                    </div>
+                    </div> -->
                   </div>
 
                   <div class="items position-relative mb-3">
@@ -990,9 +992,37 @@ async function applyCoupon(event,totalAmt){
         })
       
        const result = response.data
+       console.log(result);
        if(result.COD == true){
-        console.log('gggg');
         window.location.href ='/orderConfirm'
+       }else{
+         
+        const RazorpayOrder = result.razorpayOrder
+        console.log(RazorpayOrder);
+        const options = {
+              
+          key:'rzp_test_rtBq042RJdPlvA',
+          amount:RazorpayOrder.amount,
+          currency:RazorpayOrder.currency,
+          name:'Your Company Name',
+          description:'Test Payment',
+          order_id:RazorpayOrder.id,
+          handler:async function(response){
+            console.log('REached in handlewr');
+             const orderResponse = await axios.post('/razorpayment');
+             const orderResult = orderResponse.data
+             
+             if (orderResult.success === true) {
+              
+              window.location.href='/confirmed'
+             }
+
+          }
+        }
+
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+
        }
       })
     
@@ -1001,6 +1031,7 @@ async function applyCoupon(event,totalAmt){
      
 </script>
     <!-- custom js -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     <script src="/js/checkout.js"></script>
     <!-- end of custom js -->
     <!-- fontawesome -->
