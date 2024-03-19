@@ -42,6 +42,7 @@ const userController = require('../controller/userController')
     router.get('/editproduct/:productID',productController.editproductGET)
     router.post('/editProduct/:id',uploadProducts.array('productImage',20),productController.editproductPOST)
     router.patch('/blockproducts',productController.blockproductsPATCH)
+    router.post('/deleteProduct',productController.deleteProductPOST)
 
     //banners
 

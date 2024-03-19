@@ -75,7 +75,6 @@ module.exports={
     couponDELETE:async(req,res)=>{
         try{
             coupid = req.query.id
-            console.log(coupid);
           await couponSchema.deleteOne({_id:coupid})
           res.status(200).json({success:true,message:"coupon removing the list" })
         }catch(error){

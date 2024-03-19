@@ -105,6 +105,19 @@ module.exports={
            }  
          },
 
+         deleteProductPOST:async(req,res)=>{
+           try {
+            const prodid = req.query.id
+               const proData = await productModel.deleteOne({_id:prodid})
+               res.json({success:true,message:"product removed in list"})
+
+           } catch (error) {
+            console.log(error);
+            
+           }
+             
+         },
+
 
          showAllproductsGET:async(req,res)=>{
           const userID = req.session.email?._id

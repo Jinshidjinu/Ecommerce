@@ -330,13 +330,11 @@ var instance = new Razorpay({
       } catch (error) {
         console.log(error);        
       }
-      
      },
 
      OrdersCancelPATCH:async(req,res)=>{
-
-       const id =req.query.id
-       console.log(id);
+                   
+       const id = req.query.id
        const Userorders = await OrderModel.findOne({_id:id})
        const updateOrder = await OrderModel.updateOne({_id:id},{$set:{Status:'cancelled'}})
  
