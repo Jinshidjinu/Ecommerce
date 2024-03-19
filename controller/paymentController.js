@@ -183,7 +183,7 @@ var instance = new Razorpay({
           const usercart=   await cartModel.findOne({userID:userID})
           
             if(req.session.prodid){
-                 
+              
               let products = [
                 {
                   id:req.session.prodid,
@@ -192,7 +192,6 @@ var instance = new Razorpay({
               ]
               carts = products
             }else{
-             
               carts = usercart.productID
              
             }
@@ -204,9 +203,21 @@ var instance = new Razorpay({
               paymentMethod:payMethod,
 
             })
-            await orders.save()
+           const saveOrder =  await orders.save()
 
-            if(!req.session.prodid){
+           if(saveOrder){
+
+            carts.forEach(async(data) => {
+              
+            
+            const orders =  await OrderModel.updateOne({_id:userID,'products.id': data.id.toString()},{$set:{Status: 'confirmed'}})
+            console.log(orders); 
+            
+            })  
+
+          }
+
+            if(!req.session.prodid){     
              await cartModel.deleteOne({userID:userID})             
             }
             // delete req.session.prodid
@@ -306,11 +317,33 @@ var instance = new Razorpay({
      },
 
      orderSummaryGET:async(req,res)=>{
-
+      try {
+        const userId = req.session.email._id
+        const id = new mongoose.Types.ObjectId(req.query.id)
+        const userOrders = await OrderModel.findOne({_id:id}).populate('products.id')
+        const userDetails =await customerModel.findOne({_id:userId})
+        console.log(userOrders)
+        console.log(userDetails)
+        
+       res.render('UserSide/OrderSummary',{userOrders,userDetails})
+        
+      } catch (error) {
+        console.log(error);        
+      }
       
+     },
 
-       res.render('UserSide/OrderSummary')
+     OrdersCancelPATCH:async(req,res)=>{
+
+       const id =req.query.id
+       console.log(id);
+       const Userorders = await OrderModel.findOne({_id:id})
+       const updateOrder = await OrderModel.updateOne({_id:id},{$set:{Status:'cancelled'}})
+ 
+
+       res.json({success:true})
      }
+   
 
  }
 

@@ -75,6 +75,7 @@ router.get('/confirmed',paymentController.SuccessGET)
 router.get('/userOrders',paymentController.userOrdersListGET)
 router.post('/razorpayment',paymentController.razorpaymentPOST)
 router.get('/ordersummary',paymentController.orderSummaryGET)
+router.patch('/cancelledOrder',paymentController.OrdersCancelPATCH)
 
 
 

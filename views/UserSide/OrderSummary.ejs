@@ -229,21 +229,30 @@
             </div>
             <div class="cartBody">
               <div class="ODhead">
-                <p>Order ID - OD428508037018935100</p>
+                <p>Order ID -<%=userOrders._id%></p>
               </div>
+
+              <%userOrders.products.forEach((data)=>{ %>
+
+             
               <div class="d-flex ODhead gap-3 justify-content-between align-items-center">
                 <div>
-                  <h2 class="m-0 p-0 text-capitalize">LAPCARE DCX-A101 2 FAN Cooling Pad</h2>
+                  <h2 class="m-0 p-0 text-capitalize"><%=data.id.productName%></h2>
                   <p class="m-0 p-0 text-capitalize">Black</p>
                   <div class="d-flex align-items-baseline price gap-2 mt-2">
                     <p>₹704</p>
                     <p>57% OFF</p>
+                
                   </div>
+                  <p>qty:<%=data.quantity%></p>
                 </div>
                 <div class="imgOrder">
-                  <img src="./images/cartImg/1a.png" alt="">
+                  <img src="/images/products/<%=data.id.image[0]%>" alt="">
                 </div>
               </div>
+
+              <% }) %>
+
               <div class="ODhead pt-4 pb-4">
                 <div class="d-flex gap-3 align-items-center">
                   <p class="dot done"></p>
@@ -271,18 +280,23 @@
               <div class="ODhead sDetails">
                 <p>Shipping Details</p>
               </div>
+
+             
+
               <div class="ODhead pt-3 pb-3 SDetails">
-                <h2 class="text-capitalize">Priyanjith</h2>
-                <p class="text-capitalize">Nedinalil 1234, Jailroad, Kozhikode, Kozhikode, Kerala - 673004</p>
-                <p>Phone: 9188336166</p>
+                <h2 class="text-capitalize"><%=userDetails.name%></h2>
+                <p class="text-capitalize"><%=userOrders.address%></p>
+                <p>Phone:<%=userDetails.phone%></p>
               </div>
+
+         
               <div class="ODhead sDetails">
                 <p>Price Details</p>
               </div>
               <div class="orderContent">
                 <div class="sTotal d-flex justify-content-between align-items-center">
                   <p class="commonText m-0 p-0">Subtotal</p>
-                  <p class="commonSub m-0 p-0" id="sTotal">₹27,598</p>
+                  <p class="commonSub m-0 p-0" id="sTotal">₹<%=userOrders.totalprice%></p>
                 </div>
 
                 <div class="ship d-flex justify-content-between align-items-center">
@@ -290,10 +304,10 @@
                   <p class="commonSub m-0 p-0" id="free">FREE</p>
                 </div>
 
-                <div class="ship d-flex justify-content-between align-items-center">
+                <!-- <div class="ship d-flex justify-content-between align-items-center">
                   <p class="commonText m-0 p-0">Discount</p>
-                  <p class="commonSub m-0 p-0" id="dPrice">-19,600</p>
-                </div>
+                  <p class="commonSub m-0 p-0" id="dPrice">-</p>
+                </div> -->
 
                 <div class="ship d-flex justify-content-between align-items-center">
                   <p class="commonText m-0 p-0">Coupon Discount</p>
@@ -303,7 +317,7 @@
               <div class="Last">
                 <div class="commonText tPrice d-flex justify-content-between align-items-center">
                   <p class="m-0 p-0">Total</p>
-                  <p class="m-0 p-0" id="tPrice">₹7,998</p>
+                  <p class="m-0 p-0" id="tPrice">₹<%=userOrders.totalprice%></p>
                 </div>
               </div>
               <a href="/userOrderDownloadInvoice/:productId/:orderId" class="text-dark fw-bolder">

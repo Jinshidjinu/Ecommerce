@@ -238,7 +238,6 @@
 
                     <%data.products.forEach(product=>{%>
 
-                
                   <div class="d-flex align-items-center gap-3">
                     <img src="/images/products/<%=product.id && product.id.image && product.id.image[0]%>" alt="">
                     <div class="textOrder d-flex flex-column gap-2">
@@ -257,10 +256,14 @@
                         <div class="statusCircle"></div>
                         <p class="statusOrder me-3">Ordered</p>
                       </div>
-                      <a href="/userOrderCancled">
-                        <button class="cancelBtn margin">Cancel</button>
+                      <a class="cancel_ancher" href="/userOrderCancled">
+                        <% if(data.Status == 'cancelled') { %>
+                        <button class="cancelBtn cancelled<%=data._id%> cancellProduct"  disabled>Cancelled</button>
+                        <% } else { %>
+                        <button class="cancelBtn margin<%=data._id%>" onclick="OrderCancell(event,'<%=data._id%>')">Cancel</button>
+                        <% } %>
                       </a>
-                      <a href="/ordersummary" >
+                      <a href="/ordersummary?id=<%=data._id%>" >
                         <div class="details">Details</div>
                       </a>
                     </div>
@@ -780,6 +783,42 @@
     <!-- custom js -->
     <script src="/js/userOrderepage.js"></script>
     <!-- end of custom js -->
+
+    <script>
+    
+   async function  OrderCancell(event,OrderId){
+     event.preventDefault()
+     try {
+      const cancelBtn = document.querySelector('.margin'+OrderId)
+      const  response = await fetch(`/cancelledOrder?id=${OrderId}`,{
+       
+        method:'PATCH',
+        headers:{
+
+          'content-type':'application/json'
+        }
+
+      })
+       
+      const result = await response.json()
+      if(result.success){
+        document.querySelector('.margin' + OrderId).classList.add('cancellProduct')
+      }      
+     } catch (error) {
+
+      console.log(error);
+      
+     }
+       
+
+
+
+    }
+
+      
+    
+
+    </script>
     <!-- fontawesome -->
     <script
       src="https://kit.fontawesome.com/23d1247997.js"

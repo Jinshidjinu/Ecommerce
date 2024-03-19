@@ -311,12 +311,21 @@ a {
   line-height: normal;
   margin-bottom: 0.75rem;
 }
-.details{
+.details {
   color: rgb(181, 2, 154);
   font-size: large;
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: 300;
-
+}
+.cancellProduct{
+  padding: 0.8rem;
+  border: 1px solid red !important;
+  color: red !important;
+  font-family: sans-serif !important;
+  background: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 .quandity div {
   width: 36px;
@@ -552,19 +561,19 @@ a {
   background-color: #0f0;
   padding: 1rem;
 }
-.cartItems{
+.cartItems {
   padding: 1.5rem 1.8rem;
-  border-bottom: 1px solid #E0E0E0;
+  border-bottom: 1px solid #e0e0e0;
 }
-.cartItems img{
+.cartItems img {
   width: 86px;
   height: 86px;
   object-fit: contain;
 }
-.cartBody{
+.cartBody {
   min-height: 50vh;
 }
-.textOrder h2{
+.textOrder h2 {
   color: #000;
   font-family: Ubuntu;
   font-size: 0.9rem;
@@ -572,8 +581,8 @@ a {
   font-weight: 700;
   line-height: normal;
 }
-.textOrder p{
-  color: rgba(0, 0, 0, 0.40);
+.textOrder p {
+  color: rgba(0, 0, 0, 0.4);
   font-family: Inter;
   font-size: 0.7rem;
   font-style: normal;
@@ -581,7 +590,7 @@ a {
   line-height: normal;
   text-transform: uppercase;
 }
-.textOrder span{
+.textOrder span {
   color: #000;
   font-family: Inter;
   font-size: 0.7rem;
@@ -590,7 +599,7 @@ a {
   line-height: normal;
   text-transform: capitalize;
 }
-.textOrder p:last-child{
+.textOrder p:last-child {
   color: #000;
   font-family: Inter;
   font-size: 0.7rem;
@@ -598,14 +607,14 @@ a {
   font-weight: 400;
   line-height: normal;
 }
-.cancelBtn{
+.cancelBtn {
   border: transparent;
   outline: transparent;
   width: 5.27438rem;
   height: 1.5625rem;
   border-radius: 0.25rem;
   background: #000;
-  color: #FFF;
+  color: #fff;
   font-family: Ubuntu;
   font-size: 0.7rem;
   font-style: normal;
@@ -613,18 +622,18 @@ a {
   line-height: normal;
   text-transform: capitalize;
 }
-.margin{
+.margin {
   margin-right: 3rem;
 }
-.statusCircle{
+.statusCircle {
   width: 1rem;
   height: 1rem;
   border-style: solid;
   border-radius: 100%;
   border-width: 3px;
-  border-color: rgba(0, 0, 0, 0.50);
+  border-color: rgba(0, 0, 0, 0.5);
 }
-.statusOrder{
+.statusOrder {
   color: #000;
   font-family: Ubuntu;
   font-size: 0.8rem;
@@ -632,7 +641,7 @@ a {
   font-weight: 400;
   line-height: normal;
 }
-.lPrice{
+.lPrice {
   color: #000;
   font-family: Ubuntu;
   font-size: 1rem;
@@ -640,19 +649,19 @@ a {
   font-weight: 500;
   line-height: normal;
 }
-.statusDele{
+.statusDele {
   color: #000;
-  background: #0F0;
+  background: #0f0;
 }
-.statusDeleText{
+.statusDeleText {
   border-color: #0f0;
 }
-.invoice{
+.invoice {
   border: transparent;
   border-radius: 0.25rem;
   outline: transparent;
 }
-.marginRes{
+.marginRes {
   margin-right: 3rem;
 }
 /*---------- end of main COntent ----------*/
@@ -833,22 +842,22 @@ footer {
   .smallScreenSocial {
     display: block;
   }
-  .mainContainer{
+  .mainContainer {
     width: 100%;
   }
-  .cancelBtn{
+  .cancelBtn {
     width: 5rem;
     height: 1.5625rem;
     border-radius: 0.25rem;
     font-size: 0.65rem;
   }
-  .statusCircle{
+  .statusCircle {
     border-width: 3px;
   }
-  .statusOrder{
+  .statusOrder {
     font-size: 0.7rem;
   }
-  .lPrice{
+  .lPrice {
     font-size: 0.85rem;
   }
 }
@@ -981,24 +990,24 @@ footer {
   .itemImg {
     width: 120px;
   }
-  .cartItems img{
+  .cartItems img {
     width: 76px;
     height: 76px;
     object-fit: contain;
   }
-  .cartBody{
+  .cartBody {
     min-height: 50vh;
   }
-  .textOrder h2{
+  .textOrder h2 {
     font-size: 0.85rem;
   }
-  .textOrder p{
+  .textOrder p {
     font-size: 0.68rem;
   }
-  .textOrder span{
+  .textOrder span {
     font-size: 0.68rem;
   }
-  .marginRes{
+  .marginRes {
     margin-right: 1.5rem;
   }
 }
@@ -1086,11 +1095,11 @@ footer {
     font-weight: 500;
     text-decoration: underline;
   }
-  .cartItems{
+  .cartItems {
     flex-direction: column;
     gap: 2rem;
   }
-  .prices{
+  .prices {
     justify-content: space-between;
   }
 }
@@ -1129,14 +1138,14 @@ footer {
     padding: 0.6rem;
   }
 }
-@media (max-width: 368px){
+@media (max-width: 368px) {
   .cancelBtn {
     width: 4rem;
     height: 1.5625rem;
     border-radius: 0.25rem;
     font-size: 0.65rem;
   }
-  .marginRes{
+  .marginRes {
     margin-right: 0.5rem;
   }
 }
