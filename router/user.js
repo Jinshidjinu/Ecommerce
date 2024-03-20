@@ -7,6 +7,7 @@ const addressController = require('../controller/addressController')
 const wishlistController = require('../controller/wishlistController')
 const productController=require('../controller/productController')
 const paymentController = require('../controller/paymentController')
+const categoryController = require('../controller/CategoryController')
 
 
 
@@ -37,6 +38,8 @@ router.post('/Reset/Password/:mail',userController.ResetPasswordPOST)
 router.get('/userhome',userController.loadUserHomeGET)
 router.get('/productView',userController.productViewGET)
 
+// category filtering
+router.get('/categories/:category',categoryController.categoriesGET)
 
 // show all products
 router.get('/showAllproducts',productController.showAllproductsGET)

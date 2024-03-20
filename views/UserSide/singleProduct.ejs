@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ecart Home</title>
+    <title>Ecart</title>
     <!-- Bootstrap css cdn link -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -13,7 +14,7 @@
     />
     <!-- end of Bootstrap css cdn link -->
     <!-- Style css -->
-    <link rel="stylesheet" href="/css/userHome.css" />
+    <link rel="stylesheet" href="/css/singleProduct.css" />
     <!-- end of Style css -->
   </head>
   <body>
@@ -79,19 +80,19 @@
                     <a href="/"> Home </a>
                   </li>
                   <li>
-                    <a href="/categories/Men">Men</a>
+                    <a href="/categories/men"> Men </a>
                   </li>
                   <li>
-                    <a href="/categories/Womens"> Womens </a>
+                    <a href="/categories/women"> Womens </a>
                   </li>
                   <li>
-                    <a href="/categories/Kids"> Kids </a>
+                    <a href="/categories/kids"> Kids </a>
                   </li>
                   <li>
-                    <a href="/categories/mobile">Electronics</a>
+                    <a href="/categories/mobile"> Electronics </a>
                   </li>
                   <li>
-                    <a href="/categories/watches">Watches</a>
+                    <a href="/categories/watches">  Watches </a>
                   </li>
                   <li>
                     <a href="/"> Shop By Category </a>
@@ -123,7 +124,7 @@
               <div class="useroptions d-flex">
                 <ul class="m-0 p-0 d-flex align-items-center list-unstyled">
                   <li>
-                    <a href="/userAccount">
+                    <a href="/userAccont">
                       <svg
                         width="20"
                         height="20"
@@ -170,7 +171,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/wishlist">
+                    <a href="/userWhislist">
                       <svg
                         width="20"
                         height="20"
@@ -186,7 +187,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/cart">
+                    <a href="/usersAddToCart">
                       <svg
                         width="20"
                         height="20"
@@ -214,206 +215,320 @@
     <main>
       <div class="container-fluid">
         <div class="row">
-          <div class="col-12">
+          <div
+            class="col-12 searchBar d-flex align-items-center justify-content-center position-relative"
+          >
             <div
-              id="carouselExampleControls"
-              class="carousel slide"
-              data-bs-ride="carousel"
+              class="sortOption position-absolute d-flex align-items-center gap-3"
             >
-
-        
-           
-              <div class="carousel-inner">
-                <% bannerData.forEach((data)=>{ %>
-                <div
-                  class="carousel-item active"
-                  data-bs-interval="6000"
-                  data-bs-pause="false"
-                  data-bs-ride="false"
+              <div class="fliterIcon">
+                <svg
+                  width="26"
+                  height="26"
+                  viewBox="0 0 26 26"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <a href=""
-                    ><img
-                      src="/images/banner/<%=data.Image %>"
-                      class="w-100 img-large-screen"
-                      alt=""
-                  /></a>
-                
-                </div>
-                <%})%>
-               
+                  <path
+                    d="M10.8333 19.5V17.3333H15.1667V19.5H10.8333ZM6.5 14.0833V11.9167H19.5V14.0833H6.5ZM3.25 8.66667V6.5H22.75V8.66667H3.25Z"
+                    fill="white"
+                  />
+                </svg>
               </div>
-          
+            </div>
+            <div class="searchBox d-flex align-items-center">
+              <input
+                type="text"
+                name="search"
+                placeholder="Search for Products"
+                class="searchBar"
+                id="searchProducts"
+              />
               <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="prev"
+                class="searchBtn d-flex justify-content-center align-items-center"
+                onclick="searchAllproducts()"
               >
-                <span
-                  class="carousel-control-prev-icon slideBtn leftBtn"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Previous</span>
-              </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carouselExampleControls"
-                data-bs-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon slideBtn"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Next</span>
+              <i class="fa-solid fa-magnifying-glass" style="color: #eaecf1;"></i>
+            
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="main-body">
-              <div class="col-12">
-                <div class="text-center">
-                  <h2>Newly Arrayvals</h2>
-                </div>
-              </div>
-              <div class="col-12 overflow-hidden">
-                <div>
-                  <ul
-                    id="newlyLaunched"
-                    class="newlyLaunched position-relative p-0 d-flex align-items-center list-unstyled"
-                  >
-                  <% productData.forEach((product)=>{ %>
-                    <li>
-                      <a href="/productView?id=<%=product._id%>">
-                        <div class="newItems">
-                          <div class="productImg">
-                            <img src="/images/products/<%=product.image[0]%>" alt="" />
-                          </div>
-                          <div class="text-area">
-                            <div class="productTittle">
-                              <p><%=product.productName%></p>
-                            </div>
-                            <div
-                              class="discountPrice d-flex align-items-baseline"
-                            >
-                              <p>₹<%=product.price%></p>
-                              <p>₹<%=product.MRP%></p>
-                            </div>
-                            <div class="property">
-                              <div>
-                                <img
-                                  src=""
-                                  alt=""
-                                />
-                                <p>Swift Charge Technology</p>
-                              </div>
-                              <div>
-                                <img
-                                  src="./images/newlyLaunched/hexagon-list-icon.svg"
-                                  alt=""
-                                />
-                                <p>Dual Connectivity</p>
-                              </div>
-                              <div>
-                                <img
-                                  src="./images/newlyLaunched/hexagon-list-icon.svg"
-                                  alt=""
-                                />
-                                <p>Powered By 13mm Powerful Drivers</p>
-                              </div>
-                            </div>
-                            <!-- <div class="colorOptions">
-                              <div class="d-flex align-items-center">
-                                <p><%=product.color%></p>
-                                <div class="d-flex align-items-center">
-                                  <div class="bg-black"></div>
-                                  <div class="bg-white"></div>
-                                  <div class="bg-primary"></div>
-                                </div>
-                              </div>
-                            </div> -->
-                            <div class="shopOption">
-                              <div class="d-flex align-items-center">
-                                <!-- <p>shop Now</p> -->
-                                <svg
-                                  width="18"
-                                  height="12"
-                                  viewBox="0 0 18 12"
-                                  fill="none"
-                                  xmlns="http://www.w3.org/2000/svg" 
-                                >
-                                  <g clip-path="url(#clip0_28_66)">
-                                    <path
-                                      d="M1 1L6 6L1 11"
-                                      stroke="#4B4955"
-                                      stroke-width="1.5"
-                                    />
-                                    <path
-                                      opacity="0.65"
-                                      d="M6 1L11 6L6 11"
-                                      stroke="#4B4955"
-                                      stroke-width="1.5"
-                                    />
-                                    <path
-                                      opacity="0.4"
-                                      d="M11 1L16 6L11 11"
-                                      stroke="#4B4955"
-                                      stroke-width="1.5"
-                                    />
-                                  </g>
-                                  <defs>
-                                    <clipPath id="clip0_28_66">
-                                      <rect
-                                        width="18"
-                                        height="12"
-                                        fill="white"
-                                      />
-                                    </clipPath>
-                                  </defs>
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </a>
+      <div class="fliter-moblie">
+        <div class="fliterOptions">
+          <div class="fliterHead">
+            <h2>Filters</h2>
+          </div>
+          <div class="fliterSubHead">
+            <h2>PRICE</h2>
+            <form action="/userFliter" method="post">
+              <input type="text" value="" hidden />
+              <input type="number" value="1000" name="maxPrice" hidden />
+              <input
+                class="bg-transparent border-0"
+                type="submit"
+                value="Under ₹1,000"
+              />
+            </form>
+            <form action="/userFliterByPrice" method="post">
+              <input type="text" value="" hidden />
+              <input type="number" value="1000" name="minPrice" hidden />
+              <input type="number" value="5000" name="maxPrice" hidden />
+              <input
+                class="bg-transparent border-0"
+                type="submit"
+                value="₹1,000 - ₹5,000"
+              />
+            </form>
+            <form action="/userFliterByPrice" method="post">
+              <input type="text" value="" hidden />
+              <input type="number" value="5000" name="minPrice" hidden />
+              <input type="number" value="10000" name="maxPrice" hidden />
+              <input
+                class="bg-transparent border-0"
+                type="submit"
+                value="₹5,000 - ₹10,000"
+              />
+            </form>
+            <form action="/userFliterByPrice" method="post">
+              <input type="text" value="" hidden />
+              <input type="number" value="10000" name="minPrice" hidden />
+              <input type="number" value="20000" name="maxPrice" hidden />
+              <input
+                class="bg-transparent border-0"
+                type="submit"
+                value="₹10,000 - ₹20,000"
+              />
+            </form>
+            <form action="/userFliterByPrice" method="post">
+              <input type="text" value="" hidden />
+              <input type="number" value="20000" name="minPrice" hidden />
+              <input
+                class="bg-transparent border-0"
+                type="submit"
+                value="Over ₹20,000"
+              />
+            </form>
+            <form action="/userFliterByPrice" method="post">
+              <input type="text" value="" hidden />
+              <input
+                type="number"
+                value=""
+                name="minPrice"
+                placeholder="Min"
+                required
+              />
+              <input
+                type="number"
+                value=""
+                name="minPrice"
+                placeholder="Max"
+                required
+              />
+              <button type="submit">Go</button>
+            </form>
+          </div>
+          <div class="fliterSubHead2">
+            <h2>Customer Ratings</h2>
+            <form class="rateing" action="/userFilterByRateing" method="post">
+              <input
+                class="checkbox"
+                type="checkbox"
+                value="4"
+                name="maxRate"
+                required
+              />
+              <input type="submit" value="4★ & above" />
+            </form>
+            <form class="rateing" action="/userFilterByRateing" method="post">
+              <input
+                class="checkbox"
+                type="checkbox"
+                value="3"
+                name="maxRate"
+                required
+              />
+              <input type="submit" value="3★ & above" />
+            </form>
+          </div>
+          <div class="sort">
+            <div class="fliterHead">
+              <h2>SORT BY</h2>
+            </div>
+            <div class="sortOptions">
+              <form action="/userFilterByRateing" method="post">
+                <input type="number" value="1" name="sort" hidden />
+                <input type="submit" value="Price -- Low to High" />
+              </form>
+              <form action="/userFilterByRateing" method="post">
+                <input type="number" value="-1" name="sort" hidden />
+                <input type="submit" value="Price -- High to Low" />
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex">
+        <div class="fliter">
+          <div class="fliterOptions">
+            <div class="fliterHead">
+              <h2>Filters</h2>
+            </div>
+            <div class="fliterSubHead">
+              <h2>PRICE</h2>
+              <form action="/userFliter" method="post">
+                <input type="text" value="" hidden />
+                <input type="number" value="1000" name="maxPrice" hidden />
+                <input
+                  class="bg-transparent border-0"
+                  type="submit"
+                  value="Under ₹1,000"
+                />
+              </form>
+              <form action="/userFliterByPrice" method="post">
+                <input type="text" value="" hidden />
+                <input type="number" value="1000" name="minPrice" hidden />
+                <input type="number" value="5000" name="maxPrice" hidden />
+                <input
+                  class="bg-transparent border-0"
+                  type="submit"
+                  value="₹1,000 - ₹5,000"
+                />
+              </form>
+              <form action="/userFliterByPrice" method="post">
+                <input type="text" value="" hidden />
+                <input type="number" value="5000" name="minPrice" hidden />
+                <input type="number" value="10000" name="maxPrice" hidden />
+                <input
+                  class="bg-transparent border-0"
+                  type="submit"
+                  value="₹5,000 - ₹10,000"
+                />
+              </form>
+              <form action="/userFliterByPrice" method="post">
+                <input type="text" value="" hidden />
+                <input type="number" value="10000" name="minPrice" hidden />
+                <input type="number" value="20000" name="maxPrice" hidden />
+                <input
+                  class="bg-transparent border-0"
+                  type="submit"
+                  value="₹10,000 - ₹20,000"
+                />
+              </form>
+              <form action="/userFliterByPrice" method="post">
+                <input type="text" value="" hidden />
+                <input type="number" value="20000" name="minPrice" hidden />
+                <input
+                  class="bg-transparent border-0"
+                  type="submit"
+                  value="Over ₹20,000"
+                />
+              </form>
+              <form action="/userFliterByPrice" method="post">
+                <input type="text" value="" hidden />
+                <input
+                  type="number"
+                  value=""
+                  name="minPrice"
+                  placeholder="Min"
+                  required
+                />
+                <input
+                  type="number"
+                  value=""
+                  name="minPrice"
+                  placeholder="Max"
+                  required
+                />
+                <button type="submit">Go</button>
+              </form>
+            </div>
+            <div class="fliterSubHead2">
+              <h2>Customer Ratings</h2>
+              <form class="rateing" action="/userFilterByRateing" method="post">
+                <input
+                  class="checkbox"
+                  type="checkbox"
+                  value="4"
+                  name="maxRate"
+                  required
+                />
+                <input type="submit" value="4★ & above" />
+              </form>
+              <form class="rateing" action="/userFilterByRateing" method="post">
+                <input
+                  class="checkbox"
+                  type="checkbox"
+                  value="3"
+                  name="maxRate"
+                  required
+                />
+                <input type="submit" value="3★ & above" />
+              </form>
+            </div>
 
-                    </li>
-                    <%})%>
-                  </ul>
-                </div>
+            <div class="sort">
+              <div class="fliterHead">
+                <h2>SORT BY</h2>
+              </div>
+              <div class="sortOptions">
+                <form action="/userFilterByRateing" method="post">
+                  <input type="number" value="1" name="sort" hidden />
+                  <input type="submit" value="Price -- Low to High" />
+                </form>
+                <form action="/userFilterByRateing" method="post">
+                  <input type="number" value="-1" name="sort" hidden />
+                  <input type="submit" value="Price -- High to Low" />
+                </form>
               </div>
             </div>
           </div>
         </div>
-        <div class="row slideProduct">
-          <div class="col-12 text-center">
-            <ul
-              class="slideButton d-flex align-items-center list-unstyled justify-content-center"
-            >
-              <li data-index="0">
-                <button onfocus="moveSlide(0)"></button>
-              </li>
-              <li data-index="1">
-                <button onfocus="moveSlide(1)"></button>
-              </li>
-              <li data-index="2">
-                <button onfocus="moveSlide(2)"></button>
-              </li>
-              <li data-index="2">
-                <button onfocus="moveSlide(3)"></button>
-              </li>
-            </ul>
-            <a class="showProducts" href="/showAllproducts">
-              <button class="showAllProducts" style="background-color: rgb(233, 239, 239); width: 150px; height: 38px; margin-left: 0; border: none; border-radius: 5px;margin-bottom: 5px; ">show All <i class="fa-solid fa-arrow-down"></i></button>
-            </a>
+
+     
+
+          <div class="container-fluid">
+            <div class="row">
+              <%categoryDetails.forEach((data)=>{ %>
+              <div class="smallWidth col-6 col-md-4" onclick="window.location.href='/productView?id=<%=data._id%>'">
+               
+                <a>
+                  <div class="shopItems" >
+                 
+                    <div class="mainItem">
+                      <div
+                        class="itemImg itemImgOne d-flex align-items-center position-relative justify-content-center"
+                      >
+                    
+                       
+                        <img src="/images/products/<%=data.image[0]%>" alt="" />
+                    
+                      </div>
+                      <div class="itemDescription text-center">
+                        <h2><%=data.productName%></h2>
+                        <p><%=data.description%></p>
+                        <div
+                          class="price d-flex align-items-baseline justify-content-center"
+                        >
+                          <p class="p-0 m-0">₹<%=data.price%></p>
+                          <p class="p-0 m-0">₹<%=data.MRP%></p>
+                        </div>
+                        <div>
+                          <a href="/usersCheckout?id=<%=data._id%>">
+                            <button class="buyBtn">BUY NOW</button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <% }) %>
+            </div>
+         
           </div>
-          
-        </div>
-      
+  
       </div>
     </main>
     <!-- end of main -->
@@ -919,13 +1034,15 @@
     <!-- end of footer -->
 
     <!-- custom js -->
-  <script src="/js/userHome.js"></script>
+    <script src="./js/userSingleProductPage.js"></script>
     <!-- end of custom js -->
     <!-- fontawesome -->
     <script
       src="https://kit.fontawesome.com/23d1247997.js"
+      
       crossorigin="anonymous"
     ></script>
+    
     <!-- end of fontawesome -->
     <!-- Bootstrap script file -->
     <script
@@ -934,5 +1051,7 @@
       crossorigin="anonymous"
     ></script>
     <!--end of Bootstrap script file -->
+
+
   </body>
 </html>

@@ -1,6 +1,8 @@
 
 
- const CategorySchema = require('../models/category')
+ const CategorySchema = require('../models/category');
+const productModel = require('../models/products');
+const productController = require('./productController');
 module.exports = {
 
     categoryGET:async(req,res)=>{
@@ -66,6 +68,22 @@ module.exports = {
             res.status(500).json({success:false,message:"something  wrong!"})
           }
      },
+     categoriesGET:async(req,res)=>{
+      try {
+        
+      const category = req.params.category
+      console.log(category);
+      const categoryDetails = await productModel.find({category:category})
+   
+      res.render('UserSide/singleProduct',{categoryDetails})
+        
+      } catch (error) {
+        console.log(error);
+        
+      }
+     
 
+
+     },
      
 }  
