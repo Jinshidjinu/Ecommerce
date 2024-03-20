@@ -62,6 +62,11 @@ const userController = require('../controller/userController')
    router.post('/editcoupon/:CouponID',couponController.editCouponPOST)
    router.delete('/deleteCoupon',couponController.couponDELETE)
 
+   // Order Listing
+
+   router.get('/orderlist',productController.adminOrderListGET)
+   router.post('/updateStatus',productController.statusUpdatePOST)
+
 
 
     module.exports=router

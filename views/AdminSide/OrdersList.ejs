@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/OrderList.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.slim.js"></script>
+</head>
+
+<body>
+
+    <section id="menu">
+        <div class="logo">
+            <img src="/images/logo.png" alt="">
+            <h2>Admin</h2>
+        </div>
+        <div class="items">
+            <li><i class="fa-solid fa-chart-pie"></i> <a href="/admin/dashboard">Dashboard</a></li>
+            <li><i class="fa-solid fa-table-cells-large"></i> <a href="#">Products</a></li>
+            <li><i class="fa-solid fa-list" style="color: #adb1b8;"></i> <a href="/admin/Category">Categories</a></li>
+            <li><i class="fa-solid fa-credit-card"></i> <a href="/admin/orderlist">Orders</a></li>
+            <li><i class="fa-solid fa-credit-card"></i> <a href="/admin/banner">Banners</a></li>
+            <li><i class="fa-solid fa-credit-card"></i> <a href="/admin/coupon">Coupons</a></li>
+            <li><i class="fa-solid fa-user" style="color: #c4c8cf;"></i><a href="/admin/Userslist">Users</a></li>
+          
+            
+            <!-- <li><i class="fa-solid fa-chart-line"></i> <a href="#">Blank</a></li> -->
+            <div class="logout">
+                <li><i class="fa-solid fa-right-from-bracket" style="color: #d40c48;"></i> <a href="#">Logout</a></li>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section id="interface">
+        <div class="navigation">
+            <div class="n1">
+                <div>
+            
+                    <i id="menu-btn" class="fa-solid fa-bars"></i>
+                </div>
+                <div class="search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+
+            
+        <div class="Addproducts">
+            <a href="" class="category" id="add"></a>
+          </div>
+       
+           
+        </div>
+
+        <h3 class="i-name">Ordera Lists</h3>
+ 
+
+
+        <div class="board">
+            <table width="100%"> 
+                <thead>
+                    <tr>
+                        <td>ID</td>
+                        <!-- <td>Image</td> -->
+                        <td>Product name</td>
+                        <td>Prices</td>
+                        <td>date</td>
+                        <td>status</td>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                 
+                       
+                    <% ordersData.forEach((data)=>{ %>
+
+                        <tr class="products" id="removeproduct">
+                            <td class="people"> 
+                                <div class="people-de">
+                                   <h5><%=data._id%></h5>
+                                    
+                                </div>
+                            </td>
+                            <%data.products.forEach((data)=>{ %>
+                            <td class="people-des">
+                              <h5><%=data.id.productName%></h5>
+                            </td>
+                            <% }) %>
+                           
+                            <td class="people-des">
+                               
+                              <h5><%=data.totalprice%></h5>
+                            </td>
+                            <td class="people-des">
+                              <h5><%=data.createdAt.toISOString().substring(0,10)%></h5>
+                            </td>
+                            <td class="edit">
+                               
+
+
+
+                                <select  id="selectValue" class="dropingdown" onchange="statusUpdate(event,'<%=data._id%>')">
+                                    <option ><%=data.Status%></option>
+                                    <option value="pending">Pending</option>
+                                    <option value="confirmed">Confirmed</option>
+                                    <option value="shipped">Shipped</option>
+                                    <option value="delivered">Delivered</option>                           
+                                </select>
+                            </td>
+                            <!-- <td class="edit"> <a href=""><i class="fa-solid fa-pen-to-square" style="color: #961320;"></i></a></td> -->
+                       
+                            
+                        </tr>
+                        <% })%>
+               
+                                     
+             
+
+            
+          
+                </tbody>
+            </table>
+            
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+   
+   async function statusUpdate(event,id) {
+
+    try {
+        
+        event.preventDefault()
+
+        const dropingdown = document.querySelector('.dropingdown')
+
+        const selectOption = event.target.value
+        const response = await axios.post(`/admin/updateStatus?id=${id}`,{
+
+            Id:id,
+            Status:selectOption
+ 
+
+        })
+              
+    } catch (error) {
+
+        console.log(error);
+        
+    }
+    
+   }
+
+</script>
+
+</body>
+
+</html>
+

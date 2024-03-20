@@ -1,4 +1,5 @@
 
+const OrderModel = require('../models/Orders')
 const categoryModel= require('../models/category')
 const productModel = require('../models/products')
 const wishlistModel= require('../models/wishlist')
@@ -120,9 +121,88 @@ module.exports={
 
 
          showAllproductsGET:async(req,res)=>{
-          const userID = req.session.email?._id
-          const productDetails = await productModel.find()
-          res.render('userSide/showAllproducts',{productDetails})
+           
+           let allProducts;
+
+          const Name = req.query.search
+
+          allProducts = await productModel.find()
+
+          res.render('userSide/showAllproducts',{allProducts})
+         },
+         
+         searchProductGET:async(req,res)=>{
+          try {
+            // const userId = req.session.email._id
+            console.log(Name); 
+            // const category = await categoryModel.find({})
+            const products = await productModel.find(
+              {productName:{$regex:Name,$options:"i"},}
+              
+              ) 
+
+             
+              // res.render('UserSide/showAllproduct')
+            
+          } catch (error) {
+            console.log(error);
+            
+          }
+
+         },
+
+
+         adminOrderListGET:async(req,res)=>{
+
+          try {
+            
+            const ordersData = await OrderModel.find({}).sort({createAt:-1}).populate('products.id')
+            res.render('AdminSide/OrdersList',{ordersData})
+          
+
+          } catch (error) {
+            console.log(error);
+            
+          }
+
+
+
+
+         },
+
+         statusUpdatePOST:async(req,res)=>{
+          try {
+            const id = req.body.Id;
+            const selectOption = req.body.Status;
+
+        
+            const orderData = await OrderModel.findOne({ _id: id })
+            
+            if (!orderData) {
+              return res.status(404).json({ success: false, message: "Order not found" });
+            }
+        
+            
+        
+            if (orderData.Status == 'cancelled') {
+              req.body.Status =  'cancelled'
+            } 
+
+            const updatedOrder = await OrderModel.findOneAndUpdate({_id: id},{Status:req.body.Status},{new:true});
+
+            console.log(updatedOrder);
+        
+            if (updatedOrder.modifiedCount == 0) {
+              return res.status(400).json({ success: false, message: "Failed to update order status" });
+            }
+        
+            res.json({ success: true, message: "Order status updated successfully" });
+          } catch (error) {
+            console.log(error);
+          
+         }
+
+
          }
 
 

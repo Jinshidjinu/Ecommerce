@@ -205,18 +205,6 @@ var instance = new Razorpay({
             })
            const saveOrder =  await orders.save()
 
-           if(saveOrder){
-
-            carts.forEach(async(data) => {
-              
-            
-            const orders =  await OrderModel.updateOne({_id:userID,'products.id': data.id.toString()},{$set:{Status: 'confirmed'}})
-            console.log(orders); 
-            
-            })  
-
-          }
-
             if(!req.session.prodid){     
              await cartModel.deleteOne({userID:userID})             
             }
@@ -338,7 +326,6 @@ var instance = new Razorpay({
        const Userorders = await OrderModel.findOne({_id:id})
        const updateOrder = await OrderModel.updateOne({_id:id},{$set:{Status:'cancelled'}})
  
-
        res.json({success:true})
      }
    
