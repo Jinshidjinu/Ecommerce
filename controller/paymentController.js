@@ -232,7 +232,6 @@ var instance = new Razorpay({
 
      razorpaymentPOST:async(req,res)=>{
        try {
-        console.log('oooooppp');
         const userId = req.session.email._id
         const paymentMethod =  req.session.paymentMethod
         const paymentAddress = req.session.paymentAddress  

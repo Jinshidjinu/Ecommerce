@@ -121,36 +121,26 @@ module.exports={
 
 
          showAllproductsGET:async(req,res)=>{
-           
-           let allProducts;
+           try {
+             let allProducts;
+  
+            const Name = req.query.search?.toString()  || ''
+  
+            allProducts = await productModel.find(
 
-          const Name = req.query.search
+              {productName:{$regex:Name,$options:"i"},}
 
-          allProducts = await productModel.find()
+            )
+            res.render('userSide/showAllproducts',{allProducts})
+            
+           } catch (error) {
+            console.log(error)
+            
+           }
 
-          res.render('userSide/showAllproducts',{allProducts})
          },
          
-         searchProductGET:async(req,res)=>{
-          try {
-            // const userId = req.session.email._id
-            console.log(Name); 
-            // const category = await categoryModel.find({})
-            const products = await productModel.find(
-              {productName:{$regex:Name,$options:"i"},}
-              
-              ) 
-
-             
-              // res.render('UserSide/showAllproduct')
-            
-          } catch (error) {
-            console.log(error);
-            
-          }
-
-         },
-
+      
 
          adminOrderListGET:async(req,res)=>{
 

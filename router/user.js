@@ -40,7 +40,6 @@ router.get('/productView',userController.productViewGET)
 
 // show all products
 router.get('/showAllproducts',productController.showAllproductsGET)
-router.get('/search',productController.searchProductGET)
 
 // users Account 
 router.get("/userAccount",userController.userProfileGET)
