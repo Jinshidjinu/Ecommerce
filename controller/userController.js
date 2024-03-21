@@ -21,6 +21,7 @@ const bannerSchema = require('../models/Banner')
 const categorySchema = require('../models/category')
 const wishlistSchema = require('../models/wishlist')
 const AddressSchema  = require('../models/Address')
+const ReviewModel =require('../models/Review') 
 
 let Number;
 
@@ -253,21 +254,20 @@ module.exports = {
     productViewGET:async(req,res)=>{
       try{
         const userID = req.session.email?._id
-        console.log(userID);
         const viewID = req.query.id     
-        console.log(viewID);
         let existingProduct = false;
         const productShow = await products.findOne({_id:viewID})
         const wishlist  = await wishlistSchema.findOne({userID:userID})
+        const ProductReview = await ReviewModel.findOne({productID:viewID}).populate('review.UserId')
       
      if (wishlist && wishlist.product) {
      const existProduct = wishlist.product.find(product => product.id.equals(viewID));
      if (existProduct !== undefined) {
-      existingProduct = true;
+      existingProduct = true; 
     }
 }
        
-        res.render('UserSide/productDetails',{productShow,existingProduct})
+        res.render('UserSide/productDetails',{productShow,existingProduct,ProductReview})
 
       }catch(error){
         console.log(error);

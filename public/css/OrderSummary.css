@@ -388,6 +388,14 @@ a {
   cursor: pointer;
   background-color: #eee;
 }
+.reviewBtn{
+  background-color: rgb(224, 218, 218);
+  border-radius: 20px;
+   border:1px none;
+   width: 130px;
+   color: rgb(14, 5, 5);
+   
+}
 #qty {
   color: #000;
   font-family: Inter;

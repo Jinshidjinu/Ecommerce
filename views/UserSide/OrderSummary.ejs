@@ -229,10 +229,13 @@
             </div>
             <div class="cartBody">
               <div class="ODhead">
-                <p>Order ID -<%=userOrders._id%></p>
+                <% if (userOrders && userOrders){ %>
+
+                  <p>Order ID -<%=userOrders?._id%></p>
+               <% } %>
               </div>
 
-              <%userOrders.products.forEach((data)=>{ %>
+              <%userOrders?.products.forEach((data)=>{ %>
 
              
               <div class="d-flex ODhead gap-3 justify-content-between align-items-center">
@@ -245,6 +248,10 @@
                 
                   </div>
                   <p>qty:<%=data.quantity%></p>
+
+                  <a href="/review?id=<%=data.id._id%>">
+                    <button class="reviewBtn">Review</button>
+                  </a>
                 </div>
                 <div class="imgOrder">
                   <img src="/images/products/<%=data.id.image[0]%>" alt="">
@@ -285,7 +292,7 @@
 
               <div class="ODhead pt-3 pb-3 SDetails">
                 <h2 class="text-capitalize"><%=userDetails.name%></h2>
-                <p class="text-capitalize"><%=userOrders.address%></p>
+                <p class="text-capitalize"><%=userOrders?.address%></p>
                 <p>Phone:<%=userDetails.phone%></p>
               </div>
 
@@ -296,7 +303,11 @@
               <div class="orderContent">
                 <div class="sTotal d-flex justify-content-between align-items-center">
                   <p class="commonText m-0 p-0">Subtotal</p>
+                  <% if (userOrders && userOrders.totalprice) { %>
                   <p class="commonSub m-0 p-0" id="sTotal">₹<%=userOrders.totalprice%></p>
+                  <% } else { %>
+                    <p class="commonSub m-0 p-0" id="sTotal">₹0</p>
+                      <% } %>
                 </div>
 
                 <div class="ship d-flex justify-content-between align-items-center">
@@ -317,7 +328,11 @@
               <div class="Last">
                 <div class="commonText tPrice d-flex justify-content-between align-items-center">
                   <p class="m-0 p-0">Total</p>
+                  <% if (userOrders && userOrders.totalprice) { %>
                   <p class="m-0 p-0" id="tPrice">₹<%=userOrders.totalprice%></p>
+                  <% } else { %>
+                
+                    <% } %>
                 </div>
               </div>
               <a href="/userOrderDownloadInvoice/:productId/:orderId" class="text-dark fw-bolder">
@@ -339,7 +354,7 @@
                   </div> 
                 </div>
               </a>
-              <a href="/userProductRate/:productId" class="text-dark fw-bolder ">
+              <a href="" class="text-dark fw-bolder ">
                 <div class="ODhead sDetails d-flex justify-content-between gap-3">
                   <div>
                     Rate and Review this product

@@ -365,13 +365,22 @@
                 class="review d-flex align-items-center justify-content-between"
               >
                 <h2>Ratings & Reviews</h2>
-                <a href="/userProductRate/id">
+                <a href="">
                   <button>Rate Product</button>
                 </a>
               </div>
+
+
               <div class="content">
+                <% if(ProductReview){ %>
+
+               
+                <%ProductReview.review.forEach(data =>{ %>
+
+
+         
                 <div class="userReview">
-                  <h2>Great product</h2>
+                  <h2> Product Rating</h2>
                   <div class="rating d-flex">
                     <p class="ratedStar">★</p>
                     <p class="ratedStar">★</p>
@@ -379,73 +388,18 @@
                     <p class="ratedStar">★</p>
                     <p class="ratedStar">★</p>
                   </div>
+              
                   <p class="reviewDetails">
-                    It's sound quality is perfect as well as very loud and
-                    clear. It's built quality is upto the mark because it's
-                    woofer is made up of wood which is very good and it's bass
-                    and treble is very amazing after all you can listen any song
-                    and watch any movie like cinema hall experience. Overall it
-                    is best for this price.
+                     <%=data.comment%>
                   </p>
-                  <p class="ratedUserName">User 1</p>
-                </div>
-                <div class="userReview">
-                  <h2>Great product</h2>
-                  <div class="rating d-flex">
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                  </div>
-                  <p class="reviewDetails">
-                    It's sound quality is perfect as well as very loud and
-                    clear. It's built quality is upto the mark because it's
-                    woofer is made up of wood which is very good and it's bass
-                    and treble is very amazing after all you can listen any song
-                    and watch any movie like cinema hall experience. Overall it
-                    is best for this price.
+         
+                  <p class="ratedUserName">
+                      <%=data.UserId.name%>
                   </p>
-                  <p class="ratedUserName">User 1</p>
                 </div>
-                <div class="userReview">
-                  <h2>Great product</h2>
-                  <div class="rating d-flex">
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                  </div>
-                  <p class="reviewDetails">
-                    It's sound quality is perfect as well as very loud and
-                    clear. It's built quality is upto the mark because it's
-                    woofer is made up of wood which is very good and it's bass
-                    and treble is very amazing after all you can listen any song
-                    and watch any movie like cinema hall experience. Overall it
-                    is best for this price.
-                  </p>
-                  <p class="ratedUserName">User 1</p>
-                </div>
-                <div class="userReview">
-                  <h2>Great product</h2>
-                  <div class="rating d-flex">
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                    <p class="ratedStar">★</p>
-                  </div>
-                  <p class="reviewDetails">
-                    It's sound quality is perfect as well as very loud and
-                    clear. It's built quality is upto the mark because it's
-                    woofer is made up of wood which is very good and it's bass
-                    and treble is very amazing after all you can listen any song
-                    and watch any movie like cinema hall experience. Overall it
-                    is best for this price.
-                  </p>
-                  <p class="ratedUserName">User 1</p>
-                </div>
+                <% })%>
+             
+                <% } %>
               </div>
             </div>
           </div>
@@ -1015,36 +969,23 @@
   }
     </script>
 
+        <script>
+      const stars = document.querySelectorAll('.star');
+      const input = document.querySelector('#starInput');
 
-    <script>
-  //     async function BuyNow(event,id) {
-  //         event.preventDefault();
-  //         event.stopPropagation();
-      
-  //        console.log(id);
-  //       const response = await fetch(`/usersCheckout?id=${id}`,{
- 
-  //         method:'GET',
-  //         headers:{
-  //           'Content-Type':'application/json'
-  //         }
-
-  //       })
-
-  //     const result = await response.json()
-  //     // alert("Product added to cart!"); // Example: You can replace this with your actual logic
-  //       if (result.success == true) {
-      
-  //             Swal.fire({
-  //               title: "Product Add Successfully!..",
-  //               text: "",
-  //               icon: "success",
-  //             });
-  //           } else {
-  //             message.innerHTML = result.error || "unknown error";
-  //           }
-          
-  // }
+      stars.forEach((element, index) => {
+        element.addEventListener('click', () => {
+          stars.forEach((each, i) => {
+            input.value = i + 1;
+            if(index >= i){
+              each.classList.remove('ratedstar');
+              each.classList.add('ratedstar');
+            }else{
+              each.classList.remove('ratedstar');
+            }
+          });
+        });
+      });
     </script>
 
 

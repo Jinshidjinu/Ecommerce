@@ -80,6 +80,11 @@ router.post('/razorpayment',paymentController.razorpaymentPOST)
 router.get('/ordersummary',paymentController.orderSummaryGET)
 router.patch('/cancelledOrder',paymentController.OrdersCancelPATCH)
 
+//product review
+
+router.get('/review',productController.productReviewGET)
+router.post('/review',productController.productReviewPOST)
+
 
 
 

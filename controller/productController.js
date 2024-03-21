@@ -3,6 +3,8 @@ const OrderModel = require('../models/Orders')
 const categoryModel= require('../models/category')
 const productModel = require('../models/products')
 const wishlistModel= require('../models/wishlist')
+const ReviewModel = require('../models/Review')
+const reviewModel = require('../models/Review')
 
 
 module.exports={
@@ -172,8 +174,6 @@ module.exports={
               return res.status(404).json({ success: false, message: "Order not found" });
             }
         
-            
-        
             if (orderData.Status == 'cancelled') {
               req.body.Status =  'cancelled'
             } 
@@ -192,6 +192,64 @@ module.exports={
           
          }
 
+
+         },
+
+         productReviewGET:async(req,res)=>{
+
+         try {
+
+          const Id = req.query.id
+          const productData = await productModel.findOne({_id:Id})
+          res.render('UserSide/productReview',{productData})
+      
+        } catch (error) {
+          console.log(error);
+      
+        }
+          
+      
+    
+         },
+
+         productReviewPOST:async(req,res)=>{
+           try {
+            
+            const userID = req.session.email._id
+            const productId = req.query.id
+            const {description} = req.body
+             
+            const review = await reviewModel.findOne({productID:productId})
+
+            if (!review) {
+
+              const newReview = new reviewModel({
+                productID:productId,
+                review:[{UserId:userID,comment:description}]
+              
+              })
+              await newReview.save()
+                       
+              res.redirect('/ordersummary')
+              
+            }else{
+             
+              await reviewModel.updateOne(
+                { productID:productId},
+                {$push:{review:{UserId:userID,comment:description}}}
+             
+              )
+              res.redirect('/ordersummary')
+
+            }
+
+
+            
+           } catch (error) {
+            console.log(error);
+            
+           }
+           
 
          }
 

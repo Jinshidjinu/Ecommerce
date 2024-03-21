@@ -23,6 +23,7 @@ var instance = new Razorpay({
 
 })
 
+
  module.exports={
 
      checkOutGET :async(req,res)=>{
@@ -148,10 +149,7 @@ var instance = new Razorpay({
        amount: Totalprice * 100, // amount in the smallest currency unit
        currency: "INR",
      };
-       console.log('correct');
       const razorpayOrder = await instance.orders.create(options);
-      console.log('reached');
-      console.log("Razorpay Order:", razorpayOrder);
       res.status(200).json({success:true, razorpayOrder });
       }
                     
@@ -326,7 +324,9 @@ var instance = new Razorpay({
        const updateOrder = await OrderModel.updateOne({_id:id},{$set:{Status:'cancelled'}})
  
        res.json({success:true})
-     }
+     },
+
+   
    
 
  }
