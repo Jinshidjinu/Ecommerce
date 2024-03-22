@@ -10,7 +10,7 @@
         },
         image: {
             type: Array,
-            // required: true
+            required: true
         },
         stock: {
             type:Number,
@@ -18,14 +18,15 @@
 
         },
         price:{
-            type:Number
+            type:Number,
+            required:true
         },
         return:{
             type:[String]
         },
         MRP:{
             type : Number,
-            // required:true
+            required:true
         },
         status: {
             type:String,
@@ -37,7 +38,7 @@
         },
         deliveryDate:{
             type:String,
-            required:true
+            required:true   
         },
         color:{
             type:[String]

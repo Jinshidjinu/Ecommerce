@@ -242,10 +242,13 @@
             <div class="cartBody d-flex">
               <div class="col-6 oneSection">
                
+              
                 <%productshow.product.forEach((data)=>{ %>
+                  <% if (data.id) { %>
                 
                 <div class="cartItems" id="removedwishlist">
                   <div class="items position-relative">
+                    
                     <a
                       class="position-absolute deleteBtn"
                       href=""
@@ -271,7 +274,9 @@
                     </div>
                   </div>
                 </div>
+                <% } %>
                 <% }) %>
+            
               </div>
             </div>
           </div>

@@ -12,7 +12,7 @@ submit.addEventListener("click",async(data)=> {
         
         const productName = form.get('productName')
         const stock = form.get('stock')
-        const prices = form.get('prices')
+        const price = form.get('price')
         const discount = form.get('discount')
         const category = form.get('category')
         const subCategory = form.get('subCategory')
@@ -21,11 +21,11 @@ submit.addEventListener("click",async(data)=> {
         const colour = form.get('colour');
         const size = form.get('size')
 
-      
+        console.log("hsi here", discount,price,stock,productName,category,subCategory,deliveryDate,description,size)
         const productImageFile = document.getElementById('productImage').files[0]
-        console.log(productImageFile);
+   
         
-        if(!productName || productName=="" || !prices || !stock || !category || !subCategory || !deliveryDate || !description || !productImageFile){
+        if(!productName || productName=="" || !price || !stock || !category || !subCategory || !deliveryDate || !description || !productImageFile){
           message.textContent = "please fill out all fields"
            setTimeout(()=>{
                message.innerHTML = ""

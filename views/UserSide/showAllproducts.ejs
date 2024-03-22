@@ -80,19 +80,19 @@
                     <a href="/"> Home </a>
                   </li>
                   <li>
-                    <a href="/earbuds"> Earbuds </a>
+                    <a href="/categories/Men"> Men </a>
                   </li>
                   <li>
-                    <a href="/earphones"> Earphones </a>
+                    <a href="/categories/Women"> Women </a>
                   </li>
                   <li>
-                    <a href="/speakers"> Speakers </a>
+                    <a href="/categories/Kids"> Kids </a>
                   </li>
                   <li>
-                    <a href="/soundbars"> Soundbars </a>
+                    <a href="/categories/mobile"> Electronics </a>
                   </li>
                   <li>
-                    <a href="/smartWatch"> Smart Watch </a>
+                    <a href="/categories/watches"> Smart Watch </a>
                   </li>
                   <li>
                     <a href="/"> Shop By Category </a>
@@ -104,19 +104,19 @@
                 <h2>Shop By Category</h2>
                 <ul class="m-0 list-unstyled">
                   <li>
-                    <a href="/earbuds"> Earbuds </a>
+                    <a href="/categories/Men"> Men </a>
                   </li>
                   <li>
-                    <a href="/earphones"> Earphones </a>
+                    <a href="/categories/Women"> Women </a>
                   </li>
                   <li>
-                    <a href="/speakers"> Speakers </a>
+                    <a href="/categories/Kids"> Kids </a>
                   </li>
                   <li>
-                    <a href="/soundbars"> Soundbars </a>
+                    <a href="/categories/mobile"> Soundbars </a>
                   </li>
                   <li>
-                    <a href="/smartWatch"> Smart Watch </a>
+                    <a href="/categories/watches"> Smart Watch </a>
                   </li>
                 </ul>
               </div>
@@ -262,16 +262,17 @@
           </div>
           <div class="fliterSubHead">
             <h2>PRICE</h2>
-            <form action="/userFliter" method="post">
+            <form action="/userFliterByPrice?minPrice=500?maxPrice=1000" method="get">
               <input type="text" value="" hidden />
+              <input type="number" value="500" name="minPrice" hidden />
               <input type="number" value="1000" name="maxPrice" hidden />
               <input
                 class="bg-transparent border-0"
                 type="submit"
-                value="Under ₹1,000"
+                value="₹500 - ₹1,000"
               />
             </form>
-            <form action="/userFliterByPrice" method="post">
+            <form action="/userFliterByPrice?minPrice=1000?maxPrice=5000" method="get">
               <input type="text" value="" hidden />
               <input type="number" value="1000" name="minPrice" hidden />
               <input type="number" value="5000" name="maxPrice" hidden />
@@ -281,7 +282,7 @@
                 value="₹1,000 - ₹5,000"
               />
             </form>
-            <form action="/userFliterByPrice" method="post">
+            <form action="/userFliterByPrice?minPrice=5000?maxPrice=10000" method="get">
               <input type="text" value="" hidden />
               <input type="number" value="5000" name="minPrice" hidden />
               <input type="number" value="10000" name="maxPrice" hidden />
@@ -291,17 +292,17 @@
                 value="₹5,000 - ₹10,000"
               />
             </form>
-            <form action="/userFliterByPrice" method="post">
+            <form action="/userFliterByPrice?minPrice=10000?maxPrice=50000" method="get">
               <input type="text" value="" hidden />
               <input type="number" value="10000" name="minPrice" hidden />
-              <input type="number" value="20000" name="maxPrice" hidden />
+              <input type="number" value="50000" name="maxPrice" hidden />
               <input
                 class="bg-transparent border-0"
                 type="submit"
-                value="₹10,000 - ₹20,000"
+                value="₹10,000 - ₹50,000"
               />
             </form>
-            <form action="/userFliterByPrice" method="post">
+            <form action="/userFliterByPrice" method="get">
               <input type="text" value="" hidden />
               <input type="number" value="20000" name="minPrice" hidden />
               <input
@@ -310,7 +311,7 @@
                 value="Over ₹20,000"
               />
             </form>
-            <form action="/userFliterByPrice" method="post">
+            <!-- <form action="/userFliterByPrice" method="get">
               <input type="text" value="" hidden />
               <input
                 type="number"
@@ -327,7 +328,7 @@
                 required
               />
               <button type="submit">Go</button>
-            </form>
+            </form> -->
           </div>
           <div class="fliterSubHead2">
             <h2>Customer Ratings</h2>
@@ -377,16 +378,17 @@
             </div>
             <div class="fliterSubHead">
               <h2>PRICE</h2>
-              <form action="/userFliter" method="post">
+              <form action="/userFliterByPrice?minPrice=500?maxPrice=1000" method="get">
                 <input type="text" value="" hidden />
+                <input type="number" value="500" name="minPrice" hidden />
                 <input type="number" value="1000" name="maxPrice" hidden />
                 <input
                   class="bg-transparent border-0"
                   type="submit"
-                  value="Under ₹1,000"
+                  value="₹500 -  ₹1,000"
                 />
               </form>
-              <form action="/userFliterByPrice" method="post">
+              <form action="/userFliterByPrice?minPrice=1000?maxPrice=5000" method="get">
                 <input type="text" value="" hidden />
                 <input type="number" value="1000" name="minPrice" hidden />
                 <input type="number" value="5000" name="maxPrice" hidden />
@@ -396,7 +398,7 @@
                   value="₹1,000 - ₹5,000"
                 />
               </form>
-              <form action="/userFliterByPrice" method="post">
+              <form action="/userFliterByPrice?minPrice=5000?maxPrice=10000" method="get">
                 <input type="text" value="" hidden />
                 <input type="number" value="5000" name="minPrice" hidden />
                 <input type="number" value="10000" name="maxPrice" hidden />
@@ -406,17 +408,17 @@
                   value="₹5,000 - ₹10,000"
                 />
               </form>
-              <form action="/userFliterByPrice" method="post">
+              <form action="/userFliterByPrice?minPrice=10000?maxPrice=50000" method="get">
                 <input type="text" value="" hidden />
                 <input type="number" value="10000" name="minPrice" hidden />
-                <input type="number" value="20000" name="maxPrice" hidden />
+                <input type="number" value="50000" name="maxPrice" hidden />
                 <input
                   class="bg-transparent border-0"
                   type="submit"
-                  value="₹10,000 - ₹20,000"
+                  value="₹10,000 - ₹50,000"
                 />
               </form>
-              <form action="/userFliterByPrice" method="post">
+              <!-- <form action="/userFliterByPrice" method="get">
                 <input type="text" value="" hidden />
                 <input type="number" value="20000" name="minPrice" hidden />
                 <input
@@ -424,10 +426,10 @@
                   type="submit"
                   value="Over ₹20,000"
                 />
-              </form>
-              <form action="/userFliterByPrice" method="post">
+              </form> -->
+              <form action="/userFliterByPrice" method="get">
                 <input type="text" value="" hidden />
-                <input
+                <!-- <input
                   type="number"
                   value=""
                   name="minPrice"
@@ -441,7 +443,7 @@
                   placeholder="Max"
                   required
                 />
-                <button type="submit">Go</button>
+                <button type="submit">Go</button> -->
               </form>
             </div>
             <div class="fliterSubHead2">
@@ -490,55 +492,35 @@
 
           <div class="container-fluid">
             <div class="row">
-              <%allProducts.forEach((data)=>{ %>
-              <div class="smallWidth col-6 col-md-4" onclick="window.location.href='/productView?id=<%=data._id%>'">
-               
-                <a>
-                  <div class="shopItems" >
-                 
-                    <div class="mainItem">
-                      <div
-                        class="itemImg itemImgOne d-flex align-items-center position-relative justify-content-center"
-                      >
-                        <!-- <a href="/userWishlist">
-                          <svg
-                            class="position-absolute"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 21"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M10.5844 20.1253L10.4672 20.0175L2.25469 12.391C0.815625 11.055 0 9.18003 0 7.21596V7.06128C0 3.76128 2.34375 0.930027 5.5875 0.311277C7.43437 -0.0449731 9.32344 0.381589 10.8281 1.44096C11.25 1.74096 11.6438 2.08784 12 2.48628C12.1969 2.26128 12.4078 2.05503 12.6328 1.86284C12.8062 1.71284 12.9844 1.57221 13.1719 1.44096C14.6766 0.381589 16.5656 -0.0449731 18.4125 0.306589C21.6562 0.925339 24 3.76128 24 7.06128V7.21596C24 9.18003 23.1844 11.055 21.7453 12.391L13.5328 20.0175L13.4156 20.1253C13.0313 20.4816 12.525 20.6832 12 20.6832C11.475 20.6832 10.9688 20.4863 10.5844 20.1253ZM11.2078 4.97534C11.1891 4.96128 11.175 4.94253 11.1609 4.92378L10.3266 3.98628L10.3219 3.98159C9.23906 2.76753 7.60312 2.2144 6.00937 2.51909C3.825 2.93628 2.25 4.8394 2.25 7.06128V7.21596C2.25 8.5519 2.80781 9.83159 3.7875 10.741L12 18.3675L20.2125 10.741C21.1922 9.83159 21.75 8.5519 21.75 7.21596V7.06128C21.75 4.84409 20.175 2.93628 17.9953 2.51909C16.4016 2.2144 14.7609 2.77221 13.6828 3.98159C13.6828 3.98159 13.6828 3.98159 13.6781 3.98628C13.6734 3.99096 13.6781 3.98628 13.6734 3.99096L12.8391 4.92846C12.825 4.94721 12.8062 4.96128 12.7922 4.98003C12.5812 5.19096 12.2953 5.30815 12 5.30815C11.7047 5.30815 11.4188 5.19096 11.2078 4.98003V4.97534Z"
-                              fill="black"
-                            />
-                          </svg>
-                        </a> -->
-                       
-                        <img src="/images/products/<%=data.image[0]%>" alt="" />
-                    
-                      </div>
-                      <div class="itemDescription text-center">
-                        <h2><%=data.productName%></h2>
-                        <p><%=data.description%></p>
-                        <div
-                          class="price d-flex align-items-baseline justify-content-center"
-                        >
-                          <p class="p-0 m-0">₹<%=data.price%></p>
-                          <p class="p-0 m-0">₹<%=data.MRP%></p>
-                        </div>
-                        <div>
-                          <a href="/usersCheckout?id=<%=data._id%>">
-                            <button class="buyBtn">BUY NOW</button>
-                          </a>
-                        </div>
-                      </div>
+              <% if (allProducts) { %>
+                <% allProducts.forEach((data) => { %>
+                    <div class="smallWidth col-6 col-md-4" onclick="window.location.href='/productView?id=<%= data._id %>'">
+                        <a>
+                            <div class="shopItems">
+                                <div class="mainItem">
+                                    <div class="itemImg itemImgOne d-flex align-items-center position-relative justify-content-center">
+                                        <img src="/images/products/<%= data.image[0] %>" alt="" />
+                                    </div>
+                                    <div class="itemDescription text-center">
+                                        <h2><%= data.productName %></h2>
+                                        <p><%= data.description %></p>
+                                        <div class="price d-flex align-items-baseline justify-content-center">
+                                            <p class="p-0 m-0">₹<%= data.price %></p>
+                                            <p class="p-0 m-0">₹<%= data.MRP %></p>
+                                        </div>
+                                        <div>
+                                            <a href="/usersCheckout?id=<%= data._id %>">
+                                                <button class="buyBtn">BUY NOW</button>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                  </div>
-                </a>
-              </div>
-              <% }) %>
+                <% }); %>
+            <% } %>
+            
             </div>
          
           </div>

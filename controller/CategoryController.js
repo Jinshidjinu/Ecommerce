@@ -68,22 +68,22 @@ module.exports = {
             res.status(500).json({success:false,message:"something  wrong!"})
           }
      },
-     categoriesGET:async(req,res)=>{
-      try {
+     
+        categoriesfilteringGET: async (req, res) => {
+            try {
+                const category = req.params.category;
+                console.log(category);
+                const categoryDetails = await productModel.find({ category: category });
+                res.render('UserSide/showAllproducts', { allProducts: categoryDetails });
+                // Pass allProducts instead of categoryDetails
+            } catch (error) {
+                console.log(error);
+            }
+        }
         
-      const category = req.params.category
-      console.log(category);
-      const categoryDetails = await productModel.find({category:category})
-   
-      res.render('UserSide/singleProduct',{categoryDetails})
-        
-      } catch (error) {
-        console.log(error);
-        
-      }
      
 
 
-     },
+     ,
      
 }  

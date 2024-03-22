@@ -39,7 +39,7 @@ router.get('/userhome',userController.loadUserHomeGET)
 router.get('/productView',userController.productViewGET)
 
 // category filtering
-router.get('/categories/:category',categoryController.categoriesGET)
+router.get('/categories/:category',categoryController.categoriesfilteringGET)
 
 // show all products
 router.get('/showAllproducts',productController.showAllproductsGET)
@@ -84,6 +84,11 @@ router.patch('/cancelledOrder',paymentController.OrdersCancelPATCH)
 
 router.get('/review',productController.productReviewGET)
 router.post('/review',productController.productReviewPOST)
+
+//product price filtering 
+
+router.get('/userFliterByPrice',productController.filterByPriceGET)
+
 
 
 

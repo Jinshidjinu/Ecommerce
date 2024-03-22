@@ -35,11 +35,12 @@ module.exports={
                 return res.status(230).json({message:"please provide a image",success:false})
             }
             const productImage = req.files.map(file=>file.filename)
-                    const { productName, prices, discount, stock, category, subCategory, deliveryDate, description, color, size } = req.body;
+                    const { productName, price, discount, stock, category, subCategory, deliveryDate, description, color, size } = req.body;
+                    const MRP=discount
                     const newschema = new productModel({
                         productName,    
-                        prices,
-                        discount,
+                        price,
+                        MRP,
                         stock,
                         category,
                         subCategory,
@@ -58,7 +59,6 @@ module.exports={
                 
         },
 
-
         editproductGET:async (req,res)=>{
             let proid = req.params.productID
             let getproducts = await  productModel.findByIdAndUpdate({_id:proid})
@@ -76,9 +76,10 @@ module.exports={
                       
                   productName:editProductData.productName,
                   stock :editProductData.stock,
-                  prices:editProductData.prices,
+                  price:editProductData.price,
                   category:editProductData.category,
                   deliveryDate:editProductData.deliveryDate,
+                  description:editProductData.description,
                   image:productImage
 
                 }
@@ -89,7 +90,6 @@ module.exports={
             }
         },
              
-
          blockproductsPATCH: async (req,res)=>{
           let block = false;
            try{
@@ -121,15 +121,11 @@ module.exports={
              
          },
 
-
          showAllproductsGET:async(req,res)=>{
            try {
              let allProducts;
-  
             const Name = req.query.search?.toString()  || ''
-  
             allProducts = await productModel.find(
-
               {productName:{$regex:Name,$options:"i"},}
 
             )
@@ -142,32 +138,21 @@ module.exports={
 
          },
          
-      
 
          adminOrderListGET:async(req,res)=>{
-
           try {
-            
             const ordersData = await OrderModel.find({}).sort({createAt:-1}).populate('products.id')
             res.render('AdminSide/OrdersList',{ordersData})
-          
-
           } catch (error) {
             console.log(error);
             
           }
-
-
-
-
          },
 
          statusUpdatePOST:async(req,res)=>{
           try {
             const id = req.body.Id;
             const selectOption = req.body.Status;
-
-        
             const orderData = await OrderModel.findOne({ _id: id })
             
             if (!orderData) {
@@ -191,8 +176,6 @@ module.exports={
             console.log(error);
           
          }
-
-
          },
 
          productReviewGET:async(req,res)=>{
@@ -207,14 +190,10 @@ module.exports={
           console.log(error);
       
         }
-          
-      
-    
          },
 
          productReviewPOST:async(req,res)=>{
            try {
-            
             const userID = req.session.email._id
             const productId = req.query.id
             const {description} = req.body
@@ -228,8 +207,7 @@ module.exports={
                 review:[{UserId:userID,comment:description}]
               
               })
-              await newReview.save()
-                       
+              await newReview.save()         
               res.redirect('/ordersummary')
               
             }else{
@@ -243,16 +221,31 @@ module.exports={
 
             }
 
-
-            
            } catch (error) {
+
             console.log(error);
             
            }
-           
+         },
 
+         filterByPriceGET:async(req,res)=>{
+          try {
+            const MinimumPrice = req.query.minPrice
+            console.log(MinimumPrice);
+            const MaximumPrice = req.query.maxPrice
+            console.log(MaximumPrice);
+            const  allProducts = await productModel.find({
+               
+              price:{$gte:MinimumPrice,$lte:MaximumPrice},
+              // deleted:false
+               
+            })  
+          
+            res.render('UserSide/showAllproducts',{allProducts})
+          } catch (error) {
+            console.log(error);
+            
+          }
          }
-
-
 
 }
