@@ -246,6 +246,22 @@ module.exports={
             console.log(error);
             
           }
+         },
+
+         LowTohighAndHighToLowGET:async(req,res)=>{
+           try {
+
+            const sortValue = JSON.parse(req.query.sort)
+            const allProducts = await productModel.find().sort({price:sortValue})
+            res.render('UserSide/showAllproducts',{allProducts})
+            
+           } catch (error) {
+            console.log(error);
+            
+           }
+          
+
          }
+
 
 }

@@ -85,9 +85,9 @@ router.patch('/cancelledOrder',paymentController.OrdersCancelPATCH)
 router.get('/review',productController.productReviewGET)
 router.post('/review',productController.productReviewPOST)
 
-//product price filtering 
-
+//product price filtering  and SORT BY
 router.get('/userFliterByPrice',productController.filterByPriceGET)
+router.get('/userSortingByPrice',productController.LowTohighAndHighToLowGET)
 
 
 

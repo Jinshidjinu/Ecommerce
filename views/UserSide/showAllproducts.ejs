@@ -358,11 +358,11 @@
               <h2>SORT BY</h2>
             </div>
             <div class="sortOptions">
-              <form action="/userFilterByRateing" method="post">
+              <form action="/userSortingByPrice?sort=1" method="get">
                 <input type="number" value="1" name="sort" hidden />
                 <input type="submit" value="Price -- Low to High" />
               </form>
-              <form action="/userFilterByRateing" method="post">
+              <form action="/userSortingByPrice?sort=1" method="get">
                 <input type="number" value="-1" name="sort" hidden />
                 <input type="submit" value="Price -- High to Low" />
               </form>
@@ -475,11 +475,11 @@
                 <h2>SORT BY</h2>
               </div>
               <div class="sortOptions">
-                <form action="/userFilterByRateing" method="post">
+                <form action="/userSortingByPrice?sort=1" method="get">
                   <input type="number" value="1" name="sort" hidden />
                   <input type="submit" value="Price -- Low to High" />
                 </form>
-                <form action="/userFilterByRateing" method="post">
+                <form action="/userSortingByPrice?sort=-1" method="get">
                   <input type="number" value="-1" name="sort" hidden />
                   <input type="submit" value="Price -- High to Low" />
                 </form>
