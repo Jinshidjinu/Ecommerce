@@ -236,28 +236,34 @@
               </div>
 
               <%userOrders?.products.forEach((data)=>{ %>
-
-             
               <div class="d-flex ODhead gap-3 justify-content-between align-items-center">
                 <div>
                   <h2 class="m-0 p-0 text-capitalize"><%=data.id.productName%></h2>
                   <p class="m-0 p-0 text-capitalize">Black</p>
                   <div class="d-flex align-items-baseline price gap-2 mt-2">
-                    <p>₹704</p>
-                    <p>57% OFF</p>
-                
+                    <% let productprice = data.id.price * data.quantity %>
+                    <p>₹<%=productprice %></p>
+                    <% let percentage = Math.round(( data.id.MRP - data.id.price )/data.id.MRP *100) %>
+                    <p><%=percentage%> % OFF</p>
                   </div>
                   <p>qty:<%=data.quantity%></p>
-
-                  <a href="/review?id=<%=data.id._id%>">
-                    <button class="reviewBtn">Review</button>
-                  </a>
+                  
+                 
+                   
+                        <% if (userOrders.Status === 'delivered') { %>
+                            <a href="/review?id=<%= userOrders._id %>">
+                                <button class="reviewBtn">Review</button>
+                            </a>
+                        <% } %>
+                
+               
+                
+                
                 </div>
                 <div class="imgOrder">
                   <img src="/images/products/<%=data.id.image[0]%>" alt="">
                 </div>
               </div>
-
               <% }) %>
 
               <div class="ODhead pt-4 pb-4">

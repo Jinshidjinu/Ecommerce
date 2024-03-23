@@ -265,10 +265,8 @@ module.exports = {
      if (existProduct !== undefined) {
       existingProduct = true; 
     }
-}
-       
+      }
         res.render('UserSide/productDetails',{productShow,existingProduct,ProductReview})
-
       }catch(error){
         console.log(error);
       }
@@ -278,21 +276,13 @@ module.exports = {
 
     userProfileGET : async(req,res)=>{
        try{
-
         const userID = req.session.email._id
-        console.log(userID);
-
         const findAccount = await customer.findOne({_id:userID})
-        
         const addressdetails =  await AddressSchema.findOne({user:userID})
-        
-        
         res.render('UserSide/Userprofile',{findAccount,addressdetails})
 
        }catch(error){
-         
        console.log(error);
-
        }
 
 
@@ -300,11 +290,7 @@ module.exports = {
     editProfileGET : async(req,res)=>{
        try {
         const userID = req.session.email._id
-        console.log(userID);
-
         const findAccount = await customer.findOne({_id:userID})
-        console.log(findAccount);
-
         res.render('userSide/userEdit',{findAccount})
        } catch (error) {
         console.log(error);

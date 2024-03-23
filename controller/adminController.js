@@ -1,92 +1,53 @@
 
 const adminschema=require('../models/adminlog')
 const customer=require('../models/customer')
+const userModel = require('../models/customer')
+const OrderModel = require('../models/Orders')
 const bcrypt = require('bcrypt')
-require('dotenv').config()
-Adminkey=process.env.ADMINKEY
+const productModel = require('../models/products')
+const dotenv = require('dotenv').config()
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const Admin = {
     email :process.env.AdminMail,
     password : process.env.Password
 }
-console.log(Admin.email);
+
 module.exports={
 
 
-    adminloginGET:(req,res)=>{
+    adminloginGET:async(req,res)=>{
+
+    
         res.render('AdminSide/adminlogin')
     },
     adminloginPOST:async(req,res)=>{
-          console.log(req.body);
+
+        const Users = await customer.find()
+        const Orders = await OrderModel.find()
+        
        if(Admin.email == req.body.email && Admin.password == req.body.password){
-          console.log('bai');
-           res.render('AdminSide/dashboard')
+           res.render('AdminSide/dashboard',{Users,Orders})
 
        }
-
-        // try{
-        //     const checking= await adminschema.findOne(({email:req.body.email}))
-  
-        //     if(!checking){
-        //       res.send("email  not found")
-        //     }else{
-        //        const passwordmatch= await bcrypt.compare(req.body.password,checking.password)
-        //        if(passwordmatch){
-        //           res.render("dashboard")
-        //        }else{
-        //           res.send("wrong password")
-        //        }
-        //     }
-        //  }catch{
-        //      res.send("wrong details")
-        //  }
     },
-
-    adminsignupGET:(req,res)=>{
-        res.render('AdminSide/adminsignup')
-    },
-    adminsignupPOST: async (req,res)=>{
-
-        const{name,email,phone,adminkey,password,confirmPassword}=req.body
-        console.log(req.body)
-        try{
-            const datas={
-                 name,
-                 email,
-                 phone,
-                 adminkey,
-                 password,
-                 confirmPassword
-            }
-            adminsignup = await adminschema.insertMany(datas)
 
    
-            if(!emailRegex.test(email)){
-              return res.status(400).send('invalid password')
-
-            }else{
-                                 
-           // hash the password using bcrypt          
-           const saltRounds=10; // number of salt round for bcrypt
-           const hashedPassword = await bcrypt.hash(datas.password, saltRounds)
-           datas.password = hashedPassword 
-           signupData= await adminschema.insertMany(datas)
-               console.log(signupData);
-            }
-            
-            res.redirect('/admin/adminlogin')
-               
-        }catch{
-
-            console.log("error signupPOST",err.message);
-
-        }
-    },
     
 // admin dashboard 
 
-    dashboardGET:(req,res)=>{
-        res.render('AdminSide/dashboard')
+    dashboardGET:async(req,res)=>{
+        try {
+            
+      
+       const Users = await userModel.find();
+       const Orders = await OrderModel.find()
+       const products = await productModel.find()
+       res.render('AdminSide/dashboard',{Users,Orders,products})
+
+        } catch (error) {
+            console.log(error);
+            
+        }
 
     },
     dashboardPOST:(req,res)=>{

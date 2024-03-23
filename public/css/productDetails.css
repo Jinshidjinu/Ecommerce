@@ -411,6 +411,16 @@ a{
     line-height: normal;
     margin-top: 0.5rem;
 }
+.productSize{
+   
+    background-color: rgb(190, 185, 185);
+    border-radius: 5px;
+    color: rgb(58, 36, 36);
+    border: none;
+    
+
+
+}
 .btnBuy button{
     border: transparent;
     outline: transparent;

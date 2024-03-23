@@ -199,9 +199,7 @@ module.exports={
             const {description} = req.body
              
             const review = await reviewModel.findOne({productID:productId})
-
             if (!review) {
-
               const newReview = new reviewModel({
                 productID:productId,
                 review:[{UserId:userID,comment:description}]
@@ -231,9 +229,7 @@ module.exports={
          filterByPriceGET:async(req,res)=>{
           try {
             const MinimumPrice = req.query.minPrice
-            console.log(MinimumPrice);
             const MaximumPrice = req.query.maxPrice
-            console.log(MaximumPrice);
             const  allProducts = await productModel.find({
                
               price:{$gte:MinimumPrice,$lte:MaximumPrice},

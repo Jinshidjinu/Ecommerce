@@ -295,7 +295,8 @@
                             <p class="lPrice<%=data.id._id%>">₹<%=productPrice %></p>
                             <% let productdiscount = data.id.MRP * data.quantity  %>
                             <p class="fPrice<%=data.id._id%>">₹<%=productdiscount %></p>
-                            <p>71% OFF</p>
+                            <% let percentage =  Math.round((data.id.MRP - data.id.price)/data.id.MRP * 100) %>
+                            <p><%=percentage%>% OFF</p>
                           </div>
                         </div>
                       </div>
@@ -926,6 +927,7 @@ const fPrice = document.querySelectorAll(".fPrice");
 const sTotal = document.querySelector("#sTotal");
 const dPrice = document.querySelector("#dPrice");
 const tPrice = document.querySelector("#tPrice");
+             
 // increment the quantity
 async function inc(id, price, stock,discount) {
   const qty = document.querySelector(`.qtyOne${id}`);
@@ -935,7 +937,9 @@ async function inc(id, price, stock,discount) {
   qty.innerHTML = +qty.innerHTML + 1;
   const newprice = qty.innerHTML * price;
   const newdiscount = qty.innerHTML * discount;
-  console.log(newdiscount);
+  const discountAmount = Number(discount)-Number(price)
+  const discountPercentage = Math.round(Number(discountAmount) / Number(discount) * 100)
+  document.getElementById('percentage').innerHTML=discountPercentage +'% OFF'
   const qtyval = parseInt(qty.innerHTML);
   const stockval = parseInt(stock);
   const response = await axios.post("/quantity", {
@@ -944,7 +948,8 @@ async function inc(id, price, stock,discount) {
   });
   
   lPrice.innerHTML = `₹${newprice}`;
-  fPrice.innerHTML = `₹${newdiscount}`;
+  fPrice.innerHTML = `₹${newdiscount}`
+
   const total1 = total(price);
   const totaldis = total(discount)
   fPrice.innerHTML = `₹${totaldis}`;
@@ -987,13 +992,13 @@ async function dec(id, price, stock,discount) {
     const response = await axios.post("/quantity", {
       productid: id,
       qty: qtyval,
+
     });
    
     if (qtyval <= stockval) {
       lPrice.classList.remove("red");
       lPrice.innerHTML = `₹${newprice}`;
   
-     
     } else {
       lPrice.classList.add("red");
       lPrice.innerHTML = "out of stock";

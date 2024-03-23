@@ -81,21 +81,12 @@ router.get('/ordersummary',paymentController.orderSummaryGET)
 router.patch('/cancelledOrder',paymentController.OrdersCancelPATCH)
 
 //product review
-
 router.get('/review',productController.productReviewGET)
 router.post('/review',productController.productReviewPOST)
 
 //product price filtering  and SORT BY
 router.get('/userFliterByPrice',productController.filterByPriceGET)
 router.get('/userSortingByPrice',productController.LowTohighAndHighToLowGET)
-
-
-
-
-
-
-
-
 
 
 module.exports=router

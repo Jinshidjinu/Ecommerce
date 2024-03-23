@@ -7,7 +7,8 @@
     const bannerController =require('../controller/BannerController')
     const couponController = require('../controller/CouponController')
     const utility = require('../utility/multer')
-const userController = require('../controller/userController')
+    const userController = require('../controller/userController')
+    const chartController = require('../controller/chartController')
     
     const uploadProducts = utility.productimg()
     const uploadBanner  = utility.bannerimg()
@@ -15,9 +16,7 @@ const userController = require('../controller/userController')
     router.get('/adminlogin',adminController.adminloginGET)
     router.post('/adminlogin',adminController.adminloginPOST)
 
-    router.get('/signup',adminController.adminsignupGET)
-    router.post('/signup',adminController.adminsignupPOST)
-    
+    // dashboard  
     router.get('/dashboard',adminController.dashboardGET)
     // router.post('/dashboard',adminController.dashboardPOST)
 
@@ -67,6 +66,8 @@ const userController = require('../controller/userController')
    router.get('/orderlist',productController.adminOrderListGET)
    router.post('/updateStatus',productController.statusUpdatePOST)
 
+  //chart in dashboard
 
+  router.get('/chart',chartController.chartGET)
 
     module.exports=router

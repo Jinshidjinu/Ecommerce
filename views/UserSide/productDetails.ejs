@@ -326,7 +326,7 @@
               <p class="pDescription">
                 <%=productShow.description%>
               </p>
-              <p class="colorPallet"> <%=productShow.color%></p>
+              <p class="colorPallet"> <%=productShow.size%> </p>
               <div class="rating d-flex">
                 <p class="ratedStar">★</p>
                 <p class="ratedStar">★</p>
@@ -373,11 +373,7 @@
 
               <div class="content">
                 <% if(ProductReview){ %>
-
-               
                 <%ProductReview.review.forEach(data =>{ %>
-
-
          
                 <div class="userReview">
                   <h2> Product Rating</h2>
@@ -398,7 +394,6 @@
                   </p>
                 </div>
                 <% })%>
-             
                 <% } %>
               </div>
             </div>

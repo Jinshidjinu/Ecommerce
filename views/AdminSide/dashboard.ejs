@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.7.1.slim.js"></script>
+
 </head>
 
 <body>
@@ -58,20 +59,22 @@
 
         <h3 class="i-name">Dashboard</h3>
         <div class="values">
-            <div class="val-box">
-                <i class="fa-solid fa-users"></i>
-                <div>
-                    <h3>8,267</h3>
+          
+                <div class="val-box">
+                    <i class="fa-solid fa-users"></i>
+                    <div>
+                        <h3><h3><%=Users.length %></h3>
+                    </h3>
                     <span>New Users</span>
                 </div>
             </div>
-
+       
 
 
             <div class="val-box">
                 <i class="fa-solid fa-cart-shopping"></i>
                 <div>
-                    <h3>200,521</h3>
+                    <h3><%=Orders.length%></h3>
                     <span>Total Orders</span>
                 </div>
             </div>
@@ -81,8 +84,8 @@
             <div class="val-box">
                 <i class="fa-regular fa-circle-check"></i>
                 <div>
-                    <h3>215,542</h3>
-                    <span>Products Sold</span>
+                    <h3><%=products.length%>    </h3>
+                    <span>Total Products</span>
                 </div>
             </div>
 
@@ -98,14 +101,18 @@
         </div>
         
 
+        <div style="width: 500px; height: 500px; display: flex;gap: 150px;   margin-top: 70px;">
+            <canvas id="Chart"></canvas>
+            <canvas id="ChartOrders"></canvas>
+        </div>
+       
+
 
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
-    <script>
-        $('#menu-btn').click(function() {
-           $('#menu').toggleClass('active')
-        })
-    </script>
+    <script src="/js/Chart.js"></script>
+    
 </body>
-
 </html>

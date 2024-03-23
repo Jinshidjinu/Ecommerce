@@ -25,6 +25,9 @@ module.exports={
                 return (acc += index.id.price * index.quantity);
             }, 0);
 
+            // const discountAmount = Number()-Number(price)
+            // const discountPercentage = Math.round(Number(discountAmount) / Number(discount) * 100)
+
             res.render('UserSide/cart', { productview, subtotal, discountTotal });
         } else {
             // Handle the case where productview or productview.productID is null or undefined

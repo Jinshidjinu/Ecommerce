@@ -936,16 +936,12 @@
     <!-- end of footer -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-  
-async function applyCoupon(event,totalAmt){
+  async function applyCoupon(event,totalAmt){
    event.preventDefault()
    
    try {
-
     const CouponName = document.querySelector('.couponName').value;
-    
     const discount = document.getElementById('cDPrice')
-
     const response = await axios.post('/applyCoupon',{
       couponCode:CouponName,
       Amount :totalAmt
@@ -994,14 +990,10 @@ async function applyCoupon(event,totalAmt){
         })
       
        const result = response.data
-       console.log(result);
        if(result.COD == true){
         window.location.href ='/orderConfirm'
        }else{
-         
         const RazorpayOrder = result.razorpayOrder
-        console.log(RazorpayOrder);
-        
         const options = {
           key:'rzp_test_rtBq042RJdPlvA',
           amount:RazorpayOrder.amount,
@@ -1018,7 +1010,6 @@ async function applyCoupon(event,totalAmt){
              }
           }
         }
-
         var rzp1 = new Razorpay(options);
         rzp1.open();
 
