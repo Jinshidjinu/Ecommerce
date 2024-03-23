@@ -73,8 +73,7 @@ module.exports = {
         email,
         confirmPassword,
       };
-  
-  
+      
       //    check if the email already exists in the database
       const existingUser = await customer.findOne({ email: data.email });
       if (existingUser) {
@@ -197,6 +196,7 @@ module.exports = {
     const email = req.params.mail;
     res.render("UserSide/forgotSendOTP", { email });
   },
+
   forgotOTPverifyPOST: async (req, res) => {
     const email = req.params.mail;
     const otp = req.body.otp;
@@ -254,7 +254,7 @@ module.exports = {
     productViewGET:async(req,res)=>{
       try{
         const userID = req.session.email?._id
-        const viewID = req.query.id     
+        const viewID = req.query.id
         let existingProduct = false;
         const productShow = await products.findOne({_id:viewID})
         const wishlist  = await wishlistSchema.findOne({userID:userID})
@@ -273,7 +273,6 @@ module.exports = {
     },
 
    
-
     userProfileGET : async(req,res)=>{
        try{
         const userID = req.session.email._id
@@ -298,8 +297,6 @@ module.exports = {
     
 
     },
-
-
 };
 
 

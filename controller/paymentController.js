@@ -305,6 +305,7 @@ var instance = new Razorpay({
       try {
         const userId = req.session.email._id
         const id = new mongoose.Types.ObjectId(req.query.id)
+        console.log(id);
         const userOrders = await OrderModel.findOne({_id:id}).populate('products.id')
         const userDetails =await customerModel.findOne({_id:userId})
         

@@ -317,6 +317,14 @@ a {
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: 300;
 }
+.statusOrder{
+
+  color: green;
+
+}
+.shipped{
+  color: blue;
+}
 .cancellProduct{
   padding: 0.8rem;
   border: 1px solid red !important;

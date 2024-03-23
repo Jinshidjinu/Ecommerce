@@ -183,30 +183,30 @@ module.exports={
          try {
 
           const Id = req.query.id
-          const productData = await productModel.findOne({_id:Id})
+          const productData = await OrderModel.findOne({_id:Id})
+          console.log(productData.products[0],'kii');
           res.render('UserSide/productReview',{productData})
       
         } catch (error) {
-          console.log(error);
+          console.log(error)
       
         }
          },
 
-         productReviewPOST:async(req,res)=>{
-           try {
-            const userID = req.session.email._id
-            const productId = req.query.id
-            const {description} = req.body
-             
-            const review = await reviewModel.findOne({productID:productId})
+         productReviewPOST: async (req, res) => {
+          try {
+            const userID = req.session.email._id;
+            const productId = req.query.id;
+            const { description } = req.body;
+        
+            const review = await reviewModel.findOne({ productID: productId });
             if (!review) {
               const newReview = new reviewModel({
-                productID:productId,
-                review:[{UserId:userID,comment:description}]
-              
-              })
-              await newReview.save()         
-              res.redirect('/ordersummary')
+                productID: productId,
+                review: [{ UserId: userID, comment: description }]
+              });
+              await newReview.save();
+              res.redirect('/ordersummary');
               
             }else{
              

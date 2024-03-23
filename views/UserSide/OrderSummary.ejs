@@ -80,19 +80,19 @@
                     <a href="/"> Home </a>
                   </li>
                   <li>
-                    <a href="/earbuds"> Earbuds </a>
+                    <a href="/categories/Men"> Men </a>
                   </li>
                   <li>
-                    <a href="/earphones"> Earphones </a>
+                    <a href="/categories/Womens"> Womens</a>
                   </li>
                   <li>
-                    <a href="/speakers"> Speakers </a>
+                    <a href="/categories/Kids"> Kids </a>
                   </li>
                   <li>
-                    <a href="/soundbars"> Soundbars </a>
+                    <a href="/categories/mobile"> Electronics </a>
                   </li>
                   <li>
-                    <a href="/smartWatch"> Smart Watch </a>
+                    <a href="/categories/watches"> Watchs </a>
                   </li>
                   <li>
                     <a href="/"> Shop By Category </a>
@@ -104,19 +104,19 @@
                 <h2>Shop By Category</h2>
                 <ul class="m-0 list-unstyled">
                   <li>
-                    <a href="/earbuds"> Earbuds </a>
+                    <a href="/categories/Men"> Men </a>
                   </li>
                   <li>
-                    <a href="/earphones"> Earphones </a>
+                    <a href="/categories/Womens"> Womens </a>
                   </li>
                   <li>
-                    <a href="/speakers"> Speakers </a>
+                    <a href="/categories/Kids"> Kids </a>
                   </li>
                   <li>
-                    <a href="/soundbars"> Soundbars </a>
+                    <a href="/categories/mobile"> Electronics </a>
                   </li>
                   <li>
-                    <a href="/smartWatch"> Smart Watch </a>
+                    <a href="/categories/watches"> Watches</a>
                   </li>
                 </ul>
               </div>
@@ -250,14 +250,11 @@
                   
                  
                    
-                        <% if (userOrders.Status === 'delivered') { %>
-                            <a href="/review?id=<%= userOrders._id %>">
+                        <% if (userOrders.Status =='delivered') { %>
+                            <a href="/review?id=<%=userOrders._id %>">
                                 <button class="reviewBtn">Review</button>
                             </a>
                         <% } %>
-                
-               
-                
                 
                 </div>
                 <div class="imgOrder">
@@ -265,34 +262,78 @@
                 </div>
               </div>
               <% }) %>
+              <% if(userOrders.Status == 'delivered' ||userOrders.Status == 'pending' || userOrders.Status == 'shipped' ){%>
+                <div class="ODhead pt-4 pb-4">
+                     <div class="d-flex gap-3 align-items-center">
+                       <p class="dot done"></p>
+                   
+                       <p id="oText">Ordered Confirmed,<%=userOrders.createdAt.toISOString().substring(0, 10)%></p>
+                     </div>
+                     <div class="lineParent position-relative">
+                         <div class="line position-relative doneLine">
+     
+                         </div>
+                     </div>
+     
+                     <div class="d-flex gap-3 align-items-center">
+                       <p class="dot done"></p>
+                       <p id="oText">Shipped</p>
+                     </div>
 
-              <div class="ODhead pt-4 pb-4">
-                <div class="d-flex gap-3 align-items-center">
-                  <p class="dot done"></p>
-                  <p id="oText">Ordered Confirmed, Jul 01, 2023</p>
-                </div>
+          
+              <% if(userOrders.Status == 'delivered'){%>
                 <div class="lineParent position-relative">
-                    <div class="line position-relative doneLine">
-
+                    <div class="line position-relative doneLine" >
                     </div>
                 </div>
-                <div class="d-flex gap-3 align-items-center">
-                  <p class="dot done"></p>
-                  <p id="oText">Shipped</p>
-                </div>
-                <div class="lineParent position-relative">
-                    <div class="line position-relative doneLine">
-
-                    </div>
-                </div>
-                <div class="d-flex gap-3 align-items-center">
-                  <p class="dot done"></p>
+                <div class="d-flex gap-3 align-items-center" >
+                  <p class="dot done" ></p>
                   <p id="oText">Delivered</p>
                 </div>
-              </div>
-              <div class="ODhead sDetails">
+                
+                <%} else{ %>
+                  <div class="lineParent position-relative">
+                      <div class="line position-relative doneLine" style="background-color:rgb(184,180,180) ;">
+                      </div>
+                  </div>
+                  <div class="d-flex gap-3 align-items-center" >
+                    <p class="dot done" style="background-color: rgb(184,180,180);"></p>
+                    <p id="oText">Delivered</p>
+                  </div>
+
+               <%}%>
+               <%}%>  
+             
+              <% if(userOrders.Status == 'cancelled'){%>
+                <div class="ODhead pt-4 pb-4">
+                  <div class="d-flex gap-3 align-items-center">
+                    <p class="dot done" style="background-color: red;"></p>
+                    <p id="oText">Ordered Confirmed,</p>
+                  </div>
+                  <div class="lineParent position-relative">
+                      <div class="line position-relative doneLine" style="background-color: red;">
+                      </div>
+                  </div>
+
+                  <div class="d-flex gap-3 align-items-center">
+                    <p class="dot done" style="background-color: red;"></p>
+                    <p id="oText">Shipped</p>
+                  </div>
+
+                  <div class="lineParent position-relative">
+                    <div class="line position-relative doneLine" style="background-color: red;">
+                    </div>
+                </div>
+
+                <div class="d-flex gap-3 align-items-center">
+                  <p class="dot done" style="background-color: red;"></p>
+                  <p id="oText">Cancelled</p>
+                </div>
+
                 <p>Shipping Details</p>
               </div>
+            </div>
+              <%}%>
 
              
 

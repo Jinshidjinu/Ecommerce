@@ -222,22 +222,14 @@
                 <div class="d-flex align-items-center gap-2">
                   <div class="text-end">
                     <p class="proHead"></p>
-                    <div class="topRating d-flex align-items-center">
-                      <span class="ratedTop">★</span>
-                      <span class="ratedTop">★</span>
-                      <span class="ratedTop">★</span>
-                      <span class="ratedTop">★</span>
-                      <span>★</span>
-                    </div>
                   </div>
-                  <div class="img">
-                    <% if (productData && productData.image && productData.image.length > 0) { %>
-                      <img src="/images/products/<%= productData.image[0] %>" alt="">
-                    <% } else { %>
-                      <!-- Handle case when image is not available -->
-                    <% } %>
+                  <!-- <div class="img">
+                 
+                      <img src="/images/products/<%=productData.products.id.image%>" alt="">
+               
+                  
                     
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
@@ -260,13 +252,15 @@
               </div>
               <div class="subHead">
                 <h2 class="threeHead">Review this product</h2>
-
-                <form action="/review?id=<%=productData._id%>" method="post">
-                  <textarea class="large-input" name="description" rows="5" placeholder="Type your description here..."></textarea>
-                  <textarea class="large-input small" name="title" rows="5" placeholder="Type your title here...">Perfect product!</textarea>
-                  <button type="submit" class="submitBtn">SUBMIT</button>
-
-                </form>
+            
+                
+                    <form action="/review?id=<%=productData.products[0].id%>" method="post">
+                      <textarea class="large-input" name="description" rows="5" placeholder="Type your description here..."></textarea>
+                      <textarea class="large-input small" name="title" rows="5" placeholder="Type your title here...">Perfect product!</textarea>
+                      <button type="submit" class="submitBtn">SUBMIT</button>
+    
+                    </form>
+            
               </div>
             </div>
           </div>
