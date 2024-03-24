@@ -73,7 +73,7 @@ module.exports = {
         email,
         confirmPassword,
       };
-      
+
       //    check if the email already exists in the database
       const existingUser = await customer.findOne({ email: data.email });
       if (existingUser) {
@@ -160,7 +160,6 @@ module.exports = {
   },
   forgotPOST: async (req, res) => {
     const { email } = req.body;
-
     try {
       var transporter = nodemailer.createTransport({
         service: "gmail",
@@ -242,12 +241,11 @@ module.exports = {
   //UserHome
 
   loadUserHomeGET :async(req,res)=>{
-    if(req.session.email){
+  
       const categoryData = await categorySchema.find() 
       const bannerData = await bannerSchema.find()
       const productData = await products.find({is_blocked:false}).limit(4)  
       res.render('UserSide/userHome',{bannerData,productData,categoryData})
-    }
     },
 
 
@@ -297,6 +295,40 @@ module.exports = {
     
 
     },
+    editProfilePOST: async (req, res) => {
+      try {
+        const userID = req.session.email._id;
+        const findAccount = await customer.findOne({ _id: userID });
+        const { fName, email, phone, oldPass, password, cPass } = req.body;
+    
+        let hashedPassword = findAccount.password; // Initialize with existing password
+    
+        // Check if password is provided for update
+        if (password !== "") {
+          const salt = await bcrypt.genSalt(10);
+          hashedPassword = await bcrypt.hash(password, salt);
+        }
+    
+        // Update user data
+        await customer.updateOne(
+          { _id: findAccount._id },
+          {
+            $set: {
+              fullName: fName,
+              phoneNumber: phone,
+              email: email,
+              password: hashedPassword,
+            },
+          }
+        );
+    
+        // Redirect to user account page after successful update
+        res.status(200).redirect("/userAccount");
+      } catch (error) {
+        console.error("Error occurred during profile update:", error);
+        res.status(500).send("Internal Server Error");
+      }
+    }
 };
 
 

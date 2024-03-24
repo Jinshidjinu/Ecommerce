@@ -28,6 +28,7 @@ var instance = new Razorpay({
 
      checkOutGET :async(req,res)=>{
         try{
+          if (req.session.email) {   
             let totalPrice;
             const userID = req.session.email?._id
             const addressView = await AddressModel.findOne({user:userID})
@@ -69,6 +70,9 @@ var instance = new Razorpay({
             req.session.products = productDatas
           const CouponDetails = [couponData]
             res.render('UserSide/checkout',{addressView,usersData,totalPrice,discount,mrp,CouponDetails})
+          }else{
+            res.redirect('/')
+          }
           
         }catch(error){
         console.log(error)
@@ -78,15 +82,17 @@ var instance = new Razorpay({
 
      ApplyCouponPOST:async(req,res)=>{
         try {
-          
-          const couponCode = req.body.couponCode
-          const amount = req.body.Amount
-          const coupon = await CouponsModel.findOne({CouponCode:couponCode})
-          const newTotal = amount-amount* parseInt(coupon.discount)/ 100
-          const Total = Math.round(newTotal)
-          req.session.totalPrice = Total
-
-          res.status(200).json({success:true,Total,discount:coupon.discount})
+          if (req.session.email) {
+            const couponCode = req.body.couponCode
+            const amount = req.body.Amount
+            const coupon = await CouponsModel.findOne({CouponCode:couponCode})
+            const newTotal = amount-amount* parseInt(coupon.discount)/ 100
+            const Total = Math.round(newTotal)
+            req.session.totalPrice = Total
+            res.status(200).json({success:true,Total,discount:coupon.discount})
+          }else{
+            res.redirect('/')
+          }
         } catch (error) {
           console.log(error);
           
@@ -96,78 +102,82 @@ var instance = new Razorpay({
 
      checkOutPOST:async(req,res)=>{
       try {
-        const {phone,paymentAddress,paymentMethod} = req.body
- 
-        if(paymentMethod == 'COD'){
-        
-            req.session.paymentMethod = paymentMethod
-            req.session.paymentAddress = paymentAddress
-            req.session.totalPrice  
-            const userID = req.session.email._id
-            const userData = await customerModel.findOne({_id:userID})
-            const email = userData.email
-            console.log(email);
- 
-            try {
-              var transporter = nodemailer.createTransport({
-                service: "gmail",
-                auth: {
-                  user: myemail,
-                  pass: Mypassword,
-                },
-              });
-        
-              var mailOptions = {
-                from: myemail,
-                to: `${email}`,
-                subject: "Sending Email using Node.js",
-                text: `Your OTP is : ${otpConfirm}`,
-              };
-        
-              transporter.sendMail(mailOptions, function (error, info) {
-                if (error) {
-                  console.log(error);
-                } else {
-                  console.log("Email sent: " + info.response);
-                  // res.redirect(`${email}`);
-                }
-              });
-        
-             res.status(200).json({success:true ,COD: true })
-           }catch (error) {
-          console.log(error);          
-        }
-        
-      }else{
-     // Handle other payment methods
-        req.session.paymentMethod = paymentMethod;
-        req.session.paymentAddress = paymentAddress;
-        const Totalprice = req.session.totalPrice;
-
-     // Create Razorpay order
-       const options = {
-       amount: Totalprice * 100, // amount in the smallest currency unit
-       currency: "INR",
-     };
-      const razorpayOrder = await instance.orders.create(options);
-      res.status(200).json({success:true, razorpayOrder });
-      }
-                    
+        if (req.session.email) {
+          const {phone,paymentAddress,paymentMethod} = req.body
+  
+          if(paymentMethod == 'COD'){
+          
+              req.session.paymentMethod = paymentMethod
+              req.session.paymentAddress = paymentAddress
+              req.session.totalPrice  
+              const userID = req.session.email._id
+              const userData = await customerModel.findOne({_id:userID})
+              const email = userData.email
+              console.log(email);
+   
+              try {
+                var transporter = nodemailer.createTransport({
+                  service: "gmail",
+                  auth: {
+                    user: myemail,
+                    pass: Mypassword,
+                  },
+                });
+                var mailOptions = {
+                  from: myemail,
+                  to: `${email}`,
+                  subject: "Sending Email using Node.js",
+                  text: `Your OTP is : ${otpConfirm}`,
+                };
+                transporter.sendMail(mailOptions, function (error, info) {
+                  if (error) {
+                    console.log(error);
+                  } else {
+                    console.log("Email sent: " + info.response);
+                    // res.redirect(`${email}`);
+                  }
+                });
+               res.status(200).json({success:true ,COD: true })
+             }catch (error) {
+            console.log(error);          
+          }
+        }else{
+       // Handle other payment methods
+          req.session.paymentMethod = paymentMethod;
+          req.session.paymentAddress = paymentAddress;
+          const Totalprice = req.session.totalPrice;
+  
+       // Create Razorpay order
+         const options = {
+         amount: Totalprice * 100, // amount in the smallest currency unit
+         currency: "INR",
+       };
+        const razorpayOrder = await instance.orders.create(options);
+        res.status(200).json({success:true, razorpayOrder });
+        }  
+        }else{
+          res.redirect('/')
+        }           
       } catch (error) {
        console.log(error.message);
 
       }
-    
-         
+      
      },
      OrderOTPGET:async(req,res)=>{
-
-      res.render('UserSide/OrderOtp')
+      try {
+        if (req.session.email) {
+          res.render('UserSide/OrderOtp')
+        }else{
+          res.redirect('/')
+        }
+      } catch (error) {
+          console.log('order otp erro',error);        
+      }
      },
 
      OrderOTPpost:async(req,res)=>{
         try{
-        
           userID = req.session.email._id
           const {otp} = req.body
        
@@ -288,11 +298,14 @@ var instance = new Razorpay({
  
      userOrdersListGET:async(req,res)=>{
        try {
-             
-          const userID = req.session.email._id
-          const userOrders = await OrderModel.find({userID:userID}).populate('products.id')
-          
-          res.render('UserSide/userOrderpage',{userOrders})
+        if (req.session.email) {
+       const userID = req.session.email._id
+       const userOrders = await OrderModel.find({userID:userID}).populate('products.id') 
+       res.render('UserSide/userOrderpage',{userOrders})
+        }else{
+
+          res.redirect('/')
+        }
 
        } catch (error) {
         console.log(error);
@@ -303,16 +316,21 @@ var instance = new Razorpay({
 
      orderSummaryGET:async(req,res)=>{
       try {
-        const userId = req.session.email._id
-        const id = new mongoose.Types.ObjectId(req.query.id)
-        console.log(id);
-        const userOrders = await OrderModel.findOne({_id:id}).populate('products.id')
-        const userDetails =await customerModel.findOne({_id:userId})
-        
-        console.log(userOrders)
-        console.log(userDetails)
-        
-       res.render('UserSide/OrderSummary',{userOrders,userDetails})
+        if (req.session.email) {
+          const userId = req.session.email._id
+          const id = new mongoose.Types.ObjectId(req.query.id)
+          console.log(id);
+          const userOrders = await OrderModel.findOne({_id:id}).populate('products.id')
+          const userDetails =await customerModel.findOne({_id:userId})
+          
+          console.log(userOrders)
+          console.log(userDetails)
+          
+         res.render('UserSide/OrderSummary',{userOrders,userDetails})
+          
+        }else{
+          res.redirect('/')
+        }
         
       } catch (error) {
         console.log(error);        

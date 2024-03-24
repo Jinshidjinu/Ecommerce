@@ -44,33 +44,33 @@ module.exports={
    addtocartGET: async (req, res) => {
        
       try{
-         const userID = req.session.email._id;
-         if(!userID){
-            return res.status(401).json({error:"Unauthorized",message:'user is not logged in '})
-         }else{
-            const product_ID = req.query.id;
-            const id = new mongoose.Types.ObjectId(product_ID)
-            const cart = await cartSchema.findOne({userID})
-            if(!cart){
-               const cartNew = new cartSchema({userID,productID:[{id,quantity:1}]})
-               await cartNew.save()
-               res.json({success:true,count:1})
-           
+         if (req.session.email) {
+            const userID = req.session.email._id;
+            if(!userID){
+               return res.status(401).json({error:"Unauthorized",message:'user is not logged in '})
             }else{
-               const existingProduct = cart.productID.find(productID => productID.id.equals(id));
-
-               if (existingProduct) {
-                   // If the product is already in the cart, update its quantity
-                   existingProduct.quantity += 1;
-
-               } else {
-                   // If the product is not in the cart, add it as a new entry
-                   cart.productID.push({ id, quantity: 1 });
+               const product_ID = req.query.id;
+               const id = new mongoose.Types.ObjectId(product_ID)
+               const cart = await cartSchema.findOne({userID})
+               if(!cart){
+                  const cartNew = new cartSchema({userID,productID:[{id,quantity:1}]})
+                  await cartNew.save()
+                  res.json({success:true,count:1})
+               }else{
+                  const existingProduct = cart.productID.find(productID => productID.id.equals(id));
+                  if (existingProduct) {
+                      // If the product is already in the cart, update its quantity
+                      existingProduct.quantity += 1;
+                  } else {
+                      // If the product is not in the cart, add it as a new entry
+                      cart.productID.push({ id, quantity: 1 });
+                  }     
+                  await cart.save();
+                  return res.json({ success: true, count: cart.productID.length });
                }
-                    
-               await cart.save();
-               return res.json({ success: true, count: cart.productID.length });
             }
+         }else{
+            res.rediredct('/')
          }
       }catch(error){
         console.log(error);

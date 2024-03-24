@@ -46,7 +46,8 @@ router.get('/showAllproducts',productController.showAllproductsGET)
 
 // users Account 
 router.get("/userAccount",userController.userProfileGET)
-router.get("/editAccount",userController.editProfileGET)
+router.get("/UpdateAccount",userController.editProfileGET)
+router.post("/UpdateAccount",userController.editProfilePOST)
 
 
 // users Address details

@@ -7,9 +7,13 @@ module.exports={
 
 wishlistGET:async(req,res)=>{
    try{
-    const userid = req.session.email?._id
-    const productshow = await wishlistSchema.findOne({userID:userid}).populate('product.id')
-    res.render('UserSide/wishlist',{productshow})
+    if (req.session.email) {
+        const userid = req.session.email?._id
+        const productshow = await wishlistSchema.findOne({userID:userid}).populate('product.id')
+        res.render('UserSide/wishlist',{productshow})
+    }else{
+        res.redirect('/')
+    }
    }catch(error){
    console.log(error);
    }
@@ -48,6 +52,8 @@ addwishlistGET: async (req, res) => {
                 })
                 await wishSchema.save()   
             }   
+        }else{
+            res.redirect('/')
         }
     } catch (error) {
         console.log(error);
@@ -56,16 +62,14 @@ addwishlistGET: async (req, res) => {
 },
 
 wishlistPOST:async(req,res)=>{
-     userID = req.session.email._id
-    const  productid = new mongoose.Types.ObjectId(req.query.id)
-    console.log(productid);
-    try{
-        const findwishlist = await wishlistSchema.updateOne(
-
-            { userID : userID },
-            {$pull: { product: { id:productid } } }
-        );
-        res.json({success:true})
+    try {
+        userID = req.session.email._id
+       const  productid = new mongoose.Types.ObjectId(req.query.id)
+           const findwishlist = await wishlistSchema.updateOne(
+               { userID : userID },
+               {$pull: { product: { id:productid } } }
+           );
+           res.json({success:true})
     }catch(error){
        console.log(error);
        res.status(500).json({ success: false, error: "Server Error" });

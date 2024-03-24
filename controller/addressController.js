@@ -20,17 +20,21 @@ module.exports={
  },
 
  AddaddresuserGET:async(req,res)=>{
-
-    res.render('UserSide/Addaddress')
+      try {
+        if (req.session.email) {
+          res.render('UserSide/Addaddress')  
+        }else{
+          res.redirect('/')
+        }
+      } catch (error) {
+        console.log('add address error',error);
+      }
  },
 
  AddaddresuserPOST : async (req, res) => {
   if (req.session.email) {
-      
       try {
         const userID = new mongoose.Types.ObjectId(req.session.email._id); // Convert the userID to ObjectId
-   
-        
         const datas = {
           Locality: req.body.locality,
           country: req.body.country,
@@ -47,29 +51,39 @@ module.exports={
           { $push: { address: datas } },
           { upsert: true, new: true }
         );
-      
         res.json({ add: true, address: updatedAddresss });
       } catch (err) {
         console.error(err);
         res.status(500).json({ add: false, error: err.message });
       }
+     }else{
+
+    res.redirect('/')
   }
 },
 EditAddressGET: async (req, res) => {
-const addressid = req.params.id
-console.log(addressid);
-  const userId = req.session.email._id
   try {
-    const addressView = await addressSchema.findOne({user:userId});
-    res.render('UserSide/editAddress', { addressView });
+    // Check if session exists
+    if (req.session.email) {
+      const addressid = req.params.id;
+      const userId = req.session.email._id;
+    
+      const addressView = await addressSchema.findOne({ user: userId });
+      res.render('UserSide/editAddress', { addressView });
+    } else {
+      // If session doesn't exist, redirect to home page
+      res.redirect('/');
+    }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(500).send('Internal Server Error');
   }
+  
 },
 
 EditAddressPOST : async (req, res) => {
   try {
+    if (req,session.email) {
       const userID = req.session.email?._id;
       const newAddress = req.body;
       const addressID = req.params.id;
@@ -93,8 +107,12 @@ EditAddressPOST : async (req, res) => {
         }
 
       );
-      console.log(editAddress);
       res.redirect('/address')
+      
+    }else{
+
+      res.redirect('/')
+    }
 
   } catch (error) {
       console.log(error);
@@ -103,29 +121,17 @@ EditAddressPOST : async (req, res) => {
 },
 
 addressDelete:async(req,res)=>{
-
   try{
-    
     const addrID = req.query.id
-    console.log(addrID);
-
     const userID = req.session.email._id
-    console.log(userID);
-
     const result = await addressSchema.updateOne(
       {user:userID},
       {$pull:{address:{_id:addrID}}}
     )
-
     res.json({success:true})
-
-
   }catch(error){
     console.log(error)
     res.status(500).json({ success: false, error: "Server Error" });
-
   }
-
-
 }
 }

@@ -5,21 +5,29 @@ const couponSchema = require('../models/Coupons')
 module.exports={
 
     couponSideGET :async(req,res)=>{
-    
-        const findData = await couponSchema.find()
-        res.render('AdminSide/Coupons',{findData})
+       try {
+        if (req.session.email) {
+          const findData = await couponSchema.find()
+          res.render('AdminSide/Coupons',{findData})
+        }
+       } catch (error) {
+        console.log('coupon load error',error);
+       }
     },
     AddcouponGET:async(req,res)=>{
- 
-        res.render('AdminSide/Addcoupons')
+       try {
+        if (req.session.email) {
+          res.render('AdminSide/Addcoupons')
+        }
+       } catch (error) {
+        console.log('coupon Add error',error);
+       }
     },
     AddcouponPOST:async(req,res)=>{
           try{
-
               const couponData = req.body
               const data = new couponSchema({
-      
-                CouponCode:couponData.couponName,
+                  CouponCode:couponData.couponName,
                   discount:couponData.couponDiscount,
                   minOrderAmount:couponData.minOrderAmount,
                   maxOrderAmount:couponData.maxOrderAmount,
@@ -36,24 +44,24 @@ module.exports={
     },
 
     editCouponGET:async(req,res)=>{
-
-      const editCoupID = req.params.CouponID
-        
-        findEditdata = await couponSchema.findByIdAndUpdate({_id:editCoupID})
-     res.render('AdminSide/editCoupon',{findEditdata})
-
+       try {
+        if (req.session.email) { 
+          const editCoupID = req.params.CouponID  
+          findEditdata = await couponSchema.findByIdAndUpdate({_id:editCoupID})
+           res.render('AdminSide/editCoupon',{findEditdata})
+        }
+       } catch (error) {
+        console.log('edit Coupon error',error);
+       }
     },
 
     editCouponPOST:async(req,res)=>{
         try{
-          
              const id = req.params.CouponID
              console.log(id);
              const editedData = req.body
              console.log(editedData);
-
-         const NewEditData = await couponSchema.findByIdAndUpdate({_id:id},
-            
+         const NewEditData = await couponSchema.findByIdAndUpdate({_id:id},  
             {$set:{
               CouponCode :editedData.couponName,
                 discount:editedData.couponDiscount,
@@ -62,10 +70,8 @@ module.exports={
                 startdate:editedData.startingDate,
                 expiryDate:editedData.endingDate
             }
-
             })
             res.redirect('/admin/coupon')
-
         }catch(error){
           console.log(error);
         }

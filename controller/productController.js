@@ -179,14 +179,14 @@ module.exports={
          },
 
          productReviewGET:async(req,res)=>{
-
          try {
-
-          const Id = req.query.id
-          const productData = await OrderModel.findOne({_id:Id})
-          console.log(productData.products[0],'kii');
-          res.render('UserSide/productReview',{productData})
-      
+          if (req.session.email) {
+            const Id = req.query.id
+            const productData = await OrderModel.findOne({_id:Id})
+            res.render('UserSide/productReview',{productData})
+          }else{
+            res.redirect('/')
+          }
         } catch (error) {
           console.log(error)
       
