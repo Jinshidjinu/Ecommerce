@@ -16,17 +16,15 @@ module.exports={
 
 
     adminloginGET:async(req,res)=>{
-
-    
         res.render('AdminSide/adminlogin')
     },
     adminloginPOST:async(req,res)=>{
-
         const Users = await customer.find()
         const Orders = await OrderModel.find()
-        
+        const products = await productModel.find()
+        req.session.email = process.env.AdminMail
        if(Admin.email == req.body.email && Admin.password == req.body.password){
-           res.render('AdminSide/dashboard',{Users,Orders})
+           res.render('AdminSide/dashboard',{Users,Orders,products})
 
        }
     },
@@ -36,14 +34,15 @@ module.exports={
 // admin dashboard 
 
     dashboardGET:async(req,res)=>{
-        try {
-            
-      
-       const Users = await userModel.find();
-       const Orders = await OrderModel.find()
-       const products = await productModel.find()
-       res.render('AdminSide/dashboard',{Users,Orders,products})
-
+        try {  
+        if (req.session.email) {
+          const Users = await userModel.find();
+          const Orders = await OrderModel.find()
+          const products = await productModel.find()
+          res.render('AdminSide/dashboard',{Users,Orders,products})
+      }else{
+        res.redirect('/admin/adminlogin')
+      }
         } catch (error) {
             console.log(error);
             
@@ -67,16 +66,10 @@ module.exports={
     },
    
     blockUsersPATCH: async (req,res)=>{
-        console.log('hai');
-  
         let block = false;
-
          try{
                const dataID = req.query.id
-               console.log(dataID);
-
                const userdetail = await customer.findOne({_id:dataID})
-
                if(userdetail.verified){
                 await customer.updateOne({_id:dataID},{$set:{verified:false}})
                 block = false
@@ -90,5 +83,21 @@ module.exports={
               console.log(error.message);
          }  
         
+       },
+
+       adminLogoutGET:async(req,res)=>{
+           try {
+
+            delete req.session.email
+            res.redirect('/admin/AdminLogout')
+            console.log('kooi');
+            
+           } catch (error) {
+            console.log("adminlogout", err);
+           }
+
+
+
+
        }
 } 

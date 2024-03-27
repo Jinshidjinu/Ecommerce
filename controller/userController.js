@@ -10,9 +10,9 @@ const Mypassword = process.env.HideMypassword;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-const serviceSID = "VA30ca375e3f82d616d091c26444b15b0b";
-const AccountSID = "AC419ed74a879f53ae188cad46d571b854";
-const AuthToken = "b54b5e31baa07cac709d8712e174106c";
+const serviceSID = "VA7ceb77314a04c2907c0c93293c54abf4";
+const AccountSID = process.env.AccountSID;
+const AuthToken = process.env.AuthToken;
 const client = require("twilio")(AccountSID, AuthToken);
 
 const customer = require("../models/customer");
@@ -24,8 +24,6 @@ const AddressSchema  = require('../models/Address')
 const ReviewModel =require('../models/Review') 
 
 let Number;
-
-
 
 module.exports = {
   // user login
@@ -97,10 +95,8 @@ module.exports = {
         const saltRounds = 10; // number of salt round for bcrypt
         const hashedPassword = await bcrypt.hash(data.password, saltRounds);
         data.password = hashedPassword; // replace the hashpassword with the original password
-        console.log("otp send to the email");
         signupData = await customer.insertMany(data);
-        console.log(signupData);
-
+      
         // otp sms  signup;
         Number = req.body.phone;
         await client.verify.v2
@@ -112,7 +108,6 @@ module.exports = {
 
           .then((resp) => {
             res.redirect("/otpVerify");
-            console.log("otp res", resp);
           });
       }
     } catch (err) {
@@ -328,7 +323,28 @@ module.exports = {
         console.error("Error occurred during profile update:", error);
         res.status(500).send("Internal Server Error");
       }
+    },
+
+    logoutGET:async(req,res)=>{
+
+      try {
+        req.session.destroy((err)=>{
+          if(err){
+            console.error("Error destroying session ",err)
+          }else{
+            console.log("session destroy ")
+            res.redirect('/')
+          }
+        })
+      } catch (error) {
+        console.log('logout error',error);
+        
+      }
+
     }
+
+
+
 };
 
 

@@ -170,7 +170,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="/userWhislist">
+                    <a href="/wishlist">
                       <svg
                         width="20"
                         height="20"
@@ -217,7 +217,11 @@
           <div class="col-12">
             <div class="cartHead">
               <div class="d-flex align-items-center gap-2">
-                <h2 class="m-0 p-0">Cart(2)</h2>
+                <% if(productview && productview.products && productview.products.length > 0) { %>
+                  <h2 class="m-0 p-0 count">CartCount(<%= productview.products.length %>)</h2>
+                <% } else { %>
+                  <h2 class="m-0 p-0 ">Cart(0)</h2>
+                <% } %>
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -903,6 +907,8 @@
               });
               
               document.getElementById('removeproduct').remove()
+
+              const count = (document.querySelector('.count').innerHTML =` CartCount(${length})`)
             
             } else {
               message.innerHTML = result.error || "unknown error";

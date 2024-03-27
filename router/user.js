@@ -90,6 +90,10 @@ router.get('/userFliterByPrice',productController.filterByPriceGET)
 router.get('/userSortingByPrice',productController.LowTohighAndHighToLowGET)
 
 
+// Logout
+
+router.get('/userLogOut',userController.logoutGET)
+
 module.exports=router
 
 

@@ -14,6 +14,7 @@ module.exports={
           const userID = req.session.email._id;
     
           const productview = await cartSchema.findOne({ userID: userID }).populate('productID.id');
+           
           if (productview && productview.productID) {
             const subtotal = productview.productID.reduce((acc, index) => {
                 return (acc += index.id.MRP * index.quantity);

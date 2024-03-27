@@ -15,6 +15,7 @@
 
     router.get('/adminlogin',adminController.adminloginGET)
     router.post('/adminlogin',adminController.adminloginPOST)
+    router.get('/AdminLogout',adminController.adminLogoutGET)
 
     // dashboard  
     router.get('/dashboard',adminController.dashboardGET)
@@ -70,4 +71,6 @@
 
   router.get('/chart',chartController.chartGET)
 
-    module.exports=router
+
+
+ module.exports=router
