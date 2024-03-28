@@ -7,15 +7,20 @@ const session=require('express-session')
 require('dotenv').config()
 const twilio=require('twilio')
 const path=require("path")
+const noCache =require('nocache')
 const port=process.env.port || 8086
 const userRoute=require('./router/user')
 const adminRoute=require('./router/admin')
+
+
 
 app.use(session({
     secret:"key",
     resave:false,
     saveUninitialized:true
 }))
+
+
 
 app.use(express.urlencoded({ extended:true }))
 app.use(express.static("public"))

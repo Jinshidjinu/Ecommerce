@@ -8,9 +8,12 @@ module.exports={
 wishlistGET:async(req,res)=>{
    try{
     if (req.session.email) {
+
+        let wishlistCount;
         const userid = req.session.email?._id
         const productshow = await wishlistSchema.findOne({userID:userid}).populate('product.id')
-        res.render('UserSide/wishlist',{productshow})
+        productshow? wishlistCount = productshow.product.length:wishlistCount = 0
+        res.render('UserSide/wishlist',{productshow,wishlistCount})
     }else{
         res.redirect('/')
     }

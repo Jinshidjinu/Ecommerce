@@ -217,11 +217,7 @@
           <div class="col-12">
             <div class="cartHead">
               <div class="d-flex align-items-center gap-2">
-                <% if(productview && productview.products && productview.products.length > 0) { %>
-                  <h2 class="m-0 p-0 count">CartCount(<%= productview.products.length %>)</h2>
-                <% } else { %>
-                  <h2 class="m-0 p-0 ">Cart(0)</h2>
-                <% } %>
+                  <h2 class="m-0 p-0 ">Cart(<%= cartCount  || 0 %>)</h2>
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -299,13 +295,14 @@
                             <% let productdiscount = data.id.MRP * data.quantity  %>
                             <p class="fPrice<%=data.id._id%>">₹<%=productdiscount %></p>
                             <% let percentage =  Math.round((data.id.MRP - data.id.price)/data.id.MRP * 100) %>
-                            <p><%=percentage%>% OFF</p>
+                            <p id="percentage"><%=percentage%>% OFF</p>
                           </div>
                         </div>
                       </div>
                     </div>
                     <% }) %>
-                 <% } %>
+                 
+                
 
                
                 </div>
@@ -367,7 +364,15 @@
           </div>
         </div>
       </div>
+      <% }  else{ %>
+                    
+     <img src="/images/All images/cart_empty.webp" style="width: 120%; ;" alt="">
+     <h1 style="color: red; font-size: large; font-weight: 700; font-family:sans-serif;">Cart is Empty......!!</h1>
+  
+  
+      <% } %> 
     </main>
+ 
     <!-- end of main -->
 
     <!-- footer -->
@@ -951,15 +956,25 @@ async function inc(id, price, stock,discount) {
     productid: id,
     qty: qtyval,
   });
-  
-  lPrice.innerHTML = `₹${newprice}`;
-  fPrice.innerHTML = `₹${newdiscount}`
+    
+  const Total = response.data.Total
+  console.log('newws',Total);
 
-  const total1 = total(price);
-  const totaldis = total(discount)
-  fPrice.innerHTML = `₹${totaldis}`;
-  sTotal.innerHTML = `₹${total1}`;  
-  tPrice.innerHTML = `₹${total1}`;
+  lPrice.innerHTML = `₹${newprice}`
+  fPrice.innerHTML = `₹${newdiscount}`
+   sTotal.innerHTML = `₹${Total}`;
+   tPrice.innerHTML = `₹${Total}`;
+
+
+  // const total = total(price * 1);
+  // sTotal.innerHTML = `₹${total}`;
+  // tPrice.innerHTML = `₹${total}`;
+
+  // const total1 = total(price);
+  // const totaldis = total(discount)
+  // fPrice.innerHTML = `₹${totaldis}`;
+  // sTotal.innerHTML = `₹${total1}`;  
+
   if (qtyval <= stockval) {
     lPrice.classList.remove("red");
     lPrice.innerHTML = `₹${newprice}`;
@@ -968,6 +983,7 @@ async function inc(id, price, stock,discount) {
     lPrice.innerHTML = "out of stock";
     
   }
+  
 }
 function total(price) {
   const subtotal = sTotal.innerHTML.replace("₹", "");
@@ -999,6 +1015,14 @@ async function dec(id, price, stock,discount) {
       qty: qtyval,
 
     });
+    const Total = response.data.Total
+  console.log('newws',Total);
+
+  lPrice.innerHTML = `₹${newprice}`
+  fPrice.innerHTML = `₹${newdiscount}`
+   sTotal.innerHTML = `₹${Total}`;
+   tPrice.innerHTML = `₹${Total}`;
+    
    
     if (qtyval <= stockval) {
       lPrice.classList.remove("red");

@@ -86,11 +86,13 @@
                                     
                                 </div>
                             </td>
+                           <% if(ordersData.products){ %>
                             <%data.products.forEach((data)=>{ %>
                             <td class="people-des">
                               <h5><%=data.id.productName%></h5>
                             </td>
                             <% }) %>
+                            <%}%>
                            
                             <td class="people-des">
                                
@@ -101,9 +103,6 @@
                             </td>
                             <td class="edit">
                                
-
-
-
                                 <select  id="selectValue" class="dropingdown" onchange="statusUpdate(event,'<%=data._id%>')">
                                     <option ><%=data.Status%></option>
                                     <option value="pending">Pending</option>
@@ -112,17 +111,9 @@
                                     <option value="delivered">Delivered</option>                           
                                 </select>
                             </td>
-                            <!-- <td class="edit"> <a href=""><i class="fa-solid fa-pen-to-square" style="color: #961320;"></i></a></td> -->
-                       
-                            
+                            <!-- <td class="edit"> <a href=""><i class="fa-solid fa-pen-to-square" style="color: #961320;"></i></a></td> --> 
                         </tr>
                         <% })%>
-               
-                                     
-             
-
-            
-          
                 </tbody>
             </table>
             

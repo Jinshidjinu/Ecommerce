@@ -12,6 +12,8 @@ const Admin = {
     password : process.env.Password
 }
 
+
+
 module.exports={
 
 
@@ -57,8 +59,12 @@ module.exports={
 
     adminuserlistGET: async (req, res) => {
         try {
+            if (req.session.email) {
             const Usersdatas = await customer.find();
             res.render("AdminSide/AdminUserslist", { Usersdatas });
+        }else{
+            res.redirect('/admin/adminlogin')
+          }
         }
         catch (err) {
             console.log("error in homeget", err.message);
@@ -95,9 +101,6 @@ module.exports={
            } catch (error) {
             console.log("adminlogout", err);
            }
-
-
-
 
        }
 } 

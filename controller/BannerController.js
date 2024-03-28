@@ -6,8 +6,8 @@ const bannerSchema = require('../models/Banner')
 module.exports={
 
     bannersideGET :async(req,res)=>{
+     
         const BannerDatas = await bannerSchema.find()
-
         res.render('AdminSide/banner',{BannerDatas})
     },
 

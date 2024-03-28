@@ -23,7 +23,6 @@ var instance = new Razorpay({
 
 })
 
-
  module.exports={
 
      checkOutGET :async(req,res)=>{
@@ -48,7 +47,7 @@ var instance = new Razorpay({
                 return acc += data.id.MRP * data.quantity
               },0)
               discount = mrp 
-
+               
             }else{
               const productID = req.session.prodid
               const productData = await productModel.findById(productID)
@@ -68,7 +67,7 @@ var instance = new Razorpay({
             });
             req.session.totalPrice = totalPrice
             req.session.products = productDatas
-          const CouponDetails = [couponData]
+            const CouponDetails = [couponData]
             res.render('UserSide/checkout',{addressView,usersData,totalPrice,discount,mrp,CouponDetails})
           }else{
             res.redirect('/')
@@ -142,18 +141,23 @@ var instance = new Razorpay({
             console.log(error);          
           }
         }else{
-       // Handle other payment methods
-          req.session.paymentMethod = paymentMethod;
-          req.session.paymentAddress = paymentAddress;
-          const Totalprice = req.session.totalPrice;
-  
-       // Create Razorpay order
-         const options = {
-         amount: Totalprice * 100, // amount in the smallest currency unit
-         currency: "INR",
-       };
-        const razorpayOrder = await instance.orders.create(options);
-        res.status(200).json({success:true, razorpayOrder });
+
+          if(paymentMethod =='razorpay'){
+            
+            // Handle other payment methods
+               req.session.paymentMethod = paymentMethod;
+               req.session.paymentAddress = paymentAddress;
+               const Totalprice = req.session.totalPrice;
+       
+             
+            // Create Razorpay order
+              const options = {
+              amount: Totalprice * 100, // amount in the smallest currency unit
+              currency: "INR",
+            };
+             const razorpayOrder = await instance.orders.create(options);
+             res.status(200).json({success:true, razorpayOrder });
+          }
         }  
         }else{
           res.redirect('/')

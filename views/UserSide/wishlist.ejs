@@ -218,7 +218,7 @@
           <div class="col-12">
             <div class="cartHead">
               <div class="d-flex align-items-center gap-2">
-                <h2 class="m-0 p-0">wishlist(2)</h2>
+                <h2 class="m-0 p-0">wishlist(<%= wishlistCount  || 0 %>)</h2>
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
@@ -241,6 +241,10 @@
             
             <div class="cartBody d-flex">
               <div class="col-6 oneSection">
+
+              <%  if(productshow){ %>
+
+           
 
                 <%productshow.product.forEach((data)=>{ %>
                   <% if (data.id) { %>
@@ -275,6 +279,7 @@
                 </div>
                 <% } %>
                 <% }) %>
+                <% }%>
                
               </div>
             </div>

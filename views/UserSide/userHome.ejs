@@ -283,9 +283,10 @@
               <div class="col-12 overflow-hidden">
                 <div>
                   <ul
-                    id="newlyLaunched"
-                    class="newlyLaunched position-relative p-0 d-flex align-items-center list-unstyled"
+                  id="newlyLaunched"
+                  class="newlyLaunched position-relative p-0 d-flex align-items-center list-unstyled"
                   >
+                  
                   <% productData.forEach((product)=>{ %>
                     <li>
                       <a href="/productView?id=<%=product._id%>">
@@ -309,22 +310,22 @@
                                   src=""
                                   alt=""
                                 />
-                                <p>Swift Charge Technology</p>
+                                <p><%=product.description%></p>
                               </div>
-                              <div>
+                              <!-- <div>
                                 <img
                                   src="./images/newlyLaunched/hexagon-list-icon.svg"
                                   alt=""
                                 />
                                 <p>Dual Connectivity</p>
-                              </div>
+                              </div> -->
                               <div>
-                                <img
+                                <!-- <img
                                   src="./images/newlyLaunched/hexagon-list-icon.svg"
                                   alt=""
                                 />
                                 <p>Powered By 13mm Powerful Drivers</p>
-                              </div>
+                              </div> -->
                             </div>
                             <!-- <div class="colorOptions">
                               <div class="d-flex align-items-center">
@@ -381,8 +382,8 @@
                         </div>
                       </a>
 
+                      <%})%>
                     </li>
-                    <%})%>
                   </ul>
                 </div>
               </div>
